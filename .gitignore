@@ -1,0 +1,24 @@
+# Visual Studio Code
+.vscode/
+
+# Output folder used by Webpack or other FE stuff
+**/node_modules/*
+**/wwwroot/*
+**/Migrations/*
+**/bin/*
+**/obj/*
+
+
+
+# SpecFlow specific
+*.feature.cs
+*.feature.xlsx.*
+*.Specs_*.html
+
+#Appsettings
+appsettings.Development.json
+appsettings.json
+
+#####
+# End of core ignore list, below put you custom 'per project' settings (patterns or path)
+#####

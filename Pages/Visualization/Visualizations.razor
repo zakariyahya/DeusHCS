@@ -1,0 +1,143 @@
+@page "/reports-user"
+@using System.Globalization
+
+    <RadzenCard class="w-100 mb-4" >
+        <RadzenCheckBox @bind-Value="@showDataLabels" Name="dataLabels"></RadzenCheckBox>
+        <RadzenLabel Text="Show Data Labels" For="dataLabels" Style="margin-left: 8px; vertical-align: middle;" />
+    </RadzenCard>
+<div class="row" >
+  <div class="col-sm-6" style="width: 300px; color: #5f4e4e; background-color: #e8e3e2; background-repeat: repeat; margin-bottom: 7px">
+    <div class="rz-p-1" style="width: 265px; font-style: italic; text-align: center; margin-top: 5px">
+         <RadzenDropDown TValue="dynamic" Style="width: 265px; height: 27px; text-align: center"></RadzenDropDown>
+        </div>
+        <div class="rz-p-1" style="width: 265px; font-style: italic; text-align: center; margin-top: 5px">
+            <RadzenLabel Text="Yahya Zakariya" Style="width: 188px; margin-bottom: 5px; font-size: 20px; color: #0a0909; font-style: normal" />
+        </div>
+    </div>
+
+    <div class="col-sm-12" style="width: 800px; float: none; visibility: visible">
+        <RadzenCard></RadzenCard>
+    </div>
+
+    <div class="col-sm-6" style="width: 300px; color: #5f4e4e; background-color: #e8e3e2; background-repeat: repeat; margin-bottom: 7px">
+        <div class="rz-p-1" style="width: 265px; font-style: italic; text-align: center; margin-top: 5px">
+         <RadzenDropDown TValue="dynamic" Style="width: 265px; height: 27px; text-align: center"></RadzenDropDown>
+        </div>
+        <div class="rz-p-1" style="width: 265px; font-style: italic; text-align: center; margin-top: 5px">
+            <RadzenLabel Text="Sales Staff" Style="width: 188px; margin-bottom: 5px; font-size: 20px; color: #0a0909; font-style: normal" />
+    </div>
+</div>
+</div>
+<div class="row">
+    <div class="col-sm-6" style="width: 300px; color: #5f4e4e; background-color: #e8e3e2; background-repeat: repeat">
+       
+        <RadzenLabel Text="Recommended role for Yahya Zakariya" Style="margin-bottom: 10px; text-align: center; border-radius: 1px; border: 0px solid #30445f; margin-top: 5px; width: 267px; padding: 2px; display: inline-block" />
+        <div class="rz-p-1" style="width: 265px; font-style: italic; text-align: left; border: 1px solid #403b3b">
+            <RadzenLabel Text="Number of recommended Role" Style="width: 188px; margin-left: 5px" />
+            <RadzenNumeric Min="1" Max="10" @bind-Value=@value Style="width: 53px; background-color: #e8e3e2" />
+        </div>
+        <div class="rz-p-1" style="width: 265px; font-style: italic; text-align: left; border: 1px solid #403b3b; margin-top: 5px">
+            <RadzenLabel Text="Minimum fitness for role recommendation" Style="width: 188px; margin-left: 5px" />
+            <RadzenNumeric Min="1" Max="10" @bind-Value=@value Style="width: 53px; background-color: #e8e3e2" />
+        </div>
+        <RadzenChart SeriesClick=@OnSeriesClick style="height: 400px; margin-top: 5px; background-color: #f5f9c9; border: 0px solid #eaf38f; margin-bottom: 5px">
+            @* <RadzenStackedBarSeries Data="@revenue2020" CategoryProperty="Quarter" Title="2020" LineType="LineType.Dashed" ValueProperty="Revenue">
+                <RadzenSeriesDataLabels Visible="@showDataLabels" />
+            </RadzenStackedBarSeries> *@
+            <RadzenStackedBarSeries Data="@revenue2019" CategoryProperty="Quarter" Title="2019" ValueProperty="Revenue">
+                <RadzenSeriesDataLabels Visible="@showDataLabels" />
+            </RadzenStackedBarSeries>
+            <RadzenValueAxis Min="0" Max="100" Step="25">
+                <RadzenGridLines Visible="true" />
+                <RadzenAxisTitle Text="Revenue in USD" />
+            </RadzenValueAxis>
+            <RadzenBarOptions  Height="25" />
+        </RadzenChart>
+    </div>
+    <div class="col-sm-12" style="width: 800px; float: none; visibility: visible">
+        <RadzenCard></RadzenCard>
+    </div>
+    <div class="col-sm-6" style="width: 300px; background-color: #e8e3e2">
+    <RadzenLabel Text="Recommended user for Sales Staff position" Style="margin-bottom: 10px; text-align: center; border-radius: 1px; border: 0px solid #30445f; margin-top: 5px; width: 267px; padding: 2px; display: inline-block" />
+        <div class="rz-p-1" style="width: 265px; font-style: italic; text-align: left; border: 1px solid #403b3b">
+            <RadzenLabel Text="Number of recommended User" Style="width: 188px; margin-left: 5px" />
+            <RadzenNumeric Min="1" Max="10" @bind-Value=@value Style="width: 53px" />
+        </div>
+        <div class="rz-p-1" style="width: 265px; font-style: italic; text-align: left; border: 1px solid #403b3b; margin-top: 5px">
+            <RadzenLabel Text="Minimum fitness for user recommendation" Style="width: 188px; margin-left: 5px" />
+            <RadzenNumeric Min="1" Max="10" @bind-Value=@value Style="width: 53px" />
+        </div>
+            <RadzenChart SeriesClick=@OnSeriesClick style="height: 400px; margin-top: 5px; background-color: #f5f9c9; margin-bottom: 5px">
+            @* <RadzenStackedBarSeries Data="@revenue2020" CategoryProperty="Quarter" Title="2020" LineType="LineType.Dashed" ValueProperty="Revenue">
+                <RadzenSeriesDataLabels Visible="@showDataLabels" />
+            </RadzenStackedBarSeries> *@
+            <RadzenStackedBarSeries Data="@revenue2019" CategoryProperty="Quarter" Title="2019" ValueProperty="Revenue">
+                <RadzenSeriesDataLabels Visible="@showDataLabels" />
+            </RadzenStackedBarSeries>
+            <RadzenValueAxis Min="0" Max="100" Step="25">
+                <RadzenGridLines Visible="true" />
+                <RadzenAxisTitle Text="Revenue in USD" />
+            </RadzenValueAxis>
+            <RadzenBarOptions  Height="25" />
+        </RadzenChart>
+    </div>
+
+</div>
+
+
+@code {
+    bool showDataLabels = false;
+ int value;
+    void OnSeriesClick(SeriesClickEventArgs args)
+    {
+    }
+
+    class DataItem
+    {
+        public string Quarter { get; set; }
+        public double Revenue { get; set; }
+    }
+
+    string FormatAsUSD(object value)
+    {
+        return ((double)value).ToString("C0", CultureInfo.CreateSpecificCulture("en-US"));
+    }
+
+    DataItem[] revenue2019 = new DataItem[]
+    {
+    new DataItem
+    {
+        Quarter = "Finance Manager",
+        Revenue = 58
+    },
+    new DataItem
+    {
+        Quarter = "Product Manager",
+        Revenue = 58
+    },
+    new DataItem
+    {
+        Quarter = "Administratif Manager",
+        Revenue = 58
+    },
+    };
+
+    DataItem[] revenue2020 = new DataItem[]
+    {
+    new DataItem
+    {
+        Quarter = "Finance Manager",
+        Revenue = 58
+    },
+    new DataItem
+    {
+        Quarter = "Product Manager",
+        Revenue = 58
+    },
+    new DataItem
+    {
+        Quarter = "Administratif Manager",
+        Revenue = 58
+    },
+    };
+}
