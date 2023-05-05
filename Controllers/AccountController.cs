@@ -90,7 +90,7 @@ namespace WebAdmin.Controllers
 
                 if (result.Succeeded)
                 {
-                    if (user.isFirstLogin == false)
+                    if (user.FirstLogin == false)
                     {
                         return Redirect("~/profile");
 
@@ -117,7 +117,7 @@ namespace WebAdmin.Controllers
             var id = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var user = await userManager.FindByIdAsync(id);
-            user.isFirstLogin = true;
+            user.FirstLogin = true;
 
             var result = await userManager.ChangePasswordAsync(user, oldPassword, newPassword);
 
@@ -178,14 +178,14 @@ namespace WebAdmin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(string userName, string password, string companyName)
+        public async Task<IActionResult> Register(string userName, string password, string companyName, string companyId)
         {
             if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(password))
             {
                 return BadRequest("Invalid user name or password.");
             }
 
-            var user = new ApplicationUser { UserName = userName, Email = userName, CompanyName = companyName };
+            var user = new ApplicationUser { UserName = userName, Email = userName, CompanyName = companyName, CompanyId = companyId };
 
             password = GenerateRandomPassword();
 
@@ -197,8 +197,9 @@ namespace WebAdmin.Controllers
                     var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
 
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code }, protocol: Request.Scheme);
+                    // var string = ""
 
-                    var body = string.Format(@"<a href=""{0}"">{1}</a>", callbackUrl, $"<p>Your password is: {password}</p><p>Click to confirm your registration.</p>", "Please confirm your registration");
+                    var body = string.Format(@"<p><b>Your email is:</b> "+user.Email+@"</p><p><b>Your password is: </b>"+password+@"</p><a href=""{0}"">{1}</a>", callbackUrl, "Please confirm your activate your account");
 
                     await SendEmailAsync(user.Email, "Account Confirmation", body);
 

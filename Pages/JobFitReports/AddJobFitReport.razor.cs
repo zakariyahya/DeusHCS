@@ -34,6 +34,7 @@ namespace WebAdmin.Pages.JobFitReports
         [Inject]
         public adminPanelProjectService adminPanelProjectService { get; set; }
         protected IEnumerable<WebAdmin.Models.ApplicationUser> usersForUserId;
+        protected RadzenDataGrid<WebAdmin.Models.adminPanelProject.JobFitReport> grid0;
 
         protected override async Task OnInitializedAsync()
         {

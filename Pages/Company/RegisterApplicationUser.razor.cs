@@ -49,7 +49,7 @@ namespace WebAdmin.Pages.Company
             {
                 isBusy = true;
 
-                await Security.Register(user.Email, user.Password, user.CompanyName);
+                await Security.Register(user.Email, user.Password, user.CompanyName, user.CompanyId);
 
                 DialogService.Close(true);
             }

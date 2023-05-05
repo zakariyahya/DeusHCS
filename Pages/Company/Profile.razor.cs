@@ -53,7 +53,7 @@ namespace WebAdmin.Pages.Company
         private async Task OnBeforeInternalNavigation(LocationChangingContext context)
         {
 
-            if (user.isFirstLogin == false)
+            if (user.FirstLogin == false)
             {
                 var confirm = await JSRuntime.InvokeAsync<bool>("confirm", "Please Update password for first time!");
                 if (!confirm)

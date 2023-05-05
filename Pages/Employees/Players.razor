@@ -46,22 +46,19 @@
                 </RadzenStack>
             </RadzenColumn>
         </RadzenRow> *@
-            <RadzenDataGrid @ref="grid0" ColumnWidth="200px" Render=Grid0Render AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+            <RadzenDataGrid @ref="grid0" ColumnWidth="200px" Render=Grid0Render AllowColumnResize="true" AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
 
             Data="@employees" TItem="WebAdmin.Models.adminPanelProject.Employee"  RowDoubleClick="@EditRow">
             <Columns>
-            <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Employee" Property="EmployeeId" Title="id">
-            </RadzenDataGridColumn>
-                       @* <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Employee" Property="UserId" Title="Company">
-            </RadzenDataGridColumn> *@
-             <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Employee" Property="Email" Title="Email">
-            </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Employee" Property="FullName" Title="Full Name">
-            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Employee" Property="EmployeeId" Filterable="false" Title="ID" Frozen="true" Width="80px" TextAlign="TextAlign.Center" />
+            <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Employee" Property="FullName" Filterable="false" Title="Full Name" Frozen="true" TextAlign="TextAlign.Center" />
+            
+            <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Employee" Property="Email" Filterable="false" Title="Email"  TextAlign="TextAlign.Center" />
+
            
             <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Employee" Property="Gender" Title="Gender">
             </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Employee" Property="BirthDate" Title="Birth Date">
+                        <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Employee" Property="BirthDate" Title="Birth Date" FormatString="{0:dd/MM/yyyy}">
             </RadzenDataGridColumn>
                                     <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Employee" Property="Age" Title="Age">
             </RadzenDataGridColumn>
@@ -78,10 +75,6 @@
             </RadzenDataGridColumn>
 
             <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Employee" Property="City" Title="City">
-            </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Employee" Property="ApplyDate" Title="Apply Date">
-            </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Employee" Property="TesetDate" Title="Test Date">
             </RadzenDataGridColumn>
             <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Employee" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
                 <Template Context="playerChild">

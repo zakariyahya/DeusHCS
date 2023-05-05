@@ -35,6 +35,8 @@ namespace WebAdmin.Pages.Assessments
         public adminPanelProjectService adminPanelProjectService { get; set; }
         protected IEnumerable<WebAdmin.Models.ApplicationUser> usersForUserId;
         bool hasUseridValue;
+        protected RadzenDataGrid<WebAdmin.Models.adminPanelProject.Assessment> grid0;
+
         protected override async Task OnInitializedAsync()
         {
             assessment = new WebAdmin.Models.adminPanelProject.Assessment();

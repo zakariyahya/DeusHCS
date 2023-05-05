@@ -36,7 +36,9 @@ namespace WebAdmin.Pages.Employees
         protected string search = "";
         protected string info;
         protected bool infoVisible;
-    IList<string> values = new string[] { };
+        bool frozen;
+        IList<string> values = new string[] { };
+
         protected async Task Search(ChangeEventArgs args)
         {
             search = $"{args.Value}";

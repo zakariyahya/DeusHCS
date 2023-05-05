@@ -36,6 +36,9 @@ namespace WebAdmin.Pages.Company
         protected IEnumerable<WebAdmin.Models.ApplicationRole> roles;
         protected WebAdmin.Models.ApplicationUser user;
         protected IEnumerable<string> userRoles = Enumerable.Empty<string>();
+        protected RadzenDataGrid<WebAdmin.Models.ApplicationUser> grid0;
+// List<WebAdmin.Models.ApplicationUser> users =
+//             new List<WebAdmin.Models.ApplicationUser>();
         protected bool isBusy;
         IFileListEntry file;
 
@@ -109,7 +112,7 @@ namespace WebAdmin.Pages.Company
             {
                 isBusy = true;
                 user.Roles = roles.Where(role => userRoles.Contains(role.Id)).ToList();
-                await Security.Register(user.Email, user.Password, user.CompanyName);
+                await Security.Register(user.Email, user.Password, user.CompanyName, user.CompanyId);
                 DialogService.Close(null);
             }
             catch (Exception ex)

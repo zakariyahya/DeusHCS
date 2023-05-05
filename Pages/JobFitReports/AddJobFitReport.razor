@@ -1,252 +1,140 @@
 @page "/add-job-fit-report"
 
 <PageTitle>Add JobFitReport</PageTitle>
-    <RadzenColumn SizeMD=12>
-        <RadzenAlert Shade="Shade.Lighter" Variant="Variant.Flat" Size="AlertSize.Small" AlertStyle="AlertStyle.Danger" Visible="@errorVisible">Cannot save JobFitReport</RadzenAlert>
-        @* <RadzenTemplateForm TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Data="@jobFitReport" Visible="@(jobFitReport != null)" Submit="@FormSubmit">
-            <RadzenRow style="margin-bottom: 1rem">
-                <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="id" Component="id" style="width: 100%" />
-                </RadzenColumn>
-                <RadzenColumn SizeMD="9">
-                    <RadzenTextBox style="display: block; width: 100%" @bind-Value="@jobFitReport.id" Name="id" />
-                    <RadzenRequiredValidator Component="id" Text="id is required" />
-                </RadzenColumn>
-            </RadzenRow>
-            <RadzenRow style="margin-bottom: 1rem">
-                <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="User Id" Component="UserId" style="width: 100%" />
-                </RadzenColumn>
-                <RadzenColumn SizeMD="9">
-                    <RadzenTextBox style="display: block; width: 100%" @bind-Value="@jobFitReport.UserId" Name="UserId" />
-                    <RadzenRequiredValidator Component="UserId" Text="UserId is required" />
-                </RadzenColumn>
-            </RadzenRow>
-            <RadzenRow style="margin-bottom: 1rem">
-                <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="Employee Id" Component="EmployeeId" style="width: 100%" />
-                </RadzenColumn>
-                <RadzenColumn SizeMD="9">
-                    <RadzenTextBox style="display: block; width: 100%" @bind-Value="@jobFitReport.EmployeeId" Name="EmployeeId" />
-                    <RadzenRequiredValidator Component="EmployeeId" Text="EmployeeId is required" />
-                </RadzenColumn>
-            </RadzenRow>
-            <RadzenRow style="margin-bottom: 1rem">
-                <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="C E O General Director" Component="CEOGeneralDirector" style="width: 100%" />
-                </RadzenColumn>
-                <RadzenColumn SizeMD="9">
-                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.CEOGeneralDirector" Name="CEOGeneralDirector" />
-                    <RadzenRequiredValidator Component="CEOGeneralDirector" Text="CEOGeneralDirector is required" />
-                </RadzenColumn>
-            </RadzenRow>
-            <RadzenRow style="margin-bottom: 1rem">
-                <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="Administrative Staff" Component="AdministrativeStaff" style="width: 100%" />
-                </RadzenColumn>
-                <RadzenColumn SizeMD="9">
-                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.AdministrativeStaff" Name="AdministrativeStaff" />
-                    <RadzenRequiredValidator Component="AdministrativeStaff" Text="AdministrativeStaff is required" />
-                </RadzenColumn>
-            </RadzenRow>
-            <RadzenRow style="margin-bottom: 1rem">
-                <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="Creative Design Manager" Component="CreativeDesignManager" style="width: 100%" />
-                </RadzenColumn>
-                <RadzenColumn SizeMD="9">
-                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.CreativeDesignManager" Name="CreativeDesignManager" />
-                    <RadzenRequiredValidator Component="CreativeDesignManager" Text="CreativeDesignManager is required" />
-                </RadzenColumn>
-            </RadzenRow>
-            <RadzenRow style="margin-bottom: 1rem">
-                <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="Finance Staff" Component="FinanceStaff" style="width: 100%" />
-                </RadzenColumn>
-                <RadzenColumn SizeMD="9">
-                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.FinanceStaff" Name="FinanceStaff" />
-                    <RadzenRequiredValidator Component="FinanceStaff" Text="FinanceStaff is required" />
-                </RadzenColumn>
-            </RadzenRow>
-            <RadzenRow style="margin-bottom: 1rem">
-                <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="Finance Manager" Component="FinanceManager" style="width: 100%" />
-                </RadzenColumn>
-                <RadzenColumn SizeMD="9">
-                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.FinanceManager" Name="FinanceManager" />
-                    <RadzenRequiredValidator Component="FinanceManager" Text="FinanceManager is required" />
-                </RadzenColumn>
-            </RadzenRow>
-            <RadzenRow style="margin-bottom: 1rem">
-                <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="H R Staff" Component="HRStaff" style="width: 100%" />
-                </RadzenColumn>
-                <RadzenColumn SizeMD="9">
-                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.HRStaff" Name="HRStaff" />
-                    <RadzenRequiredValidator Component="HRStaff" Text="HRStaff is required" />
-                </RadzenColumn>
-            </RadzenRow>
-            <RadzenRow style="margin-bottom: 1rem">
-                <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="H R Manager" Component="HRManager" style="width: 100%" />
-                </RadzenColumn>
-                <RadzenColumn SizeMD="9">
-                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.HRManager" Name="HRManager" />
-                    <RadzenRequiredValidator Component="HRManager" Text="HRManager is required" />
-                </RadzenColumn>
-            </RadzenRow>
-            <RadzenRow style="margin-bottom: 1rem">
-                <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="I T Staff" Component="ITStaff" style="width: 100%" />
-                </RadzenColumn>
-                <RadzenColumn SizeMD="9">
-                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.ITStaff" Name="ITStaff" />
-                    <RadzenRequiredValidator Component="ITStaff" Text="ITStaff is required" />
-                </RadzenColumn>
-            </RadzenRow>
-            <RadzenRow style="margin-bottom: 1rem">
-                <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="I T Manager" Component="ITManager" style="width: 100%" />
-                </RadzenColumn>
-                <RadzenColumn SizeMD="9">
-                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.ITManager" Name="ITManager" />
-                    <RadzenRequiredValidator Component="ITManager" Text="ITManager is required" />
-                </RadzenColumn>
-            </RadzenRow>
-            <RadzenRow style="margin-bottom: 1rem">
-                <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="Marketing Staff" Component="MarketingStaff" style="width: 100%" />
-                </RadzenColumn>
-                <RadzenColumn SizeMD="9">
-                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.MarketingStaff" Name="MarketingStaff" />
-                    <RadzenRequiredValidator Component="MarketingStaff" Text="MarketingStaff is required" />
-                </RadzenColumn>
-            </RadzenRow>
-            <RadzenRow style="margin-bottom: 1rem">
-                <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="Product Staff" Component="ProductStaff" style="width: 100%" />
-                </RadzenColumn>
-                <RadzenColumn SizeMD="9">
-                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.ProductStaff" Name="ProductStaff" />
-                    <RadzenRequiredValidator Component="ProductStaff" Text="ProductStaff is required" />
-                </RadzenColumn>
-            </RadzenRow>
-            <RadzenRow style="margin-bottom: 1rem">
-                <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="Product Manager" Component="ProductManager" style="width: 100%" />
-                </RadzenColumn>
-                <RadzenColumn SizeMD="9">
-                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.ProductManager" Name="ProductManager" />
-                    <RadzenRequiredValidator Component="ProductManager" Text="ProductManager is required" />
-                </RadzenColumn>
-            </RadzenRow>
-            <RadzenRow style="margin-bottom: 1rem">
-                <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="Sales Staff" Component="SalesStaff" style="width: 100%" />
-                </RadzenColumn>
-                <RadzenColumn SizeMD="9">
-                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.SalesStaff" Name="SalesStaff" />
-                    <RadzenRequiredValidator Component="SalesStaff" Text="SalesStaff is required" />
-                </RadzenColumn>
-            </RadzenRow>
-            <RadzenRow style="margin-bottom: 1rem">
-                <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="Customer Service" Component="CustomerService" style="width: 100%" />
-                </RadzenColumn>
-                <RadzenColumn SizeMD="9">
-                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.CustomerService" Name="CustomerService" />
-                    <RadzenRequiredValidator Component="CustomerService" Text="CustomerService is required" />
-                </RadzenColumn>
-            </RadzenRow>
-            <RadzenRow style="margin-bottom: 1rem">
-                <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="Sales Manager" Component="SalesManager" style="width: 100%" />
-                </RadzenColumn>
-                <RadzenColumn SizeMD="9">
-                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.SalesManager" Name="SalesManager" />
-                    <RadzenRequiredValidator Component="SalesManager" Text="SalesManager is required" />
-                </RadzenColumn>
-            </RadzenRow>
-            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
-                    <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Save" Variant="Variant.Flat" />
-                    <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Variant="Variant.Flat" Click="@CancelButtonClick"  />
-            </RadzenStack>
-        </RadzenTemplateForm> *@
-        <RadzenColumn SizeMD="12">
-                <BlazorInputFile.InputFile Icon="get_app" Text="Import" OnChange="HandleFileSelected" Variant="Variant.InputFile" Shade="Shade.Lighter" />
-                @if (file != null)
-                {
-                <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="Company" Component="UserId" style="width: 100%" />
-                </RadzenColumn>
-                <RadzenColumn SizeMD="6">
-                    <RadzenDropDownDataGrid Data="@usersForUserId" TextProperty="CompanyName" ValueProperty="CompanyName"
-                        Disabled=@(hasUseridValue) Placeholder="Choose Company" style="display: block; width: 100%" @bind-Value="@jobFitReport.UserId" Name="UserId"
-                           />
-                </RadzenColumn>
-
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>CEOGeneralDirector</th>
-                            <th>AdministrativeStaff</th>
-                            <th>CreativeDesignManager</th>
-                            <th>FinanceStaff</th>
-                            <th>FinanceManager</th>
-                            <th>HRStaff</th>
-                            <th>HRManager</th>
-                            <th>ITStaff</th>
-                            <th>ITManager</th>
-                            <th>MarketingStaff</th>
-                            <th>ProductStaff</th>
-                            <th>ProductManager</th>
-                            <th>SalesStaff</th>
-                            <th>CustomerService</th>
-                            <th>SalesManager</th>
-                            <th>Action</th>
-
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var data in jobFitReports)
-                        {
-                            <tr>
-                                <td>@data.EmployeeId</td>
-                                <td>@data.CEOGeneralDirector</td>
-                                <td>@data.AdministrativeStaff</td>
-                                <td>@data.CreativeDesignManager</td>
-                                <td>@data.FinanceStaff</td>
-                                <td>@data.FinanceManager</td>
-                                <td>@data.HRStaff</td>
-                                <td>@data.HRManager</td>
-                                <td>@data.ITStaff</td>
-                                <td>@data.ITManager</td>
-                                <td>@data.MarketingStaff</td>
-                                <td>@data.ProductStaff</td>
-                                <td>@data.ProductManager</td>
-                                <td>@data.SalesStaff</td>
-                                <td>@data.CustomerService</td>
-                                <td>@data.SalesManager</td>
-
-
-                                <td> 
-                                    @if(data?.id == jobFitReportDb?.id){
-                                        <RadzenButton  ButtonType="ButtonType.Submit" Icon="save" Text="Create All" IsBusy="@isBusy" BusyText="Creating ..." Variant="Variant.Flat" Disabled />
-                                    }else{
-                                        <RadzenButton Click="@AddExcel" ButtonType="ButtonType.Submit" Icon="save" Text="Create" IsBusy="@isBusy" BusyText="Creating ..." Variant="Variant.Flat" />
-                                    }
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
+<RadzenColumn SizeMD=12>
+    <RadzenAlert Shade="Shade.Lighter" Variant="Variant.Flat" Size="AlertSize.Small" AlertStyle="AlertStyle.Danger" Visible="@errorVisible">Cannot save JobFitReport</RadzenAlert>
+    <RadzenColumn SizeMD="12">
+        <RadzenColumn SizeMD="3">
+            <RadzenLabel Text="Company" Component="UserId" style="width: 100%" />
+        </RadzenColumn>
+        <RadzenColumn SizeMD="6">
+            <RadzenDropDownDataGrid Data="@usersForUserId" TextProperty="CompanyName" ValueProperty="CompanyName"
+                Disabled=@(hasUseridValue) Placeholder="Choose Company" style="display: block; width: 100%; margin-bottom: 5px" @bind-Value="@jobFitReport.UserId" Name="UserId"
+                    />
+        </RadzenColumn>
+        <BlazorInputFile.InputFile Icon="get_app" Text="Import" style="display: block; width: 100%; margin-bottom: 5px" OnChange="HandleFileSelected" Variant="Variant.InputFile" Shade="Shade.Lighter" />
+        @if (file != null)
+        {
         
-                </table>
-                }
-                <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
-                    <RadzenButton Click="@AddExcel" ButtonType="ButtonType.Submit" Icon="save" Text="Create All" IsBusy="@isBusy" BusyText="Creating ..." Variant="Variant.Flat" />
-                    <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Click="@CancelClick" Variant="Variant.Flat" />
-                </RadzenStack>
-                </RadzenColumn>
+        <RadzenDataGrid @ref="grid0" ColumnWidth="200px"  AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+            Data="@jobFitReports"  TItem="WebAdmin.Models.adminPanelProject.JobFitReport" >
+            <Columns>
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="id" Title="id">
+                <EditTemplate Context="jobFitReport">
+                    <RadzenTextBox style="display: block; width: 100%" @bind-Value="@jobFitReport.id" Name="id" />
+                    <RadzenRequiredValidator Component="id" Text="id is required" style="position: absolute" />
+                </EditTemplate>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="UserId" Title="User Id">
+                <EditTemplate Context="jobFitReport">
+                    <RadzenTextBox style="display: block; width: 100%" @bind-Value="@jobFitReport.UserId" Name="UserId" />
+                    <RadzenRequiredValidator Component="UserId" Text="UserId is required" style="position: absolute" />
+                </EditTemplate>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="EmployeeId" Title="Employee Id">
+                <EditTemplate Context="jobFitReport">
+                    <RadzenTextBox style="display: block; width: 100%" @bind-Value="@jobFitReport.EmployeeId" Name="EmployeeId" />
+                    <RadzenRequiredValidator Component="EmployeeId" Text="EmployeeId is required" style="position: absolute" />
+                </EditTemplate>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="CEOGeneralDirector" Title="C E O General Director">
+                <EditTemplate Context="jobFitReport">
+                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.CEOGeneralDirector" Name="CEOGeneralDirector" />
+                    <RadzenRequiredValidator Component="CEOGeneralDirector" Text="CEOGeneralDirector is required" style="position: absolute" />
+                </EditTemplate>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="AdministrativeStaff" Title="Administrative Staff">
+                <EditTemplate Context="jobFitReport">
+                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.AdministrativeStaff" Name="AdministrativeStaff" />
+                    <RadzenRequiredValidator Component="AdministrativeStaff" Text="AdministrativeStaff is required" style="position: absolute" />
+                </EditTemplate>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="CreativeDesignManager" Title="Creative Design Manager">
+                <EditTemplate Context="jobFitReport">
+                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.CreativeDesignManager" Name="CreativeDesignManager" />
+                    <RadzenRequiredValidator Component="CreativeDesignManager" Text="CreativeDesignManager is required" style="position: absolute" />
+                </EditTemplate>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="FinanceStaff" Title="Finance Staff">
+                <EditTemplate Context="jobFitReport">
+                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.FinanceStaff" Name="FinanceStaff" />
+                    <RadzenRequiredValidator Component="FinanceStaff" Text="FinanceStaff is required" style="position: absolute" />
+                </EditTemplate>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="FinanceManager" Title="Finance Manager">
+                <EditTemplate Context="jobFitReport">
+                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.FinanceManager" Name="FinanceManager" />
+                    <RadzenRequiredValidator Component="FinanceManager" Text="FinanceManager is required" style="position: absolute" />
+                </EditTemplate>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="HRStaff" Title="H R Staff">
+                <EditTemplate Context="jobFitReport">
+                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.HRStaff" Name="HRStaff" />
+                    <RadzenRequiredValidator Component="HRStaff" Text="HRStaff is required" style="position: absolute" />
+                </EditTemplate>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="HRManager" Title="H R Manager">
+                <EditTemplate Context="jobFitReport">
+                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.HRManager" Name="HRManager" />
+                    <RadzenRequiredValidator Component="HRManager" Text="HRManager is required" style="position: absolute" />
+                </EditTemplate>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="ITStaff" Title="I T Staff">
+                <EditTemplate Context="jobFitReport">
+                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.ITStaff" Name="ITStaff" />
+                    <RadzenRequiredValidator Component="ITStaff" Text="ITStaff is required" style="position: absolute" />
+                </EditTemplate>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="ITManager" Title="I T Manager">
+                <EditTemplate Context="jobFitReport">
+                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.ITManager" Name="ITManager" />
+                    <RadzenRequiredValidator Component="ITManager" Text="ITManager is required" style="position: absolute" />
+                </EditTemplate>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="MarketingStaff" Title="Marketing Staff">
+                <EditTemplate Context="jobFitReport">
+                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.MarketingStaff" Name="MarketingStaff" />
+                    <RadzenRequiredValidator Component="MarketingStaff" Text="MarketingStaff is required" style="position: absolute" />
+                </EditTemplate>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="ProductStaff" Title="Product Staff">
+                <EditTemplate Context="jobFitReport">
+                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.ProductStaff" Name="ProductStaff" />
+                    <RadzenRequiredValidator Component="ProductStaff" Text="ProductStaff is required" style="position: absolute" />
+                </EditTemplate>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="ProductManager" Title="Product Manager">
+                <EditTemplate Context="jobFitReport">
+                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.ProductManager" Name="ProductManager" />
+                    <RadzenRequiredValidator Component="ProductManager" Text="ProductManager is required" style="position: absolute" />
+                </EditTemplate>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="SalesStaff" Title="Sales Staff">
+                <EditTemplate Context="jobFitReport">
+                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.SalesStaff" Name="SalesStaff" />
+                    <RadzenRequiredValidator Component="SalesStaff" Text="SalesStaff is required" style="position: absolute" />
+                </EditTemplate>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="CustomerService" Title="Customer Service">
+                <EditTemplate Context="jobFitReport">
+                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.CustomerService" Name="CustomerService" />
+                    <RadzenRequiredValidator Component="CustomerService" Text="CustomerService is required" style="position: absolute" />
+                </EditTemplate>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="SalesManager" Title="Sales Manager">
+                <EditTemplate Context="jobFitReport">
+                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.SalesManager" Name="SalesManager" />
+                    <RadzenRequiredValidator Component="SalesManager" Text="SalesManager is required" style="position: absolute" />
+                </EditTemplate>
+                </RadzenDataGridColumn>
+            </Columns>
+        </RadzenDataGrid>
+        
+        }
+        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+            <RadzenButton Click="@AddExcel" ButtonType="ButtonType.Submit" Icon="save" Text="Create All" IsBusy="@isBusy" BusyText="Creating ..." Variant="Variant.Flat" />
+            <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Click="@CancelClick" Variant="Variant.Flat" />
+        </RadzenStack>
     </RadzenColumn>
+</RadzenColumn>
 

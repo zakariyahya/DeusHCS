@@ -113,7 +113,7 @@ namespace WebAdmin
                     for (int col = 1; col <= rolCount; col++)
                     {
                         if (col == 1)
-                            company.Id = worksheet.Cells[row, col].Value.ToString();
+                            company.CompanyId = worksheet.Cells[row, col].Value.ToString();
                         else if (col == 2)
                             company.CompanyName = worksheet.Cells[row, col].Value.ToString();
                         else if (col == 3)
@@ -268,14 +268,6 @@ namespace WebAdmin
                             employee.YearHired = worksheet.Cells[row, col].Value.ToString();
                         else if (col == 12)
                             employee.City = worksheet.Cells[row, col].Value.ToString();
-                        else if (col == 13)
-                            employee.ApplyDate = Convert.ToDateTime(
-                                worksheet.Cells[row, col].Value.ToString()
-                            );
-                        else if (col == 14)
-                            employee.TesetDate = Convert.ToDateTime(
-                                worksheet.Cells[row, col].Value.ToString()
-                            );
                     }
                     employees.Add(employee);
                 }
@@ -417,7 +409,7 @@ namespace WebAdmin
                 var password = GenerateRandomPassword();
 
                 item.Password = password;
-                securityService.Register(item.Email, item.Password, item.CompanyName);
+                securityService.Register(item.Email, item.Password, item.CompanyName, item.CompanyId);
             }
 
             return companies;

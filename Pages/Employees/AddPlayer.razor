@@ -6,19 +6,15 @@
     <RadzenColumn SizeMD=12>
         <RadzenAlert Shade="Shade.Lighter" Variant="Variant.Flat" Size="AlertSize.Small" AlertStyle="AlertStyle.Danger" Visible="@errorVisible">@error</RadzenAlert>
         <RadzenAlert Shade="Shade.Lighter" Variant="Variant.Flat" Size="AlertSize.Small" AlertStyle="AlertStyle.Info" Visible="@infoVisible">@info</RadzenAlert>
-
-            <RadzenColumn SizeMD="12">
-                <BlazorInputFile.InputFile Icon="get_app" Text="Import" OnChange="HandleFileSelected" Variant="Variant.InputFile" Shade="Shade.Lighter" />
-                @if (file != null)
-                {
-                <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="Company" Component="UserId" style="width: 100%" />
-                </RadzenColumn>
-                <RadzenColumn SizeMD="6">
+             <RadzenColumn SizeMD="6">
                     <RadzenDropDownDataGrid Data="@usersForUserId" TextProperty="CompanyName" ValueProperty="CompanyName"
-                        Disabled=@(hasUseridValue) Placeholder="Choose Company" style="display: block; width: 100%" @bind-Value="@employee.UserId" Name="UserId"
+                        Disabled=@(hasUseridValue) Placeholder="Choose Company" style="display: block; width: 100%; margin-bottom: 5px" @bind-Value="@employee.UserId" Name="UserId"
                            />
                 </RadzenColumn>
+            <RadzenColumn SizeMD="12">
+                <BlazorInputFile.InputFile Icon="get_app" Text="Import" OnChange="HandleFileSelected" Variant="Variant.InputFile" Shade="Shade.Lighter" style="display: block; width: 100%; margin-bottom: 5px"/>
+                @if (file != null)
+                {
                     <RadzenDataGrid ColumnWidth="200px"  AllowFiltering="false" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
                         Data="@employees" TItem="WebAdmin.Models.adminPanelProject.Employee">
                         <Columns>
@@ -30,7 +26,7 @@
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Employee" Property="Gender" Title="Gender">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Employee" Property="BirthDate" Title="Birth Date">
+                        <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Employee" Property="BirthDate" Title="Birth Date" FormatString="{0:dd/MM/yyyy}">
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Employee" Property="Age" Title="Age">
                         </RadzenDataGridColumn>
@@ -45,10 +41,6 @@
                         <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Employee" Property="YearHired" Title="Year Hired">
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Employee" Property="City" Title="City">
-                        </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Employee" Property="ApplyDate" Title="Apply Date">
-                        </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Employee" Property="TesetDate" Title="Test Date">
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Employee" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
                             <Template Context="playerChild">

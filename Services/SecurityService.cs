@@ -247,7 +247,7 @@ namespace WebAdmin
             }
         }
 
-        public async Task Register(string userName, string password, string companyName)
+        public async Task Register(string userName, string password, string companyName, string companyId)
         {
             var uri = new Uri($"{navigationManager.BaseUri}Account/Register");
             password = GenerateRandomPassword();
@@ -255,7 +255,9 @@ namespace WebAdmin
             var content = new FormUrlEncodedContent(new Dictionary<string, string> {
                 { "userName", userName },
                 { "password", password },
-                { "companyName", companyName }
+                { "companyName", companyName },
+                { "companyId", companyId }
+
 
             });
 

@@ -13,9 +13,6 @@ namespace WebAdmin.Models
         public string CompanyId { get; set; }
         public string CompanyName { get; set; }
         public bool FirstLogin { get; set; }
-        public bool? isFirstLogin { get; set; }
-        // public bool IsFirstLogin { get; set; }
-
         [JsonIgnore, IgnoreDataMember]
         public override string PasswordHash { get; set; }
 

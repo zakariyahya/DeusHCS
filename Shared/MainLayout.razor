@@ -7,12 +7,12 @@
 <RadzenLayout style="grid-template-areas: 'rz-sidebar rz-header' 'rz-sidebar rz-body';">
     <RadzenHeader>
         <RadzenRow JustifyContent="JustifyContent.Start" AlignItems="AlignItems.Center" Gap="0">
-            <RadzenColumn Size="5">
-                <RadzenSidebarToggle Click="@SidebarToggleClick"></RadzenSidebarToggle>
+            <RadzenColumn Size="5" Style="background-color: #ffffff">
+                <RadzenSidebarToggle Click="@SidebarToggleClick" Style="background-color: #ffffff"></RadzenSidebarToggle>
             </RadzenColumn>
             <RadzenColumn Size="7">
-                <RadzenStack AlignItems="AlignItems.Center" Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.End">
-                    <RadzenProfileMenu Visible="@Security.IsAuthenticated()" Click="@ProfileMenuClick">
+                <RadzenStack AlignItems="AlignItems.Center" Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.End" Style="background-color: #ffffff">
+                    <RadzenProfileMenu Visible="@Security.IsAuthenticated()" Click="@ProfileMenuClick" Style="background-color: #ffffff">
                         <ChildContent>
 
                             <RadzenProfileMenuItem Path="profile" Icon="settings" Text="Profile" />
@@ -29,22 +29,23 @@
             </RadzenColumn>
         </RadzenRow>
     </RadzenHeader>
-    <RadzenBody Expanded="@sidebarExpanded">
+    <RadzenBody Expanded="@sidebarExpanded" Style="background-color: #ffffff">
         <RadzenRow class="rz-mx-auto rz-px-4 rz-pt-2 rz-pt-md-4 rz-pt-lg-6 rz-pt-xl-12 rz-pb-2 rz-pb-lg-12" Style="max-width: 1440px;">
             <RadzenColumn Size="12">
                 @Body
             </RadzenColumn>
         </RadzenRow>
     </RadzenBody>
-    <RadzenSidebar Expanded="@sidebarExpanded" style="z-index: 2">
+    <RadzenSidebar Expanded="@sidebarExpanded" style="z-index: 2; background-color: #11232f">
         <RadzenStack AlignItems="Radzen.AlignItems.Center" class="rz-py-1 rz-py-lg-1" Style="padding: var(--rz-panel-menu-item-padding); border-bottom: var(--rz-panel-menu-item-border);">
-            <RadzenText Text="Super Admin" TextStyle="Radzen.Blazor.TextStyle.Subtitle1" class="rz-mb-0" style="color: var(--rz-secondary-light); height: 26px; margin-top: 5px; text-align: center" />
-            <RadzenImage Text="Super Admin" Path="images/logo_desus.jpg"  style="width: 193px; height: 55px"></RadzenImage>
+            <RadzenLabel Text="Super Admin" Style="margin-top: -5px; color: #fffcf2; margin-bottom: 1px" />
+            <RadzenImage Text="Super Admin" Path="images/DEUS_Logo2.jpg"  style="width: 30%; margin-top: -20px; margin-bottom: 1px"></RadzenImage>
+            <RadzenLabel Text="Powered By Deus HCS" Style="margin: -20px; margin-bottom: 1px; width: 100%; float: none; text-align: center; text-transform: none; font-weight: normal; font-size: 5px; color: #fffcf2" />
         </RadzenStack>
-        <RadzenPanelMenu>
+        <RadzenPanelMenu Style="background-color: #11232f">
             <RadzenPanelMenuItem Text="Home" Icon="home" Path="" />
         </RadzenPanelMenu>
-        <RadzenPanelMenu>
+        <RadzenPanelMenu Style="background-color: #11232f">
             <RadzenPanelMenuItem Text="Companies" Icon="account_circle" Path="application-users"></RadzenPanelMenuItem>
             <RadzenPanelMenuItem Text="Employee List" Path="employees" Icon="line_weight"></RadzenPanelMenuItem>
             <RadzenPanelMenuItem Text="Individual Assessment Report" Path="assessments" Icon="attach_file"></RadzenPanelMenuItem>

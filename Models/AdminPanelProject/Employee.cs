@@ -40,12 +40,6 @@ namespace WebAdmin.Models.adminPanelProject
         public string City { get; set; }
 
         [Required]
-        public DateTime ApplyDate { get; set; }
-
-        [Required]
-        public DateTime TesetDate { get; set; }
-
-        [Required]
         public DateTime BirthDate { get; set; }
 
         [Required]
