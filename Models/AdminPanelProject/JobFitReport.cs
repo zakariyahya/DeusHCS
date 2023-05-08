@@ -9,7 +9,7 @@ namespace WebAdmin.Models.adminPanelProject
     public partial class JobFitReport
     {
         [Key]
-        [Required]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string id { get; set; }
 
         [Required]
@@ -19,49 +19,49 @@ namespace WebAdmin.Models.adminPanelProject
         public string EmployeeId { get; set; }
 
         [Required]
-        public decimal CEOGeneralDirector { get; set; }
+        public string CEOGeneralDirector { get; set; }
 
         [Required]
-        public decimal AdministrativeStaff { get; set; }
+        public string AdministrativeStaff { get; set; }
 
         [Required]
-        public decimal CreativeDesignManager { get; set; }
+        public string CreativeDesignManager { get; set; }
 
         [Required]
-        public decimal FinanceStaff { get; set; }
+        public string FinanceStaff { get; set; }
 
         [Required]
-        public decimal FinanceManager { get; set; }
+        public string FinanceManager { get; set; }
 
         [Required]
-        public decimal HRStaff { get; set; }
+        public string HRStaff { get; set; }
 
         [Required]
-        public decimal HRManager { get; set; }
+        public string HRManager { get; set; }
 
         [Required]
-        public decimal ITStaff { get; set; }
+        public string ITStaff { get; set; }
 
         [Required]
-        public decimal ITManager { get; set; }
+        public string ITManager { get; set; }
 
         [Required]
-        public decimal MarketingStaff { get; set; }
+        public string MarketingStaff { get; set; }
 
         [Required]
-        public decimal ProductStaff { get; set; }
+        public string ProductStaff { get; set; }
 
         [Required]
-        public decimal ProductManager { get; set; }
+        public string ProductManager { get; set; }
 
         [Required]
-        public decimal SalesStaff { get; set; }
+        public string SalesStaff { get; set; }
 
         [Required]
-        public decimal CustomerService { get; set; }
+        public string CustomerService { get; set; }
 
         [Required]
-        public decimal SalesManager { get; set; }
+        public string SalesManager { get; set; }
 
     }
 }

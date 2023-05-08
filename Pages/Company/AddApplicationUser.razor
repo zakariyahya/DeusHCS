@@ -6,11 +6,13 @@
             <RadzenRow>
                 <RadzenAlert Shade="Radzen.Shade.Lighter" Variant="Radzen.Variant.Flat" Size="Radzen.AlertSize.Small" AlertStyle="Radzen.AlertStyle.Danger" Visible="@errorVisible">@error</RadzenAlert>
                 <RadzenAlert Shade="Radzen.Shade.Lighter" Variant="Radzen.Variant.Flat" Size="Radzen.AlertSize.Small" AlertStyle="Radzen.AlertStyle.Danger" Visible="@errorExtension">@errorExt</RadzenAlert>
-                <RadzenAlert Shade="Radzen.Shade.Lighter" Variant="Radzen.Variant.Flat" Size="Radzen.AlertSize.Small" AlertStyle="Radzen.AlertStyle.Info" Visible="@infoVisible">@info</RadzenAlert>
-                <RadzenColumn SizeMD="12">
+                <RadzenAlert Shade="Radzen.Shade.Lighter" Variant="Radzen.Variant.Flat" Size="Radzen.AlertSize.Small" AlertStyle="Radzen.AlertStyle.Info" Visible="@infoVisible" Style="margin-top: 0px">@info</RadzenAlert>
+                <RadzenColumn SizeMD="12" Style="margin-bottom: 5px">
                     <BlazorInputFile.InputFile Icon="get_app" Text="Import" OnChange="HandleFileSelected" Variant="Variant.InputFile" Shade="Shade.Lighter" />
                     @if(file != null)
                     {
+            @file.Name
+
                         <RadzenDataGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30}) AllowSorting="true" Data="@companies"
                             TItem="WebAdmin.Models.ApplicationUser" >@*RowSelect="@RowSelect" for enable update companies*@
                             <Columns>

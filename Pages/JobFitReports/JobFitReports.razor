@@ -22,109 +22,109 @@
         <RadzenDataGrid @ref="grid0" ColumnWidth="200px"  AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
             Data="@jobFitReports"   RowUpdate=@GridRowUpdate RowCreate=@GridRowCreate TItem="WebAdmin.Models.adminPanelProject.JobFitReport" >
             <Columns>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="id" Title="id">
+                @* <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="id" Title="id">
                   <EditTemplate Context="jobFitReport">
                       <RadzenTextBox style="display: block; width: 100%" @bind-Value="@jobFitReport.id" Name="id" />
                       <RadzenRequiredValidator Component="id" Text="id is required" style="position: absolute" />
                   </EditTemplate>
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="UserId" Title="User Id">
+                </RadzenDataGridColumn> *@
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="UserId" Title="Company" Frozen="true" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="jobFitReport">
                       <RadzenTextBox style="display: block; width: 100%" @bind-Value="@jobFitReport.UserId" Name="UserId" />
                       <RadzenRequiredValidator Component="UserId" Text="UserId is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="EmployeeId" Title="Employee Id">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="EmployeeId" Title="Employee Id" Frozen="true" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="jobFitReport">
                       <RadzenTextBox style="display: block; width: 100%" @bind-Value="@jobFitReport.EmployeeId" Name="EmployeeId" />
                       <RadzenRequiredValidator Component="EmployeeId" Text="EmployeeId is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="CEOGeneralDirector" Title="C E O General Director">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="CEOGeneralDirector" Title="C E O General Director" Width="150px">
                   <EditTemplate Context="jobFitReport">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.CEOGeneralDirector" Name="CEOGeneralDirector" />
                       <RadzenRequiredValidator Component="CEOGeneralDirector" Text="CEOGeneralDirector is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="AdministrativeStaff" Title="Administrative Staff">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="AdministrativeStaff" Title="Administrative Staff" Width="150px">
                   <EditTemplate Context="jobFitReport">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.AdministrativeStaff" Name="AdministrativeStaff" />
                       <RadzenRequiredValidator Component="AdministrativeStaff" Text="AdministrativeStaff is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="CreativeDesignManager" Title="Creative Design Manager">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="CreativeDesignManager" Title="Creative Design Manager" Width="150px">
                   <EditTemplate Context="jobFitReport">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.CreativeDesignManager" Name="CreativeDesignManager" />
                       <RadzenRequiredValidator Component="CreativeDesignManager" Text="CreativeDesignManager is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="FinanceStaff" Title="Finance Staff">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="FinanceStaff" Title="Finance Staff" Width="150px">
                   <EditTemplate Context="jobFitReport">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.FinanceStaff" Name="FinanceStaff" />
                       <RadzenRequiredValidator Component="FinanceStaff" Text="FinanceStaff is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="FinanceManager" Title="Finance Manager">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="FinanceManager" Title="Finance Manager" Width="150px">
                   <EditTemplate Context="jobFitReport">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.FinanceManager" Name="FinanceManager" />
                       <RadzenRequiredValidator Component="FinanceManager" Text="FinanceManager is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="HRStaff" Title="H R Staff">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="HRStaff" Title="H R Staff" Width="150px">
                   <EditTemplate Context="jobFitReport">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.HRStaff" Name="HRStaff" />
                       <RadzenRequiredValidator Component="HRStaff" Text="HRStaff is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="HRManager" Title="H R Manager">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="HRManager" Title="H R Manager" Width="150px">
                   <EditTemplate Context="jobFitReport">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.HRManager" Name="HRManager" />
                       <RadzenRequiredValidator Component="HRManager" Text="HRManager is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="ITStaff" Title="I T Staff">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="ITStaff" Title="I T Staff" Width="150px">
                   <EditTemplate Context="jobFitReport">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.ITStaff" Name="ITStaff" />
                       <RadzenRequiredValidator Component="ITStaff" Text="ITStaff is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="ITManager" Title="I T Manager">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="ITManager" Title="I T Manager" Width="150px">
                   <EditTemplate Context="jobFitReport">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.ITManager" Name="ITManager" />
                       <RadzenRequiredValidator Component="ITManager" Text="ITManager is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="MarketingStaff" Title="Marketing Staff">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="MarketingStaff" Title="Marketing Staff" Width="150px">
                   <EditTemplate Context="jobFitReport">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.MarketingStaff" Name="MarketingStaff" />
                       <RadzenRequiredValidator Component="MarketingStaff" Text="MarketingStaff is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="ProductStaff" Title="Product Staff">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="ProductStaff" Title="Product Staff" Width="150px">
                   <EditTemplate Context="jobFitReport">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.ProductStaff" Name="ProductStaff" />
                       <RadzenRequiredValidator Component="ProductStaff" Text="ProductStaff is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="ProductManager" Title="Product Manager">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="ProductManager" Title="Product Manager" Width="150px">
                   <EditTemplate Context="jobFitReport">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.ProductManager" Name="ProductManager" />
                       <RadzenRequiredValidator Component="ProductManager" Text="ProductManager is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="SalesStaff" Title="Sales Staff">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="SalesStaff" Title="Sales Staff" Width="150px">
                   <EditTemplate Context="jobFitReport">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.SalesStaff" Name="SalesStaff" />
                       <RadzenRequiredValidator Component="SalesStaff" Text="SalesStaff is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="CustomerService" Title="Customer Service">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="CustomerService" Title="Customer Service" Width="150px">
                   <EditTemplate Context="jobFitReport">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.CustomerService" Name="CustomerService" />
                       <RadzenRequiredValidator Component="CustomerService" Text="CustomerService is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="SalesManager" Title="Sales Manager">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.JobFitReport" Property="SalesManager" Title="Sales Manager" Width="150px">
                   <EditTemplate Context="jobFitReport">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@jobFitReport.SalesManager" Name="SalesManager" />
                       <RadzenRequiredValidator Component="SalesManager" Text="SalesManager is required" style="position: absolute" />

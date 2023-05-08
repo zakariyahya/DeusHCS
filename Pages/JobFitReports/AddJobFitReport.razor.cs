@@ -39,25 +39,13 @@ namespace WebAdmin.Pages.JobFitReports
         protected override async Task OnInitializedAsync()
         {
             usersForUserId = await adminPanelProjectService.GetUsers();
-            jobFitReport = new WebAdmin.Models.adminPanelProject.JobFitReport();
+            // jobFitReport = new WebAdmin.Models.adminPanelProject.JobFitReport();
         }
+
         protected bool isBusy;
 
         protected bool errorVisible;
         protected WebAdmin.Models.adminPanelProject.JobFitReport jobFitReport;
-
-        protected async Task FormSubmit()
-        {
-            try
-            {
-                await adminPanelProjectService.CreateJobFitReport(jobFitReport);
-                DialogService.Close(jobFitReport);
-            }
-            catch (Exception ex)
-            {
-                errorVisible = true;
-            }
-        }
 
         IFileListEntry file;
         List<WebAdmin.Models.adminPanelProject.JobFitReport> jobFitReports =
@@ -73,34 +61,36 @@ namespace WebAdmin.Pages.JobFitReports
             {
                 adminPanelProjectService.Upload(file);
                 jobFitReports = adminPanelProjectService?.ReadJobFitReportExcel();
-                foreach (var item in jobFitReports)
-                {
-                    // var company = adminPanelProjectService.GetUserById(item.id);
-                    var jobFitReport = adminPanelProjectService.GetJobFitReportByID(item.id);
-                    jobFitReportDb = jobFitReport;
-                }
             }
+        }
+
+        protected async Task FormSubmit()
+        {
+            // try
+            // {
+            //     foreach (var item in jobFitReports)
+            //     {
+            //         isBusy = true;
+            //         item.UserId = jobFitReport.UserId;
+            //         adminPanelProjectService.CreateJobFitReport(item);
+            //     }
+            //     DialogService.Close(jobFitReport);
+            // }
+            // catch (Exception ex)
+            // {
+            //     errorVisible = true;
+            // }
+            foreach (var item in jobFitReports)
+            {
+                isBusy = true;
+                item.UserId = jobFitReport.UserId;
+                adminPanelProjectService.CreateJobFitReport(item);
+            }
+            DialogService.Close(jobFitReport);
         }
 
         protected string info;
         protected bool infoVisible;
-
-        private void AddExcel()
-        {
-            try
-            {
-                adminPanelProjectService.AddJobFitReportExcel(jobFitReports);
-                // Message = "Data Saved";
-                infoVisible = true;
-
-                info = "Companies was created";
-            }
-            catch (System.Exception ex)
-            {
-                errorVisible = true;
-                // Message = ex.Message;
-            }
-        }
 
         protected async Task CancelButtonClick(MouseEventArgs args)
         {
@@ -114,19 +104,13 @@ namespace WebAdmin.Pages.JobFitReports
 
         bool hasUseridValue;
 
+        [Parameter]
+        public string UserId { get; set; }
+
         public override async Task SetParametersAsync(ParameterView parameters)
         {
             jobFitReport = new WebAdmin.Models.adminPanelProject.JobFitReport();
-
             hasUseridValue = parameters.TryGetValue<string>("UserId", out var hasUseridResult);
-            // user = adminPanelProjectService.GetUserById(UserId);
-            // player.UserId = UserId;
-            // player.ApplicationUser = user;
-            // if (hasUseridValue)
-            // {
-            //     player.UserId = hasUseridResult;
-            //     player.ApplicationUser = user;
-            // }
             await base.SetParametersAsync(parameters);
         }
     }

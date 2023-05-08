@@ -9,7 +9,7 @@ namespace WebAdmin.Models.adminPanelProject
     public partial class Employee
     {
         [Key]
-         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string id { get; set; }
 
         [Required]
@@ -22,7 +22,7 @@ namespace WebAdmin.Models.adminPanelProject
         public string Gender { get; set; }
 
         [Required]
-        public string UserId { get; set; }
+        public string userid { get; set; }
 
         [Required]
         public string JobTitle { get; set; }
@@ -39,7 +39,7 @@ namespace WebAdmin.Models.adminPanelProject
         [Required]
         public string City { get; set; }
 
-        [Required]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime BirthDate { get; set; }
 
         [Required]
@@ -59,6 +59,5 @@ namespace WebAdmin.Models.adminPanelProject
         public DateTime? lastModifiedTime { get; set; }
 
         public string EmployeeId { get; set; }
-
     }
 }

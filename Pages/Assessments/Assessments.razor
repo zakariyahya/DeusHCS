@@ -20,460 +20,461 @@
 <RadzenTextBox Placeholder="Search ..." style="display: block; width: 100%" @oninput="@Search" />
 <RadzenRow>
     <RadzenColumn SizeMD=12>
-        <RadzenDataGrid @ref="grid0" ColumnWidth="200px"  AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" Allo AllowColumnResize="true"wSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+        <RadzenDataGrid @ref="grid0" ColumnWidth="200px"  AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowColumnResize="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
             Data="@assessments"   RowUpdate=@GridRowUpdate RowCreate=@GridRowCreate TItem="WebAdmin.Models.adminPanelProject.Assessment" AllowVirtualization="true" >
             <Columns>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="id" Title="id">
+                @* <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="id" Title="id">
                   <EditTemplate Context="assessment">
                       <RadzenTextBox style="display: block; width: 100%" @bind-Value="@assessment.id" Name="id" />
                       <RadzenRequiredValidator Component="id" Text="id is required" style="position: absolute" />
                   </EditTemplate>
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="UserId" Title="User Id">
-                  <EditTemplate Context="assessment">
-                      <RadzenTextBox style="display: block; width: 100%" @bind-Value="@assessment.UserId" Name="UserId" />
-                      <RadzenRequiredValidator Component="UserId" Text="UserId is required" style="position: absolute" />
-                  </EditTemplate>
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="EmployeeId" Title="Employee Id">
+                </RadzenDataGridColumn> *@
+                     <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="EmployeeId" Title="Employee Id" Frozen="true" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenTextBox style="display: block; width: 100%" @bind-Value="@assessment.EmployeeId" Name="EmployeeId" />
                       <RadzenRequiredValidator Component="EmployeeId" Text="EmployeeId is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Diplomatic" Title="Diplomatic">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="UserId" Title="Company" Frozen="true" Width="150px" TextAlign="TextAlign.Center">
+                  <EditTemplate Context="assessment">
+                      <RadzenTextBox style="display: block; width: 100%" @bind-Value="@assessment.UserId" Name="UserId" />
+                      <RadzenRequiredValidator Component="UserId" Text="UserId is required" style="position: absolute" />
+                  </EditTemplate>
+                </RadzenDataGridColumn>
+           
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Diplomatic" Title="Diplomatic" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.Diplomatic" Name="Diplomatic" />
                       <RadzenRequiredValidator Component="Diplomatic" Text="Diplomatic is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Empathy" Title="Empathy">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Empathy" Title="Empathy" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.Empathy" Name="Empathy" />
                       <RadzenRequiredValidator Component="Empathy" Text="Empathy is required" style="position: absolute" />
                   </EditTemplate>
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Cooperative" Title="Cooperative">
+                </RadzenDataGridColumn> 
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Cooperative" Title="Cooperative" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.Cooperative" Name="Cooperative" />
                       <RadzenRequiredValidator Component="Cooperative" Text="Cooperative is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Trust" Title="Trust">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Trust" Title="Trust" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.Trust" Name="Trust" />
                       <RadzenRequiredValidator Component="Trust" Text="Trust is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Ambitious" Title="Ambitious">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Ambitious" Title="Ambitious" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.Ambitious" Name="Ambitious" />
                       <RadzenRequiredValidator Component="Ambitious" Text="Ambitious is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Competitive" Title="Competitive">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Competitive" Title="Competitive" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.Competitive" Name="Competitive" />
                       <RadzenRequiredValidator Component="Competitive" Text="Competitive is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Direct" Title="Direct">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Direct" Title="Direct" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.Direct" Name="Direct" />
                       <RadzenRequiredValidator Component="Direct" Text="Direct is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Rational" Title="Rational">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Rational" Title="Rational" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.Rational" Name="Rational" />
                       <RadzenRequiredValidator Component="Rational" Text="Rational is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Conformity" Title="Conformity">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Conformity" Title="Conformity" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.Conformity" Name="Conformity" />
                       <RadzenRequiredValidator Component="Conformity" Text="Conformity is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Diligent" Title="Diligent">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Diligent" Title="Diligent" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.Diligent" Name="Diligent" />
                       <RadzenRequiredValidator Component="Diligent" Text="Diligent is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Organized" Title="Organized">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Organized" Title="Organized" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.Organized" Name="Organized" />
                       <RadzenRequiredValidator Component="Organized" Text="Organized is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Temperance" Title="Temperance">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Temperance" Title="Temperance" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.Temperance" Name="Temperance" />
                       <RadzenRequiredValidator Component="Temperance" Text="Temperance is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Versatile" Title="Versatile">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Versatile" Title="Versatile" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.Versatile" Name="Versatile" />
                       <RadzenRequiredValidator Component="Versatile" Text="Versatile is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Instinctive" Title="Instinctive">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Instinctive" Title="Instinctive" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.Instinctive" Name="Instinctive" />
                       <RadzenRequiredValidator Component="Instinctive" Text="Instinctive is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Opportunistic" Title="Opportunistic">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Opportunistic" Title="Opportunistic" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.Opportunistic" Name="Opportunistic" />
                       <RadzenRequiredValidator Component="Opportunistic" Text="Opportunistic is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Unorthodox" Title="Unorthodox">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Unorthodox" Title="Unorthodox" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.Unorthodox" Name="Unorthodox" />
                       <RadzenRequiredValidator Component="Unorthodox" Text="Unorthodox is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Adventurous" Title="Adventurous">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Adventurous" Title="Adventurous" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.Adventurous" Name="Adventurous" />
                       <RadzenRequiredValidator Component="Adventurous" Text="Adventurous is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Assertive" Title="Assertive">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Assertive" Title="Assertive" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.Assertive" Name="Assertive" />
                       <RadzenRequiredValidator Component="Assertive" Text="Assertive is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Optimistic" Title="Optimistic">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Optimistic" Title="Optimistic" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.Optimistic" Name="Optimistic" />
                       <RadzenRequiredValidator Component="Optimistic" Text="Optimistic is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Gregarious" Title="Gregarious">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Gregarious" Title="Gregarious" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.Gregarious" Name="Gregarious" />
                       <RadzenRequiredValidator Component="Gregarious" Text="Gregarious is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Independent" Title="Independent">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Independent" Title="Independent" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.Independent" Name="Independent" />
                       <RadzenRequiredValidator Component="Independent" Text="Independent is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Introspective" Title="Introspective">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Introspective" Title="Introspective" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.Introspective" Name="Introspective" />
                       <RadzenRequiredValidator Component="Introspective" Text="Introspective is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Restrained" Title="Restrained">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Restrained" Title="Restrained" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.Restrained" Name="Restrained" />
                       <RadzenRequiredValidator Component="Restrained" Text="Restrained is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Ingenuity" Title="Ingenuity">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Ingenuity" Title="Ingenuity" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.Ingenuity" Name="Ingenuity" />
                       <RadzenRequiredValidator Component="Ingenuity" Text="Ingenuity is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Inquisitive" Title="Inquisitive">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Inquisitive" Title="Inquisitive" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.Inquisitive" Name="Inquisitive" />
                       <RadzenRequiredValidator Component="Inquisitive" Text="Inquisitive is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Intricate" Title="Intricate">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Intricate" Title="Intricate" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.Intricate" Name="Intricate" />
                       <RadzenRequiredValidator Component="Intricate" Text="Intricate is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="StrategicallyMinded" Title="Strategically Minded">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="StrategicallyMinded" Title="Strategically Minded" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.StrategicallyMinded" Name="StrategicallyMinded" />
                       <RadzenRequiredValidator Component="StrategicallyMinded" Text="StrategicallyMinded is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Methodical" Title="Methodical">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Methodical" Title="Methodical" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.Methodical" Name="Methodical" />
                       <RadzenRequiredValidator Component="Methodical" Text="Methodical is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="PresentMinded" Title="Present Minded">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="PresentMinded" Title="Present Minded" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.PresentMinded" Name="PresentMinded" />
                       <RadzenRequiredValidator Component="PresentMinded" Text="PresentMinded is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Utilitarian" Title="Utilitarian">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Utilitarian" Title="Utilitarian" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.Utilitarian" Name="Utilitarian" />
                       <RadzenRequiredValidator Component="Utilitarian" Text="Utilitarian is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Relationship_Driven" Title="Relationship Driven">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Relationship_Driven" Title="Relationship Driven" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.Relationship_Driven" Name="Relationship_Driven" />
                       <RadzenRequiredValidator Component="Relationship_Driven" Text="Relationship_Driven is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="ResultsDriven" Title="Results Driven">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="ResultsDriven" Title="Results Driven" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.ResultsDriven" Name="ResultsDriven" />
                       <RadzenRequiredValidator Component="ResultsDriven" Text="ResultsDriven is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="MotivatedByOrder" Title="Motivated By Order">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="MotivatedByOrder" Title="Motivated By Order" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.MotivatedByOrder" Name="MotivatedByOrder" />
                       <RadzenRequiredValidator Component="MotivatedByOrder" Text="MotivatedByOrder is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="MotivatedByAmbiguity" Title="Motivated By Ambiguity">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="MotivatedByAmbiguity" Title="Motivated By Ambiguity" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.MotivatedByAmbiguity" Name="MotivatedByAmbiguity" />
                       <RadzenRequiredValidator Component="MotivatedByAmbiguity" Text="MotivatedByAmbiguity is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Outgoing" Title="Outgoing">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Outgoing" Title="Outgoing" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.Outgoing" Name="Outgoing" />
                       <RadzenRequiredValidator Component="Outgoing" Text="Outgoing is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Reserved" Title="Reserved">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Reserved" Title="Reserved" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.Reserved" Name="Reserved" />
                       <RadzenRequiredValidator Component="Reserved" Text="Reserved is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Innovative" Title="Innovative">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Innovative" Title="Innovative" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.Innovative" Name="Innovative" />
                       <RadzenRequiredValidator Component="Innovative" Text="Innovative is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Pragmatic" Title="Pragmatic">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Pragmatic" Title="Pragmatic" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.Pragmatic" Name="Pragmatic" />
                       <RadzenRequiredValidator Component="Pragmatic" Text="Pragmatic is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="VisualPerception" Title="Visual Perception">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="VisualPerception" Title="Visual Perception" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.VisualPerception" Name="VisualPerception" />
                       <RadzenRequiredValidator Component="VisualPerception" Text="VisualPerception is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="SpatialReasoning" Title="Spatial Reasoning">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="SpatialReasoning" Title="Spatial Reasoning" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.SpatialReasoning" Name="SpatialReasoning" />
                       <RadzenRequiredValidator Component="SpatialReasoning" Text="SpatialReasoning is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="VerbalComprehension" Title="Verbal Comprehension">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="VerbalComprehension" Title="Verbal Comprehension" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.VerbalComprehension" Name="VerbalComprehension" />
                       <RadzenRequiredValidator Component="VerbalComprehension" Text="VerbalComprehension is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="DominantLeadership" Title="Dominant Leadership">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="DominantLeadership" Title="Dominant Leadership" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.DominantLeadership" Name="DominantLeadership" />
                       <RadzenRequiredValidator Component="DominantLeadership" Text="DominantLeadership is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="CollaborativeLeadership" Title="Collaborative Leadership">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="CollaborativeLeadership" Title="Collaborative Leadership" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.CollaborativeLeadership" Name="CollaborativeLeadership" />
                       <RadzenRequiredValidator Component="CollaborativeLeadership" Text="CollaborativeLeadership is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="ServantLeadership" Title="Servant Leadership">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="ServantLeadership" Title="Servant Leadership" Width="150px" TextAlign="TextAlign.Center"> 
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.ServantLeadership" Name="ServantLeadership" />
                       <RadzenRequiredValidator Component="ServantLeadership" Text="ServantLeadership is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="SupportingOthers" Title="Supporting Others">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="SupportingOthers" Title="Supporting Others" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.SupportingOthers" Name="SupportingOthers" />
                       <RadzenRequiredValidator Component="SupportingOthers" Text="SupportingOthers is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="CoachingOthers" Title="Coaching Others">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="CoachingOthers" Title="Coaching Others" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.CoachingOthers" Name="CoachingOthers" />
                       <RadzenRequiredValidator Component="CoachingOthers" Text="CoachingOthers is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="EnablingTeamwork" Title="Enabling Teamwork">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="EnablingTeamwork" Title="Enabling Teamwork" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.EnablingTeamwork" Name="EnablingTeamwork" />
                       <RadzenRequiredValidator Component="EnablingTeamwork" Text="EnablingTeamwork is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="BuildingConnections" Title="Building Connections">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="BuildingConnections" Title="Building Connections" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.BuildingConnections" Name="BuildingConnections" />
                       <RadzenRequiredValidator Component="BuildingConnections" Text="BuildingConnections is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="PersuadingOthers" Title="Persuading Others">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="PersuadingOthers" Title="Persuading Others" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.PersuadingOthers" Name="PersuadingOthers" />
                       <RadzenRequiredValidator Component="PersuadingOthers" Text="PersuadingOthers is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="AdaptiveCommunication" Title="Adaptive Communication">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="AdaptiveCommunication" Title="Adaptive Communication" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.AdaptiveCommunication" Name="AdaptiveCommunication" />
                       <RadzenRequiredValidator Component="AdaptiveCommunication" Text="AdaptiveCommunication is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="TrendIdentification" Title="Trend Identification">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="TrendIdentification" Title="Trend Identification" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.TrendIdentification" Name="TrendIdentification" />
                       <RadzenRequiredValidator Component="TrendIdentification" Text="TrendIdentification is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="DistillingInformation" Title="Distilling Information">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="DistillingInformation" Title="Distilling Information" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.DistillingInformation" Name="DistillingInformation" />
                       <RadzenRequiredValidator Component="DistillingInformation" Text="DistillingInformation is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="ApplyingExpertise" Title="Applying Expertise">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="ApplyingExpertise" Title="Applying Expertise" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.ApplyingExpertise" Name="ApplyingExpertise" />
                       <RadzenRequiredValidator Component="ApplyingExpertise" Text="ApplyingExpertise is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="ActiveLearning" Title="Active Learning">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="ActiveLearning" Title="Active Learning" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.ActiveLearning" Name="ActiveLearning" />
                       <RadzenRequiredValidator Component="ActiveLearning" Text="ActiveLearning is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="StrategicAgility" Title="Strategic Agility">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="StrategicAgility" Title="Strategic Agility" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.StrategicAgility" Name="StrategicAgility" />
                       <RadzenRequiredValidator Component="StrategicAgility" Text="StrategicAgility is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="ChampioningChange" Title="Championing Change">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="ChampioningChange" Title="Championing Change" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.ChampioningChange" Name="ChampioningChange" />
                       <RadzenRequiredValidator Component="ChampioningChange" Text="ChampioningChange is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="ForwardPlanning" Title="Forward Planning">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="ForwardPlanning" Title="Forward Planning" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.ForwardPlanning" Name="ForwardPlanning" />
                       <RadzenRequiredValidator Component="ForwardPlanning" Text="ForwardPlanning is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="FollowingDirections" Title="Following Directions">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="FollowingDirections" Title="Following Directions" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.FollowingDirections" Name="FollowingDirections" />
                       <RadzenRequiredValidator Component="FollowingDirections" Text="FollowingDirections is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="QualityClientDelivery" Title="Quality Client Delivery">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="QualityClientDelivery" Title="Quality Client Delivery" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.QualityClientDelivery" Name="QualityClientDelivery" />
                       <RadzenRequiredValidator Component="QualityClientDelivery" Text="QualityClientDelivery is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="ResilienceUnderPressure" Title="Resilience Under Pressure">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="ResilienceUnderPressure" Title="Resilience Under Pressure" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.ResilienceUnderPressure" Name="ResilienceUnderPressure" />
                       <RadzenRequiredValidator Component="ResilienceUnderPressure" Text="ResilienceUnderPressure is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="LateralProblemSolving" Title="Lateral Problem Solving">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="LateralProblemSolving" Title="Lateral Problem Solving" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.LateralProblemSolving" Name="LateralProblemSolving" />
                       <RadzenRequiredValidator Component="LateralProblemSolving" Text="LateralProblemSolving is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="OperationalFlexibility" Title="Operational Flexibility">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="OperationalFlexibility" Title="Operational Flexibility" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.OperationalFlexibility" Name="OperationalFlexibility" />
                       <RadzenRequiredValidator Component="OperationalFlexibility" Text="OperationalFlexibility is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="SelfDevelopmentFocused" Title="Self Development Focused">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="SelfDevelopmentFocused" Title="Self Development Focused" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.SelfDevelopmentFocused" Name="SelfDevelopmentFocused" />
                       <RadzenRequiredValidator Component="SelfDevelopmentFocused" Text="SelfDevelopmentFocused is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="BusinessAcumen" Title="Business Acumen">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="BusinessAcumen" Title="Business Acumen" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.BusinessAcumen" Name="BusinessAcumen" />
                       <RadzenRequiredValidator Component="BusinessAcumen" Text="BusinessAcumen is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="OptimizingPerformance" Title="Optimizing Performance">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="OptimizingPerformance" Title="Optimizing Performance" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.OptimizingPerformance" Name="OptimizingPerformance" />
                       <RadzenRequiredValidator Component="OptimizingPerformance" Text="OptimizingPerformance is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="LeadingAndDeciding" Title="Leading And Deciding">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="LeadingAndDeciding" Title="Leading And Deciding" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.LeadingAndDeciding" Name="LeadingAndDeciding" />
                       <RadzenRequiredValidator Component="LeadingAndDeciding" Text="LeadingAndDeciding is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="SupportingAndCooperating" Title="Supporting And Cooperating">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="SupportingAndCooperating" Title="Supporting And Cooperating" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.SupportingAndCooperating" Name="SupportingAndCooperating" />
                       <RadzenRequiredValidator Component="SupportingAndCooperating" Text="SupportingAndCooperating is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="InteractingAndNegotiating" Title="Interacting And Negotiating">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="InteractingAndNegotiating" Title="Interacting And Negotiating" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.InteractingAndNegotiating" Name="InteractingAndNegotiating" />
                       <RadzenRequiredValidator Component="InteractingAndNegotiating" Text="InteractingAndNegotiating is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="AnalyzeAndInterpret" Title="Analyze And Interpret">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="AnalyzeAndInterpret" Title="Analyze And Interpret" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.AnalyzeAndInterpret" Name="AnalyzeAndInterpret" />
                       <RadzenRequiredValidator Component="AnalyzeAndInterpret" Text="AnalyzeAndInterpret is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="CreateAndConceptualize" Title="Create And Conceptualize">
+                @* <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="CreateAndConceptualize" Title="Create And Conceptualize">
                   <EditTemplate Context="assessment">
                       <RadzenTextBox style="display: block; width: 100%" @bind-Value="@assessment.CreateAndConceptualize" Name="CreateAndConceptualize" />
                       <RadzenRequiredValidator Component="CreateAndConceptualize" Text="CreateAndConceptualize is required" style="position: absolute" />
                   </EditTemplate>
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="OrganizeAndExecute" Title="Organize And Execute">
+                </RadzenDataGridColumn> *@
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="OrganizeAndExecute" Title="Organize And Execute" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.OrganizeAndExecute" Name="OrganizeAndExecute" />
                       <RadzenRequiredValidator Component="OrganizeAndExecute" Text="OrganizeAndExecute is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="AdaptAndCope" Title="Adapt And Cope">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="AdaptAndCope" Title="Adapt And Cope" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.AdaptAndCope" Name="AdaptAndCope" />
                       <RadzenRequiredValidator Component="AdaptAndCope" Text="AdaptAndCope is required" style="position: absolute" />
                   </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="EnterprisingAndPerforming" Title="Enterprising And Performing">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="EnterprisingAndPerforming" Title="Enterprising And Performing" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.EnterprisingAndPerforming" Name="EnterprisingAndPerforming" />
                       <RadzenRequiredValidator Component="EnterprisingAndPerforming" Text="EnterprisingAndPerforming is required" style="position: absolute" />

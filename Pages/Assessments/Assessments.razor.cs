@@ -45,11 +45,11 @@ namespace WebAdmin.Pages.Assessments
 
             await grid0.GoToPage(0);
 
-            assessments = await adminPanelProjectService.GetAssessments(new Query { Filter = $@"i => i.id.Contains(@0) || i.UserId.Contains(@0) || i.EmployeeId.Contains(@0) || i.CreateAndConceptualize.Contains(@0)", FilterParameters = new object[] { search } });
+            assessments = await adminPanelProjectService.GetAssessments(new Query { Filter = $@"i => i.id.Contains(@0) || i.UserId.Contains(@0)  ", FilterParameters = new object[] { search } });
         }
         protected override async Task OnInitializedAsync()
         {
-            assessments = await adminPanelProjectService.GetAssessments(new Query { Filter = $@"i => i.id.Contains(@0) || i.UserId.Contains(@0) || i.EmployeeId.Contains(@0) || i.CreateAndConceptualize.Contains(@0)", FilterParameters = new object[] { search } });
+            assessments = await adminPanelProjectService.GetAssessments(new Query { Filter = $@"i => i.id.Contains(@0) || i.UserId.Contains(@0) ", FilterParameters = new object[] { search } });
         }
 
         protected async Task AddButtonClick(MouseEventArgs args)

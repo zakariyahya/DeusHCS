@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Identity;
+using WebAdmin.Models.adminPanelProject;
 
 namespace WebAdmin.Models
 {
@@ -36,5 +37,7 @@ namespace WebAdmin.Models
         }
 
         public ICollection<ApplicationRole> Roles { get; set; }
+        public ICollection<Employee> Employees { get; set; }
+
     }
 }

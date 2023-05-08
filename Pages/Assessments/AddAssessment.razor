@@ -4,6 +4,8 @@
     <RadzenColumn SizeMD=12>
        
         <RadzenAlert Shade="Shade.Lighter" Variant="Variant.Flat" Size="AlertSize.Small" AlertStyle="AlertStyle.Danger" Visible="@errorVisible">Cannot save Assessment</RadzenAlert>
+        <RadzenTemplateForm TItem="WebAdmin.Models.adminPanelProject.Assessment" Data="@assessment" Visible="@(assessment != null)" Submit="@FormSubmit">
+             
              <RadzenColumn SizeMD="3">
                 <RadzenLabel Text="Company" Component="UserId" style="width: 100%" />
                 </RadzenColumn>
@@ -16,25 +18,13 @@
                  <BlazorInputFile.InputFile Icon="get_app" Text="Import"  style="display: block; width: 100%; margin-bottom: 5px" OnChange="HandleFileSelected" Variant="Variant.InputFile" Shade="Shade.Lighter" />
                 @if (file != null)
                 {
-                <RadzenDataGrid @ref="grid0" ColumnWidth="200px"  AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" Allo AllowColumnResize="true"wSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
-                    Data="@assessments"  TItem="WebAdmin.Models.adminPanelProject.Assessment" AllowVirtualization="true" >
+               <RadzenDataGrid ColumnWidth="200px"  AllowFiltering="false" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+                        Data="@assessments" TItem="WebAdmin.Models.adminPanelProject.Assessment">
                     <Columns>
-                        <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="id" Title="id">
-                        <EditTemplate Context="assessment">
-                            <RadzenTextBox style="display: block; width: 100%" @bind-Value="@assessment.id" Name="id" />
-                            <RadzenRequiredValidator Component="id" Text="id is required" style="position: absolute" />
-                        </EditTemplate>
-                        </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="UserId" Title="User Id">
-                        <EditTemplate Context="assessment">
-                            <RadzenTextBox style="display: block; width: 100%" @bind-Value="@assessment.UserId" Name="UserId" />
-                            <RadzenRequiredValidator Component="UserId" Text="UserId is required" style="position: absolute" />
-                        </EditTemplate>
-                        </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="EmployeeId" Title="Employee Id">
+                        <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="EmployeeId" Title="EmployeeId">
                         <EditTemplate Context="assessment">
                             <RadzenTextBox style="display: block; width: 100%" @bind-Value="@assessment.EmployeeId" Name="EmployeeId" />
-                            <RadzenRequiredValidator Component="EmployeeId" Text="EmployeeId is required" style="position: absolute" />
+                            <RadzenRequiredValidator Component="id" Text="id is required" style="position: absolute" />
                         </EditTemplate>
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="Diplomatic" Title="Diplomatic">
@@ -451,12 +441,12 @@
                             <RadzenRequiredValidator Component="AnalyzeAndInterpret" Text="AnalyzeAndInterpret is required" style="position: absolute" />
                         </EditTemplate>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="CreateAndConceptualize" Title="Create And Conceptualize">
+                        @* <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="CreateAndConceptualize" Title="Create And Conceptualize">
                         <EditTemplate Context="assessment">
                             <RadzenTextBox style="display: block; width: 100%" @bind-Value="@assessment.CreateAndConceptualize" Name="CreateAndConceptualize" />
                             <RadzenRequiredValidator Component="CreateAndConceptualize" Text="CreateAndConceptualize is required" style="position: absolute" />
                         </EditTemplate>
-                        </RadzenDataGridColumn>
+                        </RadzenDataGridColumn> *@
                         <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="OrganizeAndExecute" Title="Organize And Execute">
                         <EditTemplate Context="assessment">
                             <RadzenNumeric style="display: block; width: 100%" @bind-Value="@assessment.OrganizeAndExecute" Name="OrganizeAndExecute" />
@@ -479,9 +469,10 @@
                 </RadzenDataGrid>
                 }
                     <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
-                        <RadzenButton Click="@AddExcel" ButtonType="ButtonType.Submit" Icon="save" Text="Create All"  Variant="Variant.Flat" />
-                        <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Close" Click="@CancelClick" Variant="Variant.Flat" />
-                    </RadzenStack>
+                    <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Create All" IsBusy="@isBusy" BusyText="Creating ..."  Variant="Variant.Flat" />
+                    <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Close" Click="@CancelClick" Variant="Variant.Flat" />
+                </RadzenStack>
                 </RadzenColumn>
+        </RadzenTemplateForm>
     </RadzenColumn>
 

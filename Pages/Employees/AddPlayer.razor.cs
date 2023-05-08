@@ -35,21 +35,17 @@ namespace WebAdmin.Pages.Employees
         public adminPanelProjectService adminPanelProjectService { get; set; }
         IFileListEntry file;
 
-        // Employee
-        WebAdmin.Models.adminPanelProject.Employee employeeDb =
-            new WebAdmin.Models.adminPanelProject.Employee();
         List<WebAdmin.Models.adminPanelProject.Employee> employees =
             new List<WebAdmin.Models.adminPanelProject.Employee>();
 
-        // [Parameter]
-        // public string UserId { get; set; }
-        protected WebAdmin.Models.adminPanelProject.Employee employee;
-
         protected override async Task OnInitializedAsync()
         {
-            employee = new WebAdmin.Models.adminPanelProject.Employee();
-            usersForUserId = await adminPanelProjectService.GetUsers();
+            usersForuserid = await adminPanelProjectService.GetUsers();
         }
+
+        protected WebAdmin.Models.adminPanelProject.Employee employee;
+
+        protected IEnumerable<WebAdmin.Models.ApplicationUser> usersForuserid;
 
         protected bool errorVisible;
         protected string error;
@@ -57,11 +53,9 @@ namespace WebAdmin.Pages.Employees
 
         protected string info;
         protected bool infoVisible;
+        protected bool sasa;
         protected IEnumerable<WebAdmin.Models.ApplicationUser> usersForUserId;
         protected WebAdmin.Models.ApplicationUser user;
-
-        [Parameter]
-        public string UserId { get; set; }
 
         async Task HandleFileSelected(IFileListEntry[] files)
         {
@@ -70,55 +64,28 @@ namespace WebAdmin.Pages.Employees
             {
                 adminPanelProjectService.Upload(file);
                 employees = adminPanelProjectService?.ReadEmployeeExcel();
-                foreach (var item in employees)
-                {
-                    // var company = adminPanelProjectService.GetUserById(item.id);
-                    var employee = adminPanelProjectService.GetPlayerByID(item.id);
-                    employeeDb = employee;
-                }
+                // foreach (var item in employees)
+                // {
+                //     var employee = adminPanelProjectService.GetPlayerByID(item.id);
+                //     employeeDb = employee;
+                // }
             }
         }
 
         protected async Task FormSubmit()
         {
-            try
+            foreach (var item in employees)
             {
-                isBusy = true;
-                await adminPanelProjectService.CreatePlayer(employee);
-                employee = new WebAdmin.Models.adminPanelProject.Employee();
-
-                // user = adminPanelProjectService.GetUserById(UserId);
-                employee.UserId = UserId;
-                // employee.PhoneNumber = "0888";
-                // employee.createdBy = "System";
-                // player.ApplicationUser = user;
-                DialogService.Close(employee);
+                item.userid = employee.userid;
+                item.createdTime = DateTime.Now;
+                item.PhoneNumber = "0888";
+                item.createdBy = "System";
+                adminPanelProjectService.CreatePlayer(item);
             }
-            catch (Exception ex)
-            {
-                errorVisible = true;
-                error = ex.Message;
-            }
-        }
-
-        private void AddExcel()
-        {
-            try
-            {
-                // isBusy = true;
-               
-                adminPanelProjectService.AddEmployeeExcel(employees);
-                //  employee = new WebAdmin.Models.adminPanelProject.Employee();
-                // employee.UserId = UserId;
-                infoVisible = true;
-                info = "Employees was created";
-                // DialogService.Close(employee);
-            }
-            catch (System.Exception ex)
-            {
-                errorVisible = true;
-                error = ex.Message;
-            }
+            infoVisible = true;
+            sasa = true;
+            info = "Employees was created";
+            // DialogService.Close(employee);
         }
 
         protected async Task CancelButtonClick(MouseEventArgs args)
@@ -131,24 +98,21 @@ namespace WebAdmin.Pages.Employees
             DialogService.Close(null);
         }
 
-        bool hasUseridValue;
+        bool hasuseridValue;
 
-        [Inject]
-        protected SecurityService Security { get; set; }
+        [Parameter]
+        public string userid { get; set; }
 
         public override async Task SetParametersAsync(ParameterView parameters)
         {
             employee = new WebAdmin.Models.adminPanelProject.Employee();
 
-            hasUseridValue = parameters.TryGetValue<string>("UserId", out var hasUseridResult);
-            // user = adminPanelProjectService.GetUserById(UserId);
-            // player.UserId = UserId;
-            // player.ApplicationUser = user;
-            // if (hasUseridValue)
-            // {
-            //     player.UserId = hasUseridResult;
-            //     player.ApplicationUser = user;
-            // }
+            hasuseridValue = parameters.TryGetValue<string>("userid", out var hasuseridResult);
+
+            if (hasuseridValue)
+            {
+                employee.userid = hasuseridResult;
+            }
             await base.SetParametersAsync(parameters);
         }
     }

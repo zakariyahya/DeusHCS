@@ -9,233 +9,242 @@ namespace WebAdmin.Models.adminPanelProject
     public partial class Assessment
     {
         [Key]
-        [Required]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string id { get; set; }
 
         [Required]
         public string UserId { get; set; }
-
-        [Required]
+    
         public string EmployeeId { get; set; }
 
         [Required]
-        public int Diplomatic { get; set; }
+        public decimal Diplomatic { get; set; }
 
         [Required]
-        public int Empathy { get; set; }
+        public decimal Empathy { get; set; }
 
         [Required]
-        public int Cooperative { get; set; }
+        public decimal Cooperative { get; set; }
 
         [Required]
-        public int Trust { get; set; }
+        public decimal Trust { get; set; }
 
         [Required]
-        public int Ambitious { get; set; }
+        public decimal Ambitious { get; set; }
 
         [Required]
-        public int Competitive { get; set; }
+        public decimal Competitive { get; set; }
 
         [Required]
-        public int Direct { get; set; }
+        public decimal Direct { get; set; }
 
         [Required]
-        public int Rational { get; set; }
+        public decimal Rational { get; set; }
 
         [Required]
-        public int Conformity { get; set; }
+        public decimal Conformity { get; set; }
 
         [Required]
-        public int Diligent { get; set; }
+        public decimal Diligent { get; set; }
 
         [Required]
-        public int Organized { get; set; }
+        public decimal Organized { get; set; }
 
         [Required]
-        public int Temperance { get; set; }
+        public decimal Temperance { get; set; }
 
         [Required]
-        public int Versatile { get; set; }
+        public decimal Instinctive { get; set; }
 
         [Required]
-        public int Instinctive { get; set; }
+        public decimal Versatile { get; set; }
 
         [Required]
-        public int Opportunistic { get; set; }
+        public decimal Opportunistic { get; set; }
 
         [Required]
-        public int Unorthodox { get; set; }
+        public decimal InteractingAndNegotiating { get; set; }
 
         [Required]
-        public int Adventurous { get; set; }
+        public decimal AnalyzeAndInterpret { get; set; }
 
         [Required]
-        public int Assertive { get; set; }
+        public decimal Unorthodox { get; set; }
+        [Required]
+        public decimal Introspective { get; set; }
+
+        [Required]
+        public decimal Intricate { get; set; }
 
         [Required]
-        public int Optimistic { get; set; }
+        public decimal Adventurous { get; set; }
 
         [Required]
-        public int Gregarious { get; set; }
+        public decimal Assertive { get; set; }
 
         [Required]
-        public int Independent { get; set; }
+        public decimal Optimistic { get; set; }
 
         [Required]
-        public int Introspective { get; set; }
+        public decimal Gregarious { get; set; }
 
         [Required]
-        public int Restrained { get; set; }
+        public decimal Independent { get; set; }
 
         [Required]
-        public int Ingenuity { get; set; }
+        public decimal decimalrospective { get; set; }
 
         [Required]
-        public int Inquisitive { get; set; }
+        public decimal Restrained { get; set; }
 
         [Required]
-        public int Intricate { get; set; }
+        public decimal Ingenuity { get; set; }
 
         [Required]
-        public int StrategicallyMinded { get; set; }
+        public decimal Inquisitive { get; set; }
 
         [Required]
-        public int Methodical { get; set; }
+        public decimal decimalricate { get; set; }
 
         [Required]
-        public int PresentMinded { get; set; }
+        public decimal StrategicallyMinded { get; set; }
 
         [Required]
-        public int Utilitarian { get; set; }
+        public decimal Methodical { get; set; }
 
         [Required]
-        public int Relationship_Driven { get; set; }
+        public decimal PresentMinded { get; set; }
 
         [Required]
-        public int ResultsDriven { get; set; }
+        public decimal Utilitarian { get; set; }
 
         [Required]
-        public int MotivatedByOrder { get; set; }
+        public decimal Relationship_Driven { get; set; }
 
         [Required]
-        public int MotivatedByAmbiguity { get; set; }
+        public decimal ResultsDriven { get; set; }
 
         [Required]
-        public int Outgoing { get; set; }
+        public decimal MotivatedByOrder { get; set; }
 
         [Required]
-        public int Reserved { get; set; }
+        public decimal MotivatedByAmbiguity { get; set; }
 
         [Required]
-        public int Innovative { get; set; }
+        public decimal Outgoing { get; set; }
 
         [Required]
-        public int Pragmatic { get; set; }
+        public decimal Reserved { get; set; }
 
         [Required]
-        public int VisualPerception { get; set; }
+        public decimal Innovative { get; set; }
 
         [Required]
-        public int SpatialReasoning { get; set; }
+        public decimal Pragmatic { get; set; }
 
         [Required]
-        public int VerbalComprehension { get; set; }
+        public decimal VisualPerception { get; set; }
 
         [Required]
-        public int DominantLeadership { get; set; }
+        public decimal SpatialReasoning { get; set; }
 
         [Required]
-        public int CollaborativeLeadership { get; set; }
+        public decimal VerbalComprehension { get; set; }
 
         [Required]
-        public int ServantLeadership { get; set; }
+        public decimal DominantLeadership { get; set; }
 
         [Required]
-        public int SupportingOthers { get; set; }
+        public decimal CollaborativeLeadership { get; set; }
 
         [Required]
-        public int CoachingOthers { get; set; }
+        public decimal ServantLeadership { get; set; }
 
         [Required]
-        public int EnablingTeamwork { get; set; }
+        public decimal SupportingOthers { get; set; }
 
         [Required]
-        public int BuildingConnections { get; set; }
+        public decimal CoachingOthers { get; set; }
 
         [Required]
-        public int PersuadingOthers { get; set; }
+        public decimal EnablingTeamwork { get; set; }
 
         [Required]
-        public int AdaptiveCommunication { get; set; }
+        public decimal BuildingConnections { get; set; }
 
         [Required]
-        public int TrendIdentification { get; set; }
+        public decimal PersuadingOthers { get; set; }
 
         [Required]
-        public int DistillingInformation { get; set; }
+        public decimal AdaptiveCommunication { get; set; }
 
         [Required]
-        public int ApplyingExpertise { get; set; }
+        public decimal TrendIdentification { get; set; }
 
         [Required]
-        public int ActiveLearning { get; set; }
+        public decimal DistillingInformation { get; set; }
 
         [Required]
-        public int StrategicAgility { get; set; }
+        public decimal ApplyingExpertise { get; set; }
 
         [Required]
-        public int ChampioningChange { get; set; }
+        public decimal ActiveLearning { get; set; }
 
         [Required]
-        public int ForwardPlanning { get; set; }
+        public decimal StrategicAgility { get; set; }
 
         [Required]
-        public int FollowingDirections { get; set; }
+        public decimal ChampioningChange { get; set; }
 
         [Required]
-        public int QualityClientDelivery { get; set; }
+        public decimal ForwardPlanning { get; set; }
 
         [Required]
-        public int ResilienceUnderPressure { get; set; }
+        public decimal FollowingDirections { get; set; }
 
         [Required]
-        public int LateralProblemSolving { get; set; }
+        public decimal QualityClientDelivery { get; set; }
 
         [Required]
-        public int OperationalFlexibility { get; set; }
+        public decimal ResilienceUnderPressure { get; set; }
 
         [Required]
-        public int SelfDevelopmentFocused { get; set; }
+        public decimal LateralProblemSolving { get; set; }
 
         [Required]
-        public int BusinessAcumen { get; set; }
+        public decimal OperationalFlexibility { get; set; }
 
         [Required]
-        public int OptimizingPerformance { get; set; }
+        public decimal SelfDevelopmentFocused { get; set; }
 
         [Required]
-        public int LeadingAndDeciding { get; set; }
+        public decimal BusinessAcumen { get; set; }
 
         [Required]
-        public int SupportingAndCooperating { get; set; }
+        public decimal OptimizingPerformance { get; set; }
 
         [Required]
-        public int InteractingAndNegotiating { get; set; }
+        public decimal LeadingAndDeciding { get; set; }
 
         [Required]
-        public int AnalyzeAndInterpret { get; set; }
+        public decimal SupportingAndCooperating { get; set; }
 
         [Required]
-        public string CreateAndConceptualize { get; set; }
+        public decimal decimaleractingAndNegotiating { get; set; }
 
         [Required]
-        public int OrganizeAndExecute { get; set; }
+        public decimal AnalyzeAnddecimalerpret { get; set; }
 
         [Required]
-        public int AdaptAndCope { get; set; }
+        public decimal CreateAndConceptualize { get; set; }
 
         [Required]
-        public int EnterprisingAndPerforming { get; set; }
+        public decimal OrganizeAndExecute { get; set; }
 
+        [Required]
+        public decimal AdaptAndCope { get; set; }
+
+        [Required]
+        public decimal EnterprisingAndPerforming { get; set; }
     }
 }

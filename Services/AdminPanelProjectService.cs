@@ -69,7 +69,39 @@ namespace WebAdmin
 
         public async Task Upload(IFileListEntry file)
         {
-            var path = Path.Combine(environment.ContentRootPath, "wwwroot/Data", file.Name);
+            string path = Path.Combine();
+            if (file.Name == "dataCompany.xlsx")
+            {
+                path = Path.Combine(
+                    environment.ContentRootPath,
+                    "wwwroot/Data/Companies",
+                    file.Name
+                );
+            }
+            if (file.Name == "dataAssessment.xlsx")
+            {
+                path = Path.Combine(
+                    environment.ContentRootPath,
+                    "wwwroot/Data/Assessments",
+                    file.Name
+                );
+            }
+            if (file.Name == "dataEmployee.xlsx")
+            {
+                path = Path.Combine(
+                    environment.ContentRootPath,
+                    "wwwroot/Data/Employees",
+                    file.Name
+                );
+            }
+            if (file.Name == "dataJobFitReports.xlsx")
+            {
+                path = Path.Combine(
+                    environment.ContentRootPath,
+                    "wwwroot/Data/Reports",
+                    file.Name
+                );
+            }
             var memoryStream = new MemoryStream();
             await file.Data.CopyToAsync(memoryStream);
             using (FileStream fileStream = new FileStream(path, FileMode.Create, FileAccess.Write))
@@ -96,7 +128,7 @@ namespace WebAdmin
             // string FilePath = Path.Combine(environment.WebRootPath, "wwwroot/dataCompany.xlsx");
 
             string FilePath =
-                "C:/Users/Yahya/Documents/Project/AdminPanel/AdminPanel/wwwroot/Data/dataCompany.xlsx";
+                "C:/Users/Yahya/Documents/Project/AdminPanel/AdminPanel/wwwroot/Data/Companies/dataCompany.xlsx";
             // string FilePath = "D:/Data/data.xlsx";
 
             System.IO.FileInfo existingFile = new System.IO.FileInfo(FilePath);
@@ -127,11 +159,11 @@ namespace WebAdmin
 
         public List<JobFitReport> ReadJobFitReportExcel()
         {
-            // string FilePath = "C:/Users/Yahya/Documents/Project/AdminPanel/AdminPanel/wwwroot/Data/data.xlsx";
+            // string FilePath = "C:/Users/Yahya/Documents/Project/AdminPanel/AdminPanel/wwwroot/Data/*.xlsx";
             // string FilePath = Path.Combine(environment.WebRootPath, "wwwroot/dataCompany.xlsx");
 
             string FilePath =
-                "C:/Users/Yahya/Documents/Project/AdminPanel/AdminPanel/wwwroot/Data/dataJobFitReports.xlsx";
+                "C:/Users/Yahya/Documents/Project/AdminPanel/AdminPanel/wwwroot/Data/Reports/dataReport.xlsx";
             // string FilePath = "D:/Data/data.xlsx";
 
             System.IO.FileInfo existingFile = new System.IO.FileInfo(FilePath);
@@ -142,7 +174,7 @@ namespace WebAdmin
                 int rolCount = worksheet.Dimension.End.Column;
                 int rowCount = worksheet.Dimension.End.Row;
 
-                for (int row = 2; row <= rowCount; row++)
+                for (int row = 3; row <= rowCount; row++)
                 {
                     JobFitReport jbr = new JobFitReport();
                     for (int col = 1; col <= rolCount; col++)
@@ -150,65 +182,65 @@ namespace WebAdmin
                         if (col == 2)
                             jbr.EmployeeId = worksheet.Cells[row, col].Value.ToString();
                         else if (col == 3)
-                            jbr.CEOGeneralDirector = Convert.ToDecimal(
+                            jbr.CEOGeneralDirector = 
                                 worksheet.Cells[row, col].Value.ToString()
-                            );
+                            ;
                         else if (col == 4)
-                            jbr.AdministrativeStaff = Convert.ToDecimal(
+                            jbr.AdministrativeStaff = 
                                 worksheet.Cells[row, col].Value.ToString()
-                            );
+                            ;
                         else if (col == 5)
-                            jbr.CreativeDesignManager = Convert.ToDecimal(
+                            jbr.CreativeDesignManager = 
                                 worksheet.Cells[row, col].Value.ToString()
-                            );
+                            ;
                         else if (col == 6)
-                            jbr.FinanceStaff = Convert.ToDecimal(
+                            jbr.FinanceStaff = 
                                 worksheet.Cells[row, col].Value.ToString()
-                            );
+                            ;
                         else if (col == 7)
-                            jbr.FinanceManager = Convert.ToDecimal(
+                            jbr.FinanceManager = 
                                 worksheet.Cells[row, col].Value.ToString()
-                            );
+                            ;
                         else if (col == 8)
-                            jbr.HRStaff = Convert.ToDecimal(
+                            jbr.HRStaff = 
                                 worksheet.Cells[row, col].Value.ToString()
-                            );
+                            ;
                         else if (col == 9)
-                            jbr.HRManager = Convert.ToDecimal(
+                            jbr.HRManager = 
                                 worksheet.Cells[row, col].Value.ToString()
-                            );
+                            ;
                         else if (col == 10)
-                            jbr.ITStaff = Convert.ToDecimal(
+                            jbr.ITStaff = 
                                 worksheet.Cells[row, col].Value.ToString()
-                            );
+                            ;
                         else if (col == 11)
-                            jbr.ITManager = Convert.ToDecimal(
+                            jbr.ITManager =
                                 worksheet.Cells[row, col].Value.ToString()
-                            );
+                            ;
                         else if (col == 12)
-                            jbr.MarketingStaff = Convert.ToDecimal(
+                            jbr.MarketingStaff =
                                 worksheet.Cells[row, col].Value.ToString()
-                            );
+                            ;
                         else if (col == 13)
-                            jbr.ProductStaff = Convert.ToDecimal(
+                            jbr.ProductStaff = 
                                 worksheet.Cells[row, col].Value.ToString()
-                            );
+                            ;
                         else if (col == 14)
-                            jbr.ProductManager = Convert.ToDecimal(
+                            jbr.ProductManager = 
                                 worksheet.Cells[row, col].Value.ToString()
-                            );
+                            ;
                         else if (col == 15)
-                            jbr.SalesStaff = Convert.ToDecimal(
+                            jbr.SalesStaff =
                                 worksheet.Cells[row, col].Value.ToString()
-                            );
+                            ;
                         else if (col == 16)
-                            jbr.CustomerService = Convert.ToDecimal(
+                            jbr.CustomerService = 
                                 worksheet.Cells[row, col].Value.ToString()
-                            );
+                            ;
                         else if (col == 17)
-                            jbr.SalesManager = Convert.ToDecimal(
+                            jbr.SalesManager = 
                                 worksheet.Cells[row, col].Value.ToString()
-                            );
+                            ;
                     }
                     jbrs.Add(jbr);
                 }
@@ -225,7 +257,7 @@ namespace WebAdmin
         {
             // string FilePath = "C:/Users/Yahya/Documents/Project/AdminPanel/AdminPanel/wwwroot/Data/data.xlsx";
             string FilePath =
-                "C:/Users/Yahya/Documents/Project/AdminPanel/AdminPanel/wwwroot/Data/dataEmployee.xlsx";
+                "C:/Users/Yahya/Documents/Project/AdminPanel/AdminPanel/wwwroot/Data/Employees/dataEmployee.xlsx";
 
             System.IO.FileInfo existingFile = new System.IO.FileInfo(FilePath);
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
@@ -274,13 +306,11 @@ namespace WebAdmin
             }
             return employees;
         }
-
+        List<Assessment> assessments = new List<Assessment>();
         public List<Assessment> ReadAssessmentExcel()
         {
-            List<Assessment> assessments = new List<Assessment>();
-            // string FilePath = "C:/Users/Yahya/Documents/Project/AdminPanel/AdminPanel/wwwroot/Data/data.xlsx";
             string FilePath =
-                "C:/Users/Yahya/Documents/Project/AdminPanel/AdminPanel/wwwroot/Data/dataAssessment.xlsx";
+                "C:/Users/Yahya/Documents/Project/AdminPanel/AdminPanel/wwwroot/Data/dataAssmnt.xlsx";
 
             System.IO.FileInfo existingFile = new System.IO.FileInfo(FilePath);
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
@@ -297,106 +327,306 @@ namespace WebAdmin
                     {
                         if (col == 1)
                             assessment.EmployeeId = worksheet.Cells[row, col].Value.ToString();
-                        // else if (col == 2)
-                        //     assessment.Diplomatic = Convert.ToInt32(
-                        //         worksheet.Cells[row, col].Value.ToString()
-                        //     );
-                        // else if (col == 3)
-                        //     assessment.Empathy = Convert.ToInt32(
-                        //         worksheet.Cells[row, col].Value.ToString()
-                        //     );
-                        // else if (col == 4)
-                        //     assessment.Cooperative = Convert.ToInt32(
-                        //         worksheet.Cells[row, col].Value.ToString()
-                        //     );
-                        // else if (col == 5)
-                        //     assessment.Trust = Convert.ToInt32(
-                        //         worksheet.Cells[row, col].Value.ToString()
-                        //     );
-                        // else if (col == 6) assessment.Ambitious = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 7) assessment.Competitive = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 8) assessment.Direct = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 9) assessment.Rational = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 10) assessment.Conformity = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 11) assessment.Diligent = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 12) assessment.Organized = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 13) assessment.Temperance = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 14) assessment.Versatile = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 15) assessment.Instinctive = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 16) assessment.Opportunistic = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 17) assessment.Unorthodox = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 18) assessment.Adventurous = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 19) assessment.Assertive = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 20) assessment.Optimistic = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 21) assessment.Gregarious = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 22) assessment.Independent = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 23) assessment.Introspective = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 24) assessment.Restrained = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 25) assessment.Ingenuity = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 26) assessment.Inquisitive = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 27) assessment.Intricate = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 28) assessment.StrategicallyMinded = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 29) assessment.Methodical = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 30) assessment.PresentMinded = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 31) assessment.Utilitarian = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 32) assessment.Relationship_Driven = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 33) assessment.ResultsDriven = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 34) assessment.MotivatedByOrder = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 35) assessment.MotivatedByAmbiguity = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 36) assessment.Outgoing = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 37) assessment.Reserved = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 38) assessment.Innovative = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 39) assessment.Pragmatic = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 40) assessment.VisualPerception = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 41) assessment.SpatialReasoning = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 42) assessment.VerbalComprehension = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 43) assessment.DominantLeadership = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 44) assessment.CollaborativeLeadership = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 45) assessment.ServantLeadership = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 46) assessment.SupportingOthers = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 47) assessment.CoachingOthers = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 48) assessment.EnablingTeamwork = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 49) assessment.BuildingConnections = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 50) assessment.PersuadingOthers = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 51) assessment.AdaptiveCommunication = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 52) assessment.TrendIdentification = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 53) assessment.DistillingInformation = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 54) assessment.ApplyingExpertise = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 55) assessment.ActiveLearning = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 56) assessment.StrategicAgility = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 57) assessment.ChampioningChange = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 58) assessment.ForwardPlanning = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 59) assessment.FollowingDirections = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 60) assessment.QualityClientDelivery = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 61) assessment.ResilienceUnderPressure = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 62) assessment.LateralProblemSolving = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 63) assessment.OperationalFlexibility = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 64) assessment.SelfDevelopmentFocused = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 65) assessment.OperationalFlexibility = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 66) assessment.BusinessAcumen = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 67) assessment.OptimizingPerformance = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 68) assessment.LeadingAndDeciding = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 69) assessment.SupportingAndCooperating = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 70) assessment.InteractingAndNegotiating = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 71) assessment.AnalyzeAndInterpret = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 72) assessment.CreateAndConceptualize = worksheet.Cells[row, col].Value.ToString();
-                        // else if (col == 73) assessment.OrganizeAndExecute = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 74) assessment.AdaptAndCope = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
-                        // else if (col == 75) assessment.EnterprisingAndPerforming = Convert.ToInt32(worksheet.Cells[row, col].Value.ToString());
+                        else if (col == 2)
+                            assessment.Diplomatic = Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString());
+                            
+                        else if (col == 3)
+                            assessment.Empathy = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 4)
+                            assessment.Cooperative = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 5)
+                            assessment.Trust = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 6)
+                            assessment.Ambitious = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 7)
+                            assessment.Competitive = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 8)
+                            assessment.Direct = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 9)
+                            assessment.Rational = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 10)
+                            assessment.Conformity = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 11)
+                            assessment.Diligent = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 12)
+                            assessment.Organized = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 13)
+                            assessment.Temperance = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 14)
+                            assessment.Versatile = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 15)
+                            assessment.Instinctive = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 16)
+                            assessment.Opportunistic = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 17)
+                            assessment.Unorthodox = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 18)
+                            assessment.Adventurous = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 19)
+                            assessment.Assertive = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 20)
+                            assessment.Optimistic = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 21)
+                            assessment.Gregarious = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 22)
+                            assessment.Independent = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 23)
+                            assessment.Introspective = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 24)
+                            assessment.Restrained = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 25)
+                            assessment.Ingenuity = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 26)
+                            assessment.Inquisitive = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 27)
+                            assessment.Intricate = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 28)
+                            assessment.StrategicallyMinded = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 29)
+                            assessment.Methodical = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 30)
+                            assessment.PresentMinded = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 31)
+                            assessment.Utilitarian = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 32)
+                            assessment.Relationship_Driven = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 33)
+                            assessment.ResultsDriven = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 34)
+                            assessment.MotivatedByOrder = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 35)
+                            assessment.MotivatedByAmbiguity = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 36)
+                            assessment.Outgoing = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 37)
+                            assessment.Reserved = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 38)
+                            assessment.Innovative = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 39)
+                            assessment.Pragmatic = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 40)
+                            assessment.VisualPerception = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 41)
+                            assessment.SpatialReasoning = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 42)
+                            assessment.VerbalComprehension = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 43)
+                            assessment.DominantLeadership = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 44)
+                            assessment.CollaborativeLeadership = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 45)
+                            assessment.ServantLeadership = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 46)
+                            assessment.SupportingOthers = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 47)
+                            assessment.CoachingOthers = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 48)
+                            assessment.EnablingTeamwork = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 49)
+                            assessment.BuildingConnections = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 50)
+                            assessment.PersuadingOthers = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 51)
+                            assessment.AdaptiveCommunication = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 52)
+                            assessment.TrendIdentification = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 53)
+                            assessment.DistillingInformation = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 54)
+                            assessment.ApplyingExpertise = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 55)
+                            assessment.ActiveLearning = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 56)
+                            assessment.StrategicAgility = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 57)
+                            assessment.ChampioningChange = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 58)
+                            assessment.ForwardPlanning = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 59)
+                            assessment.FollowingDirections = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 60)
+                            assessment.QualityClientDelivery = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 61)
+                            assessment.ResilienceUnderPressure = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 62)
+                            assessment.LateralProblemSolving = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 63)
+                            assessment.OperationalFlexibility = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 64)
+                            assessment.SelfDevelopmentFocused = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 65)
+                            assessment.OperationalFlexibility = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 66)
+                            assessment.BusinessAcumen = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 67)
+                            assessment.OptimizingPerformance = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 68)
+                            assessment.LeadingAndDeciding = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 69)
+                            assessment.SupportingAndCooperating = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 70)
+                            assessment.InteractingAndNegotiating = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 71)
+                            assessment.AnalyzeAndInterpret = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 72)
+                            assessment.CreateAndConceptualize = Convert.ToDecimal(worksheet.Cells[
+                                row,
+                                col
+                            ].Value.ToString());
+                        else if (col == 73)
+                            assessment.OrganizeAndExecute = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 74)
+                            assessment.AdaptAndCope = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
+                        else if (col == 75)
+                            assessment.EnterprisingAndPerforming = Convert.ToDecimal(
+                                worksheet.Cells[row, col].Value.ToString()
+                            );
                     }
                     assessments.Add(assessment);
                 }
             }
-
-            // AddExcel(companies);
-
-            // foreach (var item in companies)
-            // {
-
-            //     MailClass mailClass = this.GetMailObject(item);
-            //     SendMail(mailClass);
-            //     // sendEmail(item.email, item.password);
-            // }
 
             return assessments;
         }
@@ -409,37 +639,27 @@ namespace WebAdmin
                 var password = GenerateRandomPassword();
 
                 item.Password = password;
-                securityService.Register(item.Email, item.Password, item.CompanyName, item.CompanyId);
+                securityService.Register(
+                    item.Email,
+                    item.Password,
+                    item.CompanyName,
+                    item.CompanyId
+                );
             }
 
             return companies;
         }
 
-        public List<JobFitReport> AddJobFitReportExcel(List<JobFitReport> jbs)
-        {
-            // var companies = ReadExcel();
-            foreach (var item in jbs)
-            {
-                CreateJobFitReport(item);
-            }
+        // public List<JobFitReport> AddJobFitReportExcel(List<JobFitReport> jbs)
+        // {
+        //     // var companies = ReadExcel();
+        //     foreach (var item in jbs)
+        //     {
+        //         CreateJobFitReport(item);
+        //     }
 
-            return jbrs;
-        }
-
-        public List<Employee> AddEmployeeExcel(List<Employee> employees)
-        {
-            // var companies = ReadExcel();
-            foreach (var item in employees)
-            {
-                item.UserId = "UserId";
-                item.createdTime = DateTime.Now;
-                item.PhoneNumber = "0888";
-                item.createdBy = "System";
-                CreatePlayer(item);
-            }
-
-            return employees;
-        }
+        //     return jbrs;
+        // }
 
         public List<Assessment> AddAssessmentExcel(List<Assessment> assessments)
         {
@@ -526,8 +746,6 @@ namespace WebAdmin
         public async Task<IQueryable<WebAdmin.Models.ApplicationUser>> GetUsers(Query query = null)
         {
             var items = Context.Users.AsQueryable();
-
-            // items = items.Include(i => i.UserName);
 
             if (query != null)
             {

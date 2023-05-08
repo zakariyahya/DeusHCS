@@ -1,14 +1,14 @@
 @page "/add-player"
 
 @attribute [Authorize]
-
 <PageTitle>Add Employee</PageTitle>
     <RadzenColumn SizeMD=12>
         <RadzenAlert Shade="Shade.Lighter" Variant="Variant.Flat" Size="AlertSize.Small" AlertStyle="AlertStyle.Danger" Visible="@errorVisible">@error</RadzenAlert>
         <RadzenAlert Shade="Shade.Lighter" Variant="Variant.Flat" Size="AlertSize.Small" AlertStyle="AlertStyle.Info" Visible="@infoVisible">@info</RadzenAlert>
+        <RadzenTemplateForm TItem="WebAdmin.Models.adminPanelProject.Employee" Data="@employee" Visible="@(employee != null)" Submit="@FormSubmit">
              <RadzenColumn SizeMD="6">
-                    <RadzenDropDownDataGrid Data="@usersForUserId" TextProperty="CompanyName" ValueProperty="CompanyName"
-                        Disabled=@(hasUseridValue) Placeholder="Choose Company" style="display: block; width: 100%; margin-bottom: 5px" @bind-Value="@employee.UserId" Name="UserId"
+                     <RadzenDropDownDataGrid Data="@usersForuserid" TextProperty="CompanyName" ValueProperty="CompanyName"
+                        Disabled=@(hasuseridValue) Placeholder="Choose Company" style="display: block; width: 100%; margin-bottom: 5px" @bind-Value="@employee.userid" Name="userid"
                            />
                 </RadzenColumn>
             <RadzenColumn SizeMD="12">
@@ -53,7 +53,7 @@
                 
                 }
                 <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
-                    <RadzenButton Click="@AddExcel" ButtonType="ButtonType.Submit" Icon="save" Text="Create All"  Variant="Variant.Flat" />
+                    <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Create All"  Variant="Variant.Flat" />
                     <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Close" Click="@CancelClick" Variant="Variant.Flat" />
                 </RadzenStack>
                 </RadzenColumn>
@@ -62,6 +62,6 @@
                     <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Save" Variant="Variant.Flat" />
                     <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Variant="Variant.Flat" Click="@CancelButtonClick"  />
             </RadzenStack> *@
-        @* </RadzenTemplateForm> *@
+        </RadzenTemplateForm>
     </RadzenColumn>
 

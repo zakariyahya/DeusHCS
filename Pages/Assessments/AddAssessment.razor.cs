@@ -31,23 +31,28 @@ namespace WebAdmin.Pages.Assessments
 
         [Inject]
         protected NotificationService NotificationService { get; set; }
+
         [Inject]
         public adminPanelProjectService adminPanelProjectService { get; set; }
         protected IEnumerable<WebAdmin.Models.ApplicationUser> usersForUserId;
         bool hasUseridValue;
         protected RadzenDataGrid<WebAdmin.Models.adminPanelProject.Assessment> grid0;
+        List<WebAdmin.Models.adminPanelProject.Assessment> assessments =
+            new List<WebAdmin.Models.adminPanelProject.Assessment>();
 
         protected override async Task OnInitializedAsync()
         {
-            assessment = new WebAdmin.Models.adminPanelProject.Assessment();
+            // assessment = new WebAdmin.Models.adminPanelProject.Assessment();
             usersForUserId = await adminPanelProjectService.GetUsers();
-
         }
+
         protected bool errorVisible;
         protected string error;
-        Assessment assessmentDb = new Assessment();
-        List<Assessment> assessments = new List<Assessment>();
+
+        // Assessment assessmentDb = new Assessment();
+
         protected WebAdmin.Models.adminPanelProject.Assessment assessment;
+
         [Parameter]
         public string UserId { get; set; }
         protected bool isBusy;
@@ -57,83 +62,49 @@ namespace WebAdmin.Pages.Assessments
         protected string errorExt;
         protected string info;
         protected bool infoVisible;
+
         async Task HandleFileSelected(IFileListEntry[] files)
         {
             file = files.FirstOrDefault();
             if (file != null)
             {
-                // if (file.Type != "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-                // {
-                //     errorExtension = true;
-                //     errorExt = "Upload file excel only";
-                // }
-                adminPanelProjectService.Upload(file);
-                assessments = adminPanelProjectService.ReadAssessmentExcel();
-                foreach (var item in assessments)
+                if (file.Type != "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
                 {
-                    // var company = adminPanelProjectService.GetUserById(item.id);
-                    assessmentDb = assessment;
+                    errorExtension = true;
+                    errorExt = "Upload file excel only";
                 }
+                adminPanelProjectService.Upload(file);
+                assessments = adminPanelProjectService?.ReadAssessmentExcel();
+
             }
         }
+
         protected async Task FormSubmit()
         {
-            try
+            foreach (var item in assessments)
             {
                 isBusy = true;
-                await adminPanelProjectService.CreateAssessment(assessment);
-                assessment = new WebAdmin.Models.adminPanelProject.Assessment();
-
-                // user = adminPanelProjectService.GetUserById(UserId);
-                assessment.UserId = UserId;
-                assessment.EmployeeId = UserId;
-                DialogService.Close(assessment);
+                item.UserId = assessment.UserId;
+                adminPanelProjectService.CreateAssessment(item);
             }
-            catch (Exception ex)
-            {
-                errorVisible = true;
-                error = ex.Message;
-            }
+            info = "Employees was created";
+            DialogService.Close(assessment);
         }
 
-        private void AddExcel()
-        {
-            try
-            {
-                adminPanelProjectService.AddAssessmentExcel(assessments);
-                // Message = "Data Saved";
-                infoVisible = true;
-
-                info = "Companies was created";
-            }
-            catch (System.Exception ex)
-            {
-                errorVisible = true;
-                // Message = ex.Message;
-            }
-
-        }
         protected async Task CancelButtonClick(MouseEventArgs args)
         {
             DialogService.Close(null);
         }
+
         protected async Task CancelClick()
         {
             DialogService.Close(null);
         }
+
         public override async Task SetParametersAsync(ParameterView parameters)
         {
             assessment = new WebAdmin.Models.adminPanelProject.Assessment();
-
-            hasUseridValue = parameters.TryGetValue<string>("EmployeeId", out var hasUseridResult);
-            // user = adminPanelProjectService.GetUserById(UserId);
-            // player.UserId = UserId;
-            // player.ApplicationUser = user;
-            // if (hasUseridValue)
-            // {
-            //     player.UserId = hasUseridResult;
-            //     player.ApplicationUser = user;
-            // }
+            hasUseridValue = parameters.TryGetValue<string>("UserId", out var hasUseridResult);
             await base.SetParametersAsync(parameters);
         }
     }

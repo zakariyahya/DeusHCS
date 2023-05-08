@@ -73,7 +73,7 @@ namespace WebAdmin.Pages.Employees
         bool hasUseridValue;
 
         [Parameter]
-        public string UserId { get; set; }
+        public string userid { get; set; }
 
         [Inject]
         protected SecurityService Security { get; set; }
@@ -81,11 +81,11 @@ namespace WebAdmin.Pages.Employees
         {
             employee = new WebAdmin.Models.adminPanelProject.Employee();
 
-            hasUseridValue = parameters.TryGetValue<string>("UserId", out var hasUseridResult);
+            hasUseridValue = parameters.TryGetValue<string>("userid", out var hasUseridResult);
 
             if (hasUseridValue)
             {
-                employee.UserId = hasUseridResult;
+                employee.userid = hasUseridResult;
             }
             await base.SetParametersAsync(parameters);
         }
