@@ -36,6 +36,7 @@ namespace WebAdmin.Pages.Employees
         protected string search = "";
         protected string info;
         protected bool infoVisible;
+        string userid;
         bool frozen;
         IList<string> values = new string[] { };
 
@@ -65,7 +66,7 @@ namespace WebAdmin.Pages.Employees
                     FilterParameters = new object[] { search }
                 }
             );
-
+            
             infoVisible = !string.IsNullOrEmpty(info);
             usersForUserId = await adminPanelProjectService.GetUsers();
         }
@@ -203,6 +204,27 @@ namespace WebAdmin.Pages.Employees
             //     player.ApplicationUser = user;
             // }
             await base.SetParametersAsync(parameters);
+        }
+
+        void LoadData(LoadDataArgs args)
+        {
+            var query = adminPanelProjectService.GetPlayers(
+                new Query
+                {
+                    Filter =
+                            $@"i => i.id.Contains(@0) || i.FullName.Contains(@0) || i.Email.Contains(@0) || i.Gender.Contains(@0) || i.createdBy.Contains(@0)",
+                    FilterParameters = new object[] { search }
+                }
+            );
+
+            // if (!string.IsNullOrEmpty(args.Filter))
+            // {
+            //     query = query.Where(c => c.CustomerID.ToLower().Contains(args.Filter.ToLower()) || c.ContactName.ToLower().Contains(args.Filter.ToLower()));
+            // }
+
+            // employees = query();
+
+            // InvokeAsync(StateHasChanged);
         }
     }
 }

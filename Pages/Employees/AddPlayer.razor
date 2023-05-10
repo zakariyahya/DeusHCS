@@ -1,6 +1,6 @@
 @page "/add-player"
 
-@attribute [Authorize]
+@attribute [Authorize(Roles="admin")]
 <PageTitle>Add Employee</PageTitle>
     <RadzenColumn SizeMD=12>
         <RadzenAlert Shade="Shade.Lighter" Variant="Variant.Flat" Size="AlertSize.Small" AlertStyle="AlertStyle.Danger" Visible="@errorVisible">@error</RadzenAlert>

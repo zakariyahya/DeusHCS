@@ -74,7 +74,7 @@ namespace WebAdmin.Pages.Assessments
                     errorExt = "Upload file excel only";
                 }
                 adminPanelProjectService.Upload(file);
-                assessments = adminPanelProjectService?.ReadAssessmentExcel();
+                assessments = adminPanelProjectService?.ReadAssessmentExcel(file);
 
             }
         }

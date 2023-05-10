@@ -1,5 +1,6 @@
-@page "/register-application-user"
-@attribute [Authorize]
+@page "/register-application-user"
+
+@attribute [Authorize(Roles="admin")]
 
 <PageTitle>Register Application User</PageTitle>
 <RadzenRow>

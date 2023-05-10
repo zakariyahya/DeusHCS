@@ -37,8 +37,8 @@ namespace WebAdmin.Pages.Company
         protected WebAdmin.Models.ApplicationUser user;
         protected IEnumerable<string> userRoles = Enumerable.Empty<string>();
         protected RadzenDataGrid<WebAdmin.Models.ApplicationUser> grid0;
-// List<WebAdmin.Models.ApplicationUser> users =
-//             new List<WebAdmin.Models.ApplicationUser>();
+        // List<WebAdmin.Models.ApplicationUser> users =
+        //             new List<WebAdmin.Models.ApplicationUser>();
         protected bool isBusy;
         IFileListEntry file;
 
@@ -68,7 +68,7 @@ namespace WebAdmin.Pages.Company
 
             roles = await Security.GetRoles();
         }
-
+        bool uploadSucces;
         async Task HandleFileSelected(IFileListEntry[] files)
         {
             file = files.FirstOrDefault();
@@ -80,12 +80,19 @@ namespace WebAdmin.Pages.Company
                     errorExt = "Upload file excel only";
                 }
                 adminPanelProjectService.Upload(file);
-                companies = adminPanelProjectService.ReadExcel();
-                foreach (var item in companies)
-                {
-                    var company = adminPanelProjectService.GetUserById(item.Id);
-                    companyDb = company;
-                }
+                uploadSucces = true;
+                // foreach (var item in companies)
+                // {
+                //     var company = adminPanelProjectService.GetUserById(item.Id);
+                //     companyDb = company;
+                // }
+                companies = adminPanelProjectService.ReadExcel(file);
+                
+                // if (uploadSucces)
+                // {
+                //     companies = adminPanelProjectService.ReadExcel(file);
+                // }
+
             }
 
         }
@@ -98,6 +105,8 @@ namespace WebAdmin.Pages.Company
                 infoVisible = true;
 
                 info = "Companies was created";
+                DialogService.Close(null);
+
             }
             catch (System.Exception ex)
             {

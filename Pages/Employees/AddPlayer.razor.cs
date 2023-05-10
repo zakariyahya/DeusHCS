@@ -63,7 +63,7 @@ namespace WebAdmin.Pages.Employees
             if (file != null)
             {
                 adminPanelProjectService.Upload(file);
-                employees = adminPanelProjectService?.ReadEmployeeExcel();
+                employees = adminPanelProjectService?.ReadEmployeeExcel(file);
                 // foreach (var item in employees)
                 // {
                 //     var employee = adminPanelProjectService.GetPlayerByID(item.id);
@@ -82,10 +82,10 @@ namespace WebAdmin.Pages.Employees
                 item.createdBy = "System";
                 adminPanelProjectService.CreatePlayer(item);
             }
-            infoVisible = true;
-            sasa = true;
-            info = "Employees was created";
-            // DialogService.Close(employee);
+            // infoVisible = true;
+            // sasa = true;
+            // info = "Employees was created";
+            DialogService.Close(employee);
         }
 
         protected async Task CancelButtonClick(MouseEventArgs args)

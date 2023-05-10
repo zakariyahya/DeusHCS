@@ -77,6 +77,7 @@ namespace WebAdmin
                     "wwwroot/Data/Companies",
                     file.Name
                 );
+
             }
             if (file.Name == "dataAssessment.xlsx")
             {
@@ -94,7 +95,7 @@ namespace WebAdmin
                     file.Name
                 );
             }
-            if (file.Name == "dataJobFitReports.xlsx")
+            if (file.Name == "dataReport.xlsx")
             {
                 path = Path.Combine(
                     environment.ContentRootPath,
@@ -108,6 +109,8 @@ namespace WebAdmin
             {
                 memoryStream.WriteTo(fileStream);
             }
+                ReadExcel(file);
+
             // ReadExcel();
         }
 
@@ -122,13 +125,16 @@ namespace WebAdmin
         //     }
         //     // ReadExcel();
         // }
-        public List<ApplicationUser> ReadExcel()
+        public List<ApplicationUser> ReadExcel(IFileListEntry file)
         {
             // string FilePath = "C:/Users/Yahya/Documents/Project/AdminPanel/AdminPanel/wwwroot/Data/data.xlsx";
             // string FilePath = Path.Combine(environment.WebRootPath, "wwwroot/dataCompany.xlsx");
 
             string FilePath =
-                "C:/Users/Yahya/Documents/Project/AdminPanel/AdminPanel/wwwroot/Data/Companies/dataCompany.xlsx";
+                Path.Combine(
+                    environment.ContentRootPath,
+                    "wwwroot/Data/Companies",file.Name
+                );
             // string FilePath = "D:/Data/data.xlsx";
 
             System.IO.FileInfo existingFile = new System.IO.FileInfo(FilePath);
@@ -157,15 +163,16 @@ namespace WebAdmin
             return companies;
         }
 
-        public List<JobFitReport> ReadJobFitReportExcel()
+        public List<JobFitReport> ReadJobFitReportExcel(IFileListEntry file)
         {
             // string FilePath = "C:/Users/Yahya/Documents/Project/AdminPanel/AdminPanel/wwwroot/Data/*.xlsx";
             // string FilePath = Path.Combine(environment.WebRootPath, "wwwroot/dataCompany.xlsx");
 
-            string FilePath =
-                "C:/Users/Yahya/Documents/Project/AdminPanel/AdminPanel/wwwroot/Data/Reports/dataReport.xlsx";
-            // string FilePath = "D:/Data/data.xlsx";
-
+            string FilePath = Path.Combine(
+                    environment.ContentRootPath,
+                    "wwwroot/Data/Reports",
+                    file.Name
+                );
             System.IO.FileInfo existingFile = new System.IO.FileInfo(FilePath);
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             using (ExcelPackage package = new ExcelPackage(existingFile))
@@ -253,12 +260,14 @@ namespace WebAdmin
 
         List<Employee> employees = new List<Employee>();
 
-        public List<Employee> ReadEmployeeExcel()
+        public List<Employee> ReadEmployeeExcel(IFileListEntry file)
         {
             // string FilePath = "C:/Users/Yahya/Documents/Project/AdminPanel/AdminPanel/wwwroot/Data/data.xlsx";
-            string FilePath =
-                "C:/Users/Yahya/Documents/Project/AdminPanel/AdminPanel/wwwroot/Data/Employees/dataEmployee.xlsx";
 
+            string FilePath = Path.Combine(
+                    environment.ContentRootPath,
+                    "wwwroot/Data/Employees", file.Name
+                );
             System.IO.FileInfo existingFile = new System.IO.FileInfo(FilePath);
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             using (ExcelPackage package = new ExcelPackage(existingFile))
@@ -307,11 +316,14 @@ namespace WebAdmin
             return employees;
         }
         List<Assessment> assessments = new List<Assessment>();
-        public List<Assessment> ReadAssessmentExcel()
+        public List<Assessment> ReadAssessmentExcel(IFileListEntry file)
         {
-            string FilePath =
-                "C:/Users/Yahya/Documents/Project/AdminPanel/AdminPanel/wwwroot/Data/dataAssmnt.xlsx";
-
+            // string FilePath =
+            //    "C:/Users/yahya/Documents/Project/Data/Assessments/dataAssessment.xlsx";
+            string FilePath = Path.Combine(
+                    environment.ContentRootPath,
+                    "wwwroot/Data/Assessments", file.Name
+                );
             System.IO.FileInfo existingFile = new System.IO.FileInfo(FilePath);
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             using (ExcelPackage package = new ExcelPackage(existingFile))
@@ -1486,6 +1498,7 @@ namespace WebAdmin
 
             return Context.Employees.FirstOrDefault(x => x.id == id);
         }
+
 
         partial void OnPlayerUpdated(WebAdmin.Models.adminPanelProject.Employee item);
 

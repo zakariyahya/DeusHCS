@@ -60,7 +60,7 @@ namespace WebAdmin.Pages.JobFitReports
             if (file != null)
             {
                 adminPanelProjectService.Upload(file);
-                jobFitReports = adminPanelProjectService?.ReadJobFitReportExcel();
+                jobFitReports = adminPanelProjectService?.ReadJobFitReportExcel(file);
             }
         }
 
