@@ -19,49 +19,49 @@ namespace WebAdmin.Models.adminPanelProject
         public string EmployeeId { get; set; }
 
         [Required]
-        public string CEOGeneralDirector { get; set; }
+        public decimal CEOGeneralDirector { get; set; }
 
         [Required]
-        public string AdministrativeStaff { get; set; }
+        public decimal AdministrativeStaff { get; set; }
 
         [Required]
-        public string CreativeDesignManager { get; set; }
+        public decimal CreativeDesignManager { get; set; }
 
         [Required]
-        public string FinanceStaff { get; set; }
+        public decimal FinanceStaff { get; set; }
 
         [Required]
-        public string FinanceManager { get; set; }
+        public decimal FinanceManager { get; set; }
 
         [Required]
-        public string HRStaff { get; set; }
+        public decimal HRStaff { get; set; }
 
         [Required]
-        public string HRManager { get; set; }
+        public decimal HRManager { get; set; }
 
         [Required]
-        public string ITStaff { get; set; }
+        public decimal ITStaff { get; set; }
 
         [Required]
-        public string ITManager { get; set; }
+        public decimal ITManager { get; set; }
 
         [Required]
-        public string MarketingStaff { get; set; }
+        public decimal MarketingStaff { get; set; }
 
         [Required]
-        public string ProductStaff { get; set; }
+        public decimal ProductStaff { get; set; }
 
         [Required]
-        public string ProductManager { get; set; }
+        public decimal ProductManager { get; set; }
 
         [Required]
-        public string SalesStaff { get; set; }
+        public decimal SalesStaff { get; set; }
 
         [Required]
-        public string CustomerService { get; set; }
+        public decimal CustomerService { get; set; }
 
         [Required]
-        public string SalesManager { get; set; }
+        public decimal SalesManager { get; set; }
 
     }
 }

@@ -190,63 +190,63 @@ namespace WebAdmin
                             jbr.EmployeeId = worksheet.Cells[row, col].Value.ToString();
                         else if (col == 3)
                             jbr.CEOGeneralDirector = 
-                                worksheet.Cells[row, col].Value.ToString()
+                                Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
                             ;
                         else if (col == 4)
                             jbr.AdministrativeStaff = 
-                                worksheet.Cells[row, col].Value.ToString()
+                                Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
                             ;
                         else if (col == 5)
                             jbr.CreativeDesignManager = 
-                                worksheet.Cells[row, col].Value.ToString()
+                                Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
                             ;
                         else if (col == 6)
                             jbr.FinanceStaff = 
-                                worksheet.Cells[row, col].Value.ToString()
+                                Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
                             ;
                         else if (col == 7)
                             jbr.FinanceManager = 
-                                worksheet.Cells[row, col].Value.ToString()
+                                Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
                             ;
                         else if (col == 8)
                             jbr.HRStaff = 
-                                worksheet.Cells[row, col].Value.ToString()
+                                Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
                             ;
                         else if (col == 9)
                             jbr.HRManager = 
-                                worksheet.Cells[row, col].Value.ToString()
+                                Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
                             ;
                         else if (col == 10)
                             jbr.ITStaff = 
-                                worksheet.Cells[row, col].Value.ToString()
+                                Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
                             ;
                         else if (col == 11)
                             jbr.ITManager =
-                                worksheet.Cells[row, col].Value.ToString()
+                                Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
                             ;
                         else if (col == 12)
                             jbr.MarketingStaff =
-                                worksheet.Cells[row, col].Value.ToString()
+                                Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
                             ;
                         else if (col == 13)
                             jbr.ProductStaff = 
-                                worksheet.Cells[row, col].Value.ToString()
+                                Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
                             ;
                         else if (col == 14)
                             jbr.ProductManager = 
-                                worksheet.Cells[row, col].Value.ToString()
+                                Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
                             ;
                         else if (col == 15)
                             jbr.SalesStaff =
-                                worksheet.Cells[row, col].Value.ToString()
+                                Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
                             ;
                         else if (col == 16)
                             jbr.CustomerService = 
-                                worksheet.Cells[row, col].Value.ToString()
+                                Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
                             ;
                         else if (col == 17)
                             jbr.SalesManager = 
-                                worksheet.Cells[row, col].Value.ToString()
+                                Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
                             ;
                     }
                     jbrs.Add(jbr);
@@ -857,7 +857,25 @@ namespace WebAdmin
         > GetJobFitReports(Query query = null)
         {
             var items = Context.JobFitReports.AsQueryable();
-
+            foreach (var item in items)
+            {
+                item.AdministrativeStaff = item.AdministrativeStaff*100;
+                item.CEOGeneralDirector = item.CEOGeneralDirector*100;
+                item.CreativeDesignManager = item.CreativeDesignManager*100;
+                item.CustomerService = item.CustomerService*100;
+                item.FinanceManager = item.FinanceManager*100;
+                item.FinanceStaff = item.FinanceStaff*100;
+                item.HRManager = item.HRManager*100;
+                item.HRStaff = item.HRStaff*100;
+                item.ITManager = item.ITManager*100;
+                item.ITStaff = item.ITStaff*100;
+                item.MarketingStaff = item.MarketingStaff*100;
+                item.ProductManager = item.ProductManager*100;
+                item.SalesManager = item.SalesManager*100;
+                item.SalesStaff = item.SalesStaff*100;
+                item.ProductStaff = item.ProductStaff*100;
+            }
+            
             if (query != null)
             {
                 if (!string.IsNullOrEmpty(query.Expand))
@@ -908,7 +926,7 @@ namespace WebAdmin
             string id
         )
         {
-            var items = Context.JobFitReports.AsNoTracking().Where(i => i.id == id);
+            var items = Context.JobFitReports.AsNoTracking().Where(i => i.EmployeeId == id);
 
             var itemToReturn = items.FirstOrDefault();
 
@@ -928,6 +946,24 @@ namespace WebAdmin
         )
         {
             OnJobFitReportCreated(jobfitreport);
+            // Convert.ToDouble(jobfitreport.CEOGeneralDirector);
+            // Convert.ToDouble(jobfitreport.AdministrativeStaff);
+            // Convert.ToDouble(jobfitreport.CreativeDesignManager);
+            // Convert.ToDouble(jobfitreport.FinanceManager);
+            // Convert.ToDouble(jobfitreport.FinanceStaff);
+            // Convert.ToDouble(jobfitreport.HRStaff);
+            // Convert.ToDouble(jobfitreport.HRManager);
+            // Convert.ToDouble(jobfitreport.ITStaff);
+            // Convert.ToDouble(jobfitreport.ITManager);
+            // Convert.ToDouble(jobfitreport.MarketingStaff);
+            // Convert.ToDouble(jobfitreport.ProductManager);
+            // Convert.ToDouble(jobfitreport.ProductStaff);
+            // Convert.ToDouble(jobfitreport.SalesStaff);
+            // Convert.ToDouble(jobfitreport.SalesManager);
+            // Convert.ToDouble(jobfitreport.CustomerService);
+
+
+
 
             var existingItem = Context.JobFitReports
                 .Where(i => i.id == jobfitreport.id)
@@ -1480,7 +1516,7 @@ namespace WebAdmin
 
         public async Task<WebAdmin.Models.adminPanelProject.Employee> GetPlayerById(string id)
         {
-            var items = Context.Employees.AsNoTracking().Where(i => i.id == id);
+            var items = Context.Employees.AsNoTracking().Where(i => i.EmployeeId == id);
 
             // items = items.Include(i => i.ApplicationUser);
 

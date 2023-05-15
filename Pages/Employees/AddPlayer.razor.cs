@@ -38,6 +38,7 @@ namespace WebAdmin.Pages.Employees
         List<WebAdmin.Models.adminPanelProject.Employee> employees =
             new List<WebAdmin.Models.adminPanelProject.Employee>();
 
+
         protected override async Task OnInitializedAsync()
         {
             usersForuserid = await adminPanelProjectService.GetUsers();
@@ -80,7 +81,9 @@ namespace WebAdmin.Pages.Employees
                 item.createdTime = DateTime.Now;
                 item.PhoneNumber = "0888";
                 item.createdBy = "System";
+                
                 adminPanelProjectService.CreatePlayer(item);
+          
             }
             // infoVisible = true;
             // sasa = true;

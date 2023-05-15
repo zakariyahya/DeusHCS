@@ -1,0 +1,120 @@
+@page "/reports-user"
+@attribute [Authorize]
+
+<div class="row" >
+  <RadzenCard Style="margin-bottom: 5px; width: 100%; height: 100px; background-color: #11232f">
+      <RadzenLabel Text="Label" Style="width: 116px; height: 66px">
+          <RadzenImage Style="width: 76px; height: 60px" Path="images\DEUS_Logo2.jpg"></RadzenImage>
+      </RadzenLabel>
+      <RadzenLabel Text="JOB FITTING" Style="width: 75%; height: 49px; text-align: center; text-transform: uppercase; color: #ffffff; margin-top: -10px" class="rz-text-display-h4" />
+      <RadzenLabel Text="PT Lorem Ipsum" Style="width: 265px; margin-left: 37%; margin-top: -30px; text-align: center; color: #ffffff" class="rz-text-display-h5 fw-bold" />
+  </RadzenCard>
+    <div class="col-sm-6" style="width: 25%; color: #5f4e4e; background-color: #ececec; background-repeat: repeat; margin-bottom: 7px">
+        <div class="rz-p-1" style="width: 100%; font-style: italic; text-align: center; margin-top: 5px">
+
+        <RadzenDropDown TValue="string" @bind-Value="employeeId" Placeholder="Select Employee" AllowFiltering="true"
+            Data="@employees" TextProperty="FullName"  ValueProperty="EmployeeId" Style="width: 100%; text-align: center; height: 40px"  />
+        </div>
+        <div class="rz-p-1" style="width: 100%; font-style: italic; text-align: center; margin-top: 5px">
+            <RadzenLabel Text="Yahya Zakariya" Style="width: 100%; margin-bottom: 5px; font-size: 20px; color: #0a0909; font-style: normal" class="fw-bold rz-text-display-h4" />
+        </div>
+    </div>
+    <div class="col-sm-12" style="width: 50%; float: none; visibility: visible; margin-bottom: 5px">
+        <RadzenCard Style="height: 79px; background-color: #eeeeee; border-radius: 0px">
+            <RadzenLabel Text="Yahya Zakariya" Style="width: 357px">
+                <RadzenCard Style="margin-top: -10px; height: 69px; background-color: #eeeeee; margin-left: -10px; border: 0px none rgba(66, 66, 66, 0); border-radius: 0px; width: 100%">
+                    <RadzenLabel Text="54%" Style="color: #ffc677; margin-left: 10px; margin-right: 30px" class="fw-bold rz-text-display-h4" /><RadzenLabel Text="Yahya Zakariya for Finance Staff" Style="width: 124px; font-size: 15px" />
+                </RadzenCard>
+            </RadzenLabel>
+            <RadzenLabel Text="Considered" Style="width: 294px; background-color: rgba(241, 243, 166, 0)">
+                <RadzenCard Style="margin-top: -10px; height: 69px; background-color: rgba(255, 249, 149, 0.62); width: 307px; border-radius: 0px">
+                    <RadzenLabel Text="Considered" class="rz-text-display-h4 fw-bold" Style="color: #ffc677" />
+                </RadzenCard>
+            </RadzenLabel>
+        </RadzenCard>
+    </div>
+
+    <div class="col-sm-6" style="color: #5f4e4e; background-color: #ececec; background-repeat: repeat; margin-bottom: 7px; width: 25%">
+        <div class="rz-p-1" style="width: 100%; font-style: italic; text-align: center; margin-top: 5px">
+         @* <RadzenDropDown TValue="dynamic" Style="width: 100%; height: 30px; text-align: center"></RadzenDropDown> *@
+         <RadzenDropDown TValue="string" @bind-Value="employeeId" Placeholder="Select Employee" AllowFiltering="true"
+            Data="@employees" TextProperty="FullName"  ValueProperty="FullName" Style="width: 50%; max-width: 400px;" />
+        </div>
+        <div class="rz-p-1" style="font-style: italic; text-align: center; margin-top: 5px; width: 100%">
+            <RadzenLabel Text="Sales Staff" Style="width: 100%; margin-bottom: 5px; font-size: 20px; color: #0a0909; font-style: normal" class="fw-bold rz-text-display-h4" />
+    </div>
+</div>
+</div>
+<div class="row">
+    <div class="col-sm-6" style="width: 25%; color: #5f4e4e; background-color: #ececec; background-repeat: repeat">
+       
+        <RadzenLabel Text="Recommended role for Yahya Zakariya" Style="margin-bottom: 10px; text-align: center; border-radius: 1px; border: 0px solid #30445f; margin-top: 5px; width: 100%; padding: 2px; display: inline-block" class="fw-bolder" />
+        <div class="rz-p-1" style="width: 100%; font-style: italic; text-align: left; border: 1px solid #403b3b">
+            <RadzenLabel Text="Number of recommended Role" Style="width: 70%; margin-left: 5px" />
+            <RadzenNumeric Min="1" Max="10" @bind-Value=@value Style="width: 20%; background-color: #dbd7d7; height: 20%" />
+        </div>
+        <div class="rz-p-1" style="width: 100%; font-style: italic; text-align: left; border: 1px solid #403b3b; margin-top: 5px">
+            <RadzenLabel Text="Minimum fitness for role recommendation" Style="width: 70%; margin-left: 5px" />
+            <RadzenNumeric Min="1" Max="100" Step="5" @bind-Value=@minFRC Style="width: 20%; background-color: #dbd7d7; height: 20%" />
+        </div>
+        <RadzenChart SeriesClick=@OnSeriesClick Visible="@(employeeId != null)" style="height: 400px; margin-top: 5px; background-color: #fffcf2; border: 0px solid #eaf38f; margin-bottom: 5px; float: none" ColorScheme="Radzen.Blazor.ColorScheme.Palette">
+            @* <RadzenStackedBarSeries Data="@revenue2020" CategoryProperty="Quarter" Title="2020" LineType="LineType.Dashed" ValueProperty="Revenue">
+                <RadzenSeriesDataLabels Visible="@showDataLabels" />
+            </RadzenStackedBarSeries> *@
+            <RadzenStackedBarSeries Data="@data.Where(x => x.employeeID == employeeId && x.Revenue >= minFRC ).OrderByDescending(data => data.Revenue)" CategoryProperty="Quarter" Title="2019" ValueProperty="Revenue">
+                <RadzenSeriesDataLabels  />
+            </RadzenStackedBarSeries>
+            <RadzenValueAxis Min="0" Max="100" Step="25">
+                <RadzenGridLines Visible="true" />
+                <RadzenAxisTitle Text="" />
+            </RadzenValueAxis>
+            <RadzenBarOptions  Height="25" />
+            <RadzenCategoryAxis>
+                <RadzenGridLines LineType="Radzen.Blazor.LineType.Solid"></RadzenGridLines>
+            </RadzenCategoryAxis>
+        </RadzenChart>
+    </div>
+    <div class="col-sm-12" style="width: 50%; float: none; visibility: visible; margin-bottom: 5PX; background-color: #11232f">
+        <RadzenCard Style="margin-top: 10px; background-color: #adaaaa; height: 60px; border-radius: 0px">
+            <RadzenLabel Text="Label" Style="width: 100%; height: 65px; margin-top: -10px">
+                <RadzenLabel Text="Yahya Zakariya" Style="width: 154px; color: #ffffff; font-family: Arial; text-transform: uppercase" class="fw-bolder" />
+                <RadzenLabel Text="" Style="width: 473px" Visible="true" />
+                <RadzenLabel Text="Applying for Hr Staff" Style="color: #ffffff" />
+            </RadzenLabel>
+        </RadzenCard>
+        <RadzenLabel Text="21 y.o Male from Bandung" Style="width: 415px; margin-top: 5px; font-style: italic; text-transform: capitalize; color: #ffffff; line-height: 20px" />
+        <RadzenLabel Text="Date applied: 1 Oct 2022" Style="width: 268px; margin-top: 5px; font-style: italic; color: #ffffff" />
+        <RadzenLabel Text="Islam" Style="width: 415px; color: #ffffff; font-style: italic" />
+        <RadzenLabel Text="Test date: 1 Oct 2022" Style="width: 271px; font-style: italic; color: #ffffff" />
+        <RadzenLabel Text="Single" Style="background-color: rgba(255, 255, 255, 0); color: #ffffff; font-style: italic; width: 683px; margin-bottom: 20px" />
+        <RadzenLabel Text="Insight " Style="width: 690px; height: 39px; color: #000000; background-color: #adaaaa; margin-bottom: 5px; padding-top: 2px" />
+        <RadzenLabel Text="Text .................................." Style="width: 685px; height: 65px; color: #ffffff" />
+        <RadzenLabel Text="Text .................................." Style="width: 688px; height: 45px; color: #ffffff" />
+        <RadzenLabel Text="Text .................................." Style="width: 695px; color: #ffffff; margin-bottom: 50px" />
+        <RadzenProgressBar Style="height: 37px"></RadzenProgressBar>
+    </div>
+    <div class="col-sm-6" style="width: 25%; background-color: #ececec">
+    <RadzenLabel Text="Recommended user for Sales Staff position" Style="margin-bottom: 10px; text-align: center; border-radius: 1px; border: 0px solid #30445f; margin-top: 5px; width: 100%; padding: 2px; display: inline-block" class="fw-bold" />
+        <div class="rz-p-1" style="width: 100%; font-style: italic; text-align: left; border: 1px solid #403b3b">
+            <RadzenLabel Text="Number of recommended User" Style="width: 70%; margin-left: 5px" />
+            <RadzenNumeric Min="1" Max="10" @bind-Value=@value Style="width: 20%; height: 20%; background-color: #dbd7d7" />
+        </div>
+        <div class="rz-p-1" style="width: 100%; font-style: italic; text-align: left; border: 1px solid #403b3b; margin-top: 5px">
+            <RadzenLabel Text="Minimum fitness for user recommendation" Style="width: 70%; margin-left: 5px" />
+            <RadzenNumeric Min="1" Max="10" @bind-Value=@value Style="width: 20%; height: 20%; background-color: #dbd7d7" />
+        </div>
+        @* <RadzenChart SeriesClick=@OnSeriesClick style="height: 400px; margin-top: 5px; background-color: #fffcf2; margin-bottom: 5px">
+            <RadzenStackedBarSeries Data="@revenue2020" CategoryProperty="Quarter" Title="2020" LineType="LineType.Dashed" ValueProperty="Revenue">
+                <RadzenSeriesDataLabels Visible="@showDataLabels" />
+            </RadzenStackedBarSeries>
+            <RadzenStackedBarSeries Data="@revenue2019" CategoryProperty="Quarter" Title="2019" ValueProperty="Revenue">
+                <RadzenSeriesDataLabels />
+            </RadzenStackedBarSeries>
+            <RadzenValueAxis Min="0" Max="100" Step="25">
+                <RadzenGridLines Visible="true" />
+                <RadzenAxisTitle Text="Revenue in USD" />
+            </RadzenValueAxis>
+            <RadzenBarOptions  Height="25" />
+        </RadzenChart> *@
+    </div>
+</div>

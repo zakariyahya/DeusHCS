@@ -59,9 +59,9 @@ namespace WebAdmin.Pages.Company
         {
             // await DialogService.OpenAsync<AddApplicationUser>("Add Application User");
             await DialogService.OpenAsync<AddApplicationUser>("Add Companies");
-
-
             users = await Security.GetUsers();
+            await grid0.Reload();
+
         }
 
         protected async Task RowSelect(WebAdmin.Models.ApplicationUser user)

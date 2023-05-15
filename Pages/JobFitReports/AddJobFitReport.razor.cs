@@ -41,7 +41,8 @@ namespace WebAdmin.Pages.JobFitReports
             usersForUserId = await adminPanelProjectService.GetUsers();
             // jobFitReport = new WebAdmin.Models.adminPanelProject.JobFitReport();
         }
-
+        List<WebAdmin.Models.adminPanelProject.DataItem> dataItems =
+           new List<WebAdmin.Models.adminPanelProject.DataItem>();
         protected bool isBusy;
 
         protected bool errorVisible;
@@ -66,27 +67,37 @@ namespace WebAdmin.Pages.JobFitReports
 
         protected async Task FormSubmit()
         {
-            // try
-            // {
-            //     foreach (var item in jobFitReports)
-            //     {
-            //         isBusy = true;
-            //         item.UserId = jobFitReport.UserId;
-            //         adminPanelProjectService.CreateJobFitReport(item);
-            //     }
-            //     DialogService.Close(jobFitReport);
-            // }
-            // catch (Exception ex)
-            // {
-            //     errorVisible = true;
-            // }
-            foreach (var item in jobFitReports)
+            try
             {
-                isBusy = true;
-                item.UserId = jobFitReport.UserId;
-                adminPanelProjectService.CreateJobFitReport(item);
+                foreach (var item in jobFitReports)
+                {
+                    isBusy = true;
+                    item.UserId = jobFitReport.UserId;
+                    adminPanelProjectService.CreateJobFitReport(item);
+                }
+                DialogService.Close(jobFitReport);
             }
-            DialogService.Close(jobFitReport);
+            catch (Exception ex)
+            {
+                errorVisible = true;
+            }
+            // foreach (var item in jobFitReports)
+            // {
+            //     isBusy = true;
+            //     item.UserId = jobFitReport.UserId;
+
+            //     adminPanelProjectService.CreateJobFitReport(item);
+                
+            //     // foreach (var dataItem in dataItems)
+            //     // {
+            //     //     dataItem.employeeID = item.EmployeeId;
+            //     //     dataItem.Quarter.Add(((char)item.HRManager));
+            //     //     dataItem.Revenue.Add(item.HRManager);
+            //     //     dataItem.Revenue.Add(item.CEOGeneralDirector);
+
+            //     // }
+            // }
+            // DialogService.Close(jobFitReport);
         }
 
         protected string info;
