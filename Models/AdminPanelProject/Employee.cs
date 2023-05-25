@@ -14,7 +14,7 @@ namespace WebAdmin.Models.adminPanelProject
 
         [Required]
         public string FullName { get; set; }
-
+    
         [Required]
         public string Email { get; set; }
 
@@ -59,5 +59,16 @@ namespace WebAdmin.Models.adminPanelProject
         public DateTime? lastModifiedTime { get; set; }
 
         public string EmployeeId { get; set; }
+
+        public string? Religion {get; set;}
+        public string? Insight {get; set;}
+        // internal static object GetEntityTypes()
+        // {
+        //     throw new NotImplementedException();
+        // }
+        [Required]
+        public string CompanyId { get; set; }
+        [NotMapped]
+        public JobFitReport JobFitReports {get; set;}
     }
 }

@@ -15,6 +15,10 @@ using Microsoft.AspNetCore.Identity;
 using WebAdmin.Models;
 using OfficeOpenXml;
 using WebAdmin.Models.adminPanelProject;
+using Microsoft.EntityFrameworkCore.Metadata;
+using System.IO.Compression;
+using System.Text;
+using Microsoft.AspNetCore.Components.Forms;
 
 namespace WebAdmin
 {
@@ -30,6 +34,7 @@ namespace WebAdmin
         private readonly IWebHostEnvironment environment;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IConfiguration configuration;
+        private readonly ContextHelper contextHelper;
 
         public adminPanelProjectService(
             ApplicationIdentityDbContext context,
@@ -37,7 +42,8 @@ namespace WebAdmin
             IWebHostEnvironment environment,
             SecurityService securityService,
             UserManager<ApplicationUser> userManager,
-            IConfiguration configuration
+            IConfiguration configuration,
+            ContextHelper contextHelper
         )
         {
             this.context = context;
@@ -46,6 +52,7 @@ namespace WebAdmin
             this.securityService = securityService;
             this.userManager = userManager;
             this.configuration = configuration;
+            this.contextHelper = contextHelper;
         }
 
         public void Reset() =>
@@ -109,7 +116,7 @@ namespace WebAdmin
             {
                 memoryStream.WriteTo(fileStream);
             }
-                ReadExcel(file);
+            ReadExcel(file);
 
             // ReadExcel();
         }
@@ -133,7 +140,7 @@ namespace WebAdmin
             string FilePath =
                 Path.Combine(
                     environment.ContentRootPath,
-                    "wwwroot/Data/Companies",file.Name
+                    "wwwroot/Data/Companies", file.Name
                 );
             // string FilePath = "D:/Data/data.xlsx";
 
@@ -188,36 +195,45 @@ namespace WebAdmin
                     {
                         if (col == 2)
                             jbr.EmployeeId = worksheet.Cells[row, col].Value.ToString();
+
                         else if (col == 3)
-                            jbr.CEOGeneralDirector = 
-                                Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
+                            jbr.Bio =
+                                worksheet.Cells[row, col].Value.ToString()
                             ;
                         else if (col == 4)
-                            jbr.AdministrativeStaff = 
-                                Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
+                            jbr.Insight =
+                                worksheet.Cells[row, col].Value.ToString()
                             ;
                         else if (col == 5)
-                            jbr.CreativeDesignManager = 
+                            jbr.CEOGeneralDirector =
                                 Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
                             ;
                         else if (col == 6)
-                            jbr.FinanceStaff = 
+                            jbr.AdministrativeStaff =
                                 Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
                             ;
                         else if (col == 7)
-                            jbr.FinanceManager = 
+                            jbr.CreativeDesignManager =
                                 Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
                             ;
                         else if (col == 8)
-                            jbr.HRStaff = 
+                            jbr.FinanceStaff =
                                 Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
                             ;
                         else if (col == 9)
-                            jbr.HRManager = 
+                            jbr.FinanceManager =
                                 Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
                             ;
                         else if (col == 10)
-                            jbr.ITStaff = 
+                            jbr.HRStaff =
+                                Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
+                            ;
+                        else if (col == 9)
+                            jbr.HRManager =
+                                Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
+                            ;
+                        else if (col == 10)
+                            jbr.ITStaff =
                                 Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
                             ;
                         else if (col == 11)
@@ -229,11 +245,11 @@ namespace WebAdmin
                                 Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
                             ;
                         else if (col == 13)
-                            jbr.ProductStaff = 
+                            jbr.ProductStaff =
                                 Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
                             ;
                         else if (col == 14)
-                            jbr.ProductManager = 
+                            jbr.ProductManager =
                                 Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
                             ;
                         else if (col == 15)
@@ -241,11 +257,11 @@ namespace WebAdmin
                                 Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
                             ;
                         else if (col == 16)
-                            jbr.CustomerService = 
+                            jbr.CustomerService =
                                 Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
                             ;
                         else if (col == 17)
-                            jbr.SalesManager = 
+                            jbr.SalesManager =
                                 Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
                             ;
                     }
@@ -256,6 +272,9 @@ namespace WebAdmin
         }
 
         List<ApplicationUser> companies = new List<ApplicationUser>();
+
+
+
         List<JobFitReport> jbrs = new List<JobFitReport>();
 
         List<Employee> employees = new List<Employee>();
@@ -341,7 +360,7 @@ namespace WebAdmin
                             assessment.EmployeeId = worksheet.Cells[row, col].Value.ToString();
                         else if (col == 2)
                             assessment.Diplomatic = Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString());
-                            
+
                         else if (col == 3)
                             assessment.Empathy = Convert.ToDecimal(
                                 worksheet.Cells[row, col].Value.ToString()
@@ -754,7 +773,10 @@ namespace WebAdmin
         }
 
         partial void OnUsersRead(ref IQueryable<WebAdmin.Models.ApplicationUser> userItems);
-
+        public async Task<List<WebAdmin.Models.ApplicationUser>> GetAllUsers()
+        {
+            return context.Users.ToList();
+        }
         public async Task<IQueryable<WebAdmin.Models.ApplicationUser>> GetUsers(Query query = null)
         {
             var items = Context.Users.AsQueryable();
@@ -857,25 +879,8 @@ namespace WebAdmin
         > GetJobFitReports(Query query = null)
         {
             var items = Context.JobFitReports.AsQueryable();
-            foreach (var item in items)
-            {
-                item.AdministrativeStaff = item.AdministrativeStaff*100;
-                item.CEOGeneralDirector = item.CEOGeneralDirector*100;
-                item.CreativeDesignManager = item.CreativeDesignManager*100;
-                item.CustomerService = item.CustomerService*100;
-                item.FinanceManager = item.FinanceManager*100;
-                item.FinanceStaff = item.FinanceStaff*100;
-                item.HRManager = item.HRManager*100;
-                item.HRStaff = item.HRStaff*100;
-                item.ITManager = item.ITManager*100;
-                item.ITStaff = item.ITStaff*100;
-                item.MarketingStaff = item.MarketingStaff*100;
-                item.ProductManager = item.ProductManager*100;
-                item.SalesManager = item.SalesManager*100;
-                item.SalesStaff = item.SalesStaff*100;
-                item.ProductStaff = item.ProductStaff*100;
-            }
-            
+
+
             if (query != null)
             {
                 if (!string.IsNullOrEmpty(query.Expand))
@@ -917,12 +922,32 @@ namespace WebAdmin
 
             OnJobFitReportsRead(ref items);
 
+            foreach (var item in items)
+            {
+                // String.Format("Value: {0:P2}.", 0.8526);
+                item.AdministrativeStaff = Math.Round(item.AdministrativeStaff * 100, 2);
+                item.CEOGeneralDirector = Math.Round(item.CEOGeneralDirector * 100, 2);
+                item.CreativeDesignManager = Math.Round(item.CreativeDesignManager * 100, 2);
+                item.CustomerService = Math.Round(item.CustomerService * 100, 2);
+                item.FinanceManager = Math.Round(item.FinanceManager * 100, 2);
+                item.FinanceStaff = Math.Round(item.FinanceStaff * 100, 2);
+                item.HRManager = Math.Round(item.HRManager * 100, 2);
+                item.HRStaff = Math.Round(item.HRStaff * 100, 2);
+                item.ITManager = Math.Round(item.ITManager * 100, 2);
+                item.ITStaff = Math.Round(item.ITStaff * 100, 2);
+                item.MarketingStaff = Math.Round(item.MarketingStaff * 100, 2);
+                item.ProductManager = Math.Round(item.ProductManager * 100, 2);
+                item.SalesManager = Math.Round(item.SalesManager * 100, 2);
+                item.SalesStaff = Math.Round(item.SalesStaff * 100, 2);
+                item.ProductStaff = Math.Round(item.ProductStaff * 100, 2);
+            }
+
             return await Task.FromResult(items);
         }
 
         partial void OnJobFitReportGet(WebAdmin.Models.adminPanelProject.JobFitReport item);
 
-        public async Task<WebAdmin.Models.adminPanelProject.JobFitReport> GetJobFitReportById(
+        public WebAdmin.Models.adminPanelProject.JobFitReport GetJobFitReportById(
             string id
         )
         {
@@ -932,7 +957,7 @@ namespace WebAdmin
 
             OnJobFitReportGet(itemToReturn);
 
-            return await Task.FromResult(itemToReturn);
+            return itemToReturn;
         }
 
         partial void OnJobFitReportCreated(WebAdmin.Models.adminPanelProject.JobFitReport item);
@@ -946,24 +971,6 @@ namespace WebAdmin
         )
         {
             OnJobFitReportCreated(jobfitreport);
-            // Convert.ToDouble(jobfitreport.CEOGeneralDirector);
-            // Convert.ToDouble(jobfitreport.AdministrativeStaff);
-            // Convert.ToDouble(jobfitreport.CreativeDesignManager);
-            // Convert.ToDouble(jobfitreport.FinanceManager);
-            // Convert.ToDouble(jobfitreport.FinanceStaff);
-            // Convert.ToDouble(jobfitreport.HRStaff);
-            // Convert.ToDouble(jobfitreport.HRManager);
-            // Convert.ToDouble(jobfitreport.ITStaff);
-            // Convert.ToDouble(jobfitreport.ITManager);
-            // Convert.ToDouble(jobfitreport.MarketingStaff);
-            // Convert.ToDouble(jobfitreport.ProductManager);
-            // Convert.ToDouble(jobfitreport.ProductStaff);
-            // Convert.ToDouble(jobfitreport.SalesStaff);
-            // Convert.ToDouble(jobfitreport.SalesManager);
-            // Convert.ToDouble(jobfitreport.CustomerService);
-
-
-
 
             var existingItem = Context.JobFitReports
                 .Where(i => i.id == jobfitreport.id)
@@ -1097,6 +1104,8 @@ namespace WebAdmin
             );
         }
 
+
+
         partial void OnAssessmentsRead(
             ref IQueryable<WebAdmin.Models.adminPanelProject.Assessment> items
         );
@@ -1164,6 +1173,99 @@ namespace WebAdmin
             return await Task.FromResult(itemToReturn);
         }
 
+        public List<WebAdmin.Models.adminPanelProject.TransposeData> GenerateTransposData()
+        {
+
+            // var tableNames = AssessmentDatas.FromSqlRaw($"INSERT INTO public.\"AssessmentDatas\" (assessmentName) select column_name from INFORMATION_SCHEMA.columns where TABLE_NAME = 'Assessments'").ToList();
+            //Generate the target dynamic sql statemnet for transposing column to
+            // var tableNames = AssessmentDatas.FromSqlRaw($"DO $$DECLARE target_table text := 'TransposeDatas'; source_table text := 'Assessments'; dynamic_sql text BEGIN EXECUTE format('DROP TABLE IF EXISTS %I', target_table);EXECUTE format('CREATE TABLE %I (column_name text, column_value text)', target_table); SELECT format('INSERT INTO %I (column_name, column_value)SELECT unnest(array[% s]) AS column_name, unnest(array[% s]) AS column_value FROM % I', target_table, string_agg(quote_literal(attname), ','), string_agg(quote_ident(attname) || '::text', ','), source_table)INTO dynamic_sql FROM pg_attribute WHERE attrelid = (SELECT oid FROM pg_class WHERE relname = source_table) AND attnum > 0 AND NOT attisdropped; EXECUTE dynamic_sql;END$$;").ToList();
+
+            // using (var context = new ApplicationIdentityDbContext())
+            // {
+            var targetTable = "TransposeDatas";
+            var sourceTable = "Assessments";
+            var dynamicSql = $@"
+                                    DO $$DECLARE
+                                        target_table text := '{targetTable}';
+                                        source_table text := '{sourceTable}';
+                                        dynamic_sql text;
+                                    BEGIN
+                                        EXECUTE format('DROP TABLE IF EXISTS %I', target_table);
+                                        EXECUTE format('CREATE TABLE %I (column_name text, column_value text)', target_table);
+                                
+                                        SELECT format(
+                                            'INSERT INTO %I (column_name, column_value)
+                                            SELECT unnest(array[%s]) AS column_name, unnest(array[%s]) AS column_value
+                                            FROM %I',
+                                            target_table,
+                                            string_agg(quote_literal(attname), ','),
+                                            string_agg(quote_ident(attname) || '::text', ','),
+                                            source_table
+                                        )
+                                        INTO dynamic_sql
+                                        FROM pg_attribute
+                                        WHERE attrelid = (SELECT oid FROM pg_class WHERE relname = source_table)
+                                            AND attnum > 0
+                                            AND NOT attisdropped;
+                                
+                                        EXECUTE dynamic_sql;
+                                    END$$;
+                                ";
+
+            context.Database.ExecuteSqlRaw(dynamicSql);
+
+            // Query the transposed data from the target table
+            var transposedData = context.TransposeDatas.ToList();
+
+            // Return the transposed data
+            return transposedData;
+            // var targetTable = "transposed_data";
+            // var sourceTable = "Assessments";
+            // var dynamicSql = "";
+
+            // // Drop the target table if it already exists
+            // context.Database.ExecuteSqlRaw($"DROP TABLE IF EXISTS {targetTable}");
+
+            // // Create the target table to store the transposed data
+            // context.Database.ExecuteSqlRaw($"CREATE TABLE {targetTable} (column_name text, column_value tect)");
+
+            // // Generate the dynamic SQL statement for transposing columns to rows
+            // var query = context.TransposeDatas.FromSqlRaw(@"
+            //     SELECT format(
+            //         'INSERT INTO {0} (column_name, column_value)
+            //         SELECT unnest(array[{1}]) AS column_name, unnest(array[{2}]::numeric[]) AS column_value
+            //         FROM {3}',
+            //         {0},
+            //         string_agg(quote_literal(attname), ','),
+            //         string_agg(quote_ident(attname) || '::text', ','),
+            //         {4}
+            //     )
+            //     FROM pg_attribute
+            //     WHERE attrelid = (
+            //         SELECT oid FROM pg_class WHERE relname = {4}
+            //     )
+            //     AND attnum > 0
+            //     AND NOT attisdropped",
+            //     targetTable,
+            //     sourceTable,
+            //     sourceTable);
+
+            // dynamicSql = query.Single().ToString();
+
+            // // Execute the dynamic SQL statement to insert the transposed data
+            // context.Database.ExecuteSqlRaw(dynamicSql);
+
+            // // Query the transposed data from the target table
+            // var transposedData = context.TransposeDatas.ToList();
+
+            // // Return the transposed data
+            // return transposedData;
+
+            // }
+            // return tableNames;
+        }
+
+
         partial void OnAssessmentCreated(WebAdmin.Models.adminPanelProject.Assessment item);
 
         partial void OnAfterAssessmentCreated(WebAdmin.Models.adminPanelProject.Assessment item);
@@ -1174,9 +1276,15 @@ namespace WebAdmin
         {
             OnAssessmentCreated(assessment);
 
+
             var existingItem = Context.Assessments
-                .Where(i => i.id == assessment.id)
+                .Where(i => i.EmployeeId == assessment.EmployeeId)
                 .FirstOrDefault();
+
+            // foreach (var item in transposeDatas)
+            // {
+            //     item.EmployeeId = existingItem.EmployeeId;
+            // }
 
             if (existingItem != null)
             {
@@ -1195,9 +1303,76 @@ namespace WebAdmin
             }
 
             OnAfterAssessmentCreated(assessment);
+            // var transposeDatas = context.GetTableNames();
+
+            // foreach (var item in transposeDatas)
+            // {
+            //     item.EmployeeId = existingItem.EmployeeId;
+            // }
+            GenerateTransposData();
+            // foreach (var item in columnAssessents)
+            // {
+            //     foreach (var item2 in dataAssessments)
+            //     {
+            //         // assessmentData.id = "dadasdasd";
+            //         assessmentData.UserId = "2131";
+            //         assessmentData.EmployeeId = "oke";
+            //         assessmentData.assessmentName = item.ToString();
+            //         Context.AssessmentDatas.Add(assessmentData);
+            //         Context.SaveChanges();
+            //     }
+            //     // assessmentData.UserId = "2131";
+            //     // assessmentData.assessmentName = item.Name;
+            //     // Context.AssessmentDatas.Add(assessmentData);
+            //     // Context.SaveChanges();
+
+            // }
+            return assessment;
+        }
+
+
+
+        partial void OnDataItemCreated(WebAdmin.Models.adminPanelProject.DataItem item);
+
+        partial void OnAfterDataItemCreated(WebAdmin.Models.adminPanelProject.DataItem item);
+
+        public async Task<WebAdmin.Models.adminPanelProject.DataItem> CreateDataItem(
+            WebAdmin.Models.adminPanelProject.DataItem assessment
+        )
+        {
+            OnDataItemCreated(assessment);
+
+
+            var existingItem = Context.Assessments
+                .Where(i => i.EmployeeId == assessment.employeeID)
+                .FirstOrDefault();
+
+            // foreach (var item in transposeDatas)
+            // {
+            //     item.EmployeeId = existingItem.EmployeeId;
+            // }
+
+            if (existingItem != null)
+            {
+                throw new Exception("Item already available");
+            }
+
+            try
+            {
+                Context.dataItems.Add(assessment);
+                Context.SaveChanges();
+            }
+            catch
+            {
+                Context.Entry(assessment).State = EntityState.Detached;
+                throw;
+            }
+
+            OnAfterDataItemCreated(assessment);
 
             return assessment;
         }
+
 
         public async Task<WebAdmin.Models.adminPanelProject.Assessment> CancelAssessmentChanges(
             WebAdmin.Models.adminPanelProject.Assessment item
@@ -1303,6 +1478,74 @@ namespace WebAdmin
         partial void OnEmployeesRead(
             ref IQueryable<WebAdmin.Models.adminPanelProject.Employee> items
         );
+        partial void OnTransposeDataRead(
+            ref IQueryable<WebAdmin.Models.adminPanelProject.TransposeData> items
+        );
+
+        public async Task<IQueryable<WebAdmin.Models.adminPanelProject.TransposeData>> GetTransposeDatas(
+          Query query = null
+      )
+        {
+            var items = Context.TransposeDatas.AsQueryable();
+
+            if (query != null)
+            {
+                if (!string.IsNullOrEmpty(query.Expand))
+                {
+                    var propertiesToExpand = query.Expand.Split(',');
+                    foreach (var p in propertiesToExpand)
+                    {
+                        items = items.Include(p.Trim());
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(query.Filter))
+                {
+                    if (query.FilterParameters != null)
+                    {
+                        items = items.Where(query.Filter, query.FilterParameters);
+                    }
+                    else
+                    {
+                        items = items.Where(query.Filter);
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(query.OrderBy))
+                {
+                    items = items.OrderBy(query.OrderBy);
+                }
+
+                if (query.Skip.HasValue)
+                {
+                    items = items.Skip(query.Skip.Value);
+                }
+
+                if (query.Top.HasValue)
+                {
+                    items = items.Take(query.Top.Value);
+                }
+            }
+
+            OnTransposeDataRead(ref items);
+
+            return await Task.FromResult(items);
+        }
+
+        partial void OnTransposeGet(List<WebAdmin.Models.adminPanelProject.TransposeData> item);
+
+        public List<WebAdmin.Models.adminPanelProject.TransposeData> GetTransposeDataById(string parameterValue)
+        {
+            var query = Context.TransposeDatas
+                  .Where(data => string.Compare(data.ColumnValue, parameterValue) >= 0)
+            .Take(75);
+
+            var result = query.ToList();
+
+            // OnTransposeGet(result);
+
+            return result;
+        }
 
         public async Task<IQueryable<WebAdmin.Models.adminPanelProject.Employee>> GetEmployees(
             Query query = null
@@ -1511,10 +1754,9 @@ namespace WebAdmin
                 true
             );
         }
-
         partial void OnPlayerGet(WebAdmin.Models.adminPanelProject.Employee item);
 
-        public async Task<WebAdmin.Models.adminPanelProject.Employee> GetPlayerById(string id)
+        public WebAdmin.Models.adminPanelProject.Employee GetPlayerById(string id)
         {
             var items = Context.Employees.AsNoTracking().Where(i => i.EmployeeId == id);
 
@@ -1524,7 +1766,8 @@ namespace WebAdmin
 
             OnPlayerGet(itemToReturn);
 
-            return await Task.FromResult(itemToReturn);
+            // return await Task.FromResult(itemToReturn);
+            return itemToReturn;
         }
 
         public Employee GetPlayerByID(string id)
@@ -1685,7 +1928,62 @@ namespace WebAdmin
             // var user = Context.Users.Where(i => i.CompanyName.ToLower() == id.ToLower()).FirstOrDefault();
             // return user;
 
-            return Context.Assessments.FirstOrDefault(x => x.id == id);
+            return Context.Assessments.FirstOrDefault(x => x.EmployeeId == id);
+        }
+
+
+
+        public async Task<List<ZipEntry>> ExtractFiles(Stream fileData)
+        {
+            await using var ms = new MemoryStream();
+            await fileData.CopyToAsync(ms);
+
+            using var archive = new ZipArchive(ms);
+
+            var entries = new List<ZipEntry>();
+
+            foreach (var entry in archive.Entries)
+            {
+                await using var fileStream = entry.Open();
+                var fileBytes = await fileStream.ReadFully();
+                var content = Encoding.UTF8.GetString(fileBytes);
+
+                entries.Add(new ZipEntry { Name = entry.FullName, Content = content });
+            }
+
+            return entries;
+        }
+
+        private static readonly string SaveDirectory = "wwwroot/uploads"; // Change this path according to your requirements
+
+
+        public async Task<string> SaveFile(IBrowserFile file)
+        {
+            var fileName = Path.GetFileName(file.Name);
+            var filePath = Path.Combine(SaveDirectory, fileName);
+
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.OpenReadStream().CopyToAsync(fileStream);
+            }
+
+            return filePath;
+        }
+        public Task<Stream> GetFileStream(string filePath)
+        {
+            var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+            return Task.FromResult<Stream>(fileStream);
+        }
+
+    }
+
+    public static class NewBaseType
+    {
+        public static async Task<byte[]> ReadFully(this Stream input)
+        {
+            await using var ms = new MemoryStream();
+            await input.CopyToAsync(ms);
+            return ms.ToArray();
         }
     }
 }

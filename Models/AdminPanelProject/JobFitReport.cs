@@ -14,6 +14,8 @@ namespace WebAdmin.Models.adminPanelProject
 
         [Required]
         public string UserId { get; set; }
+        public string? Bio { get; set; }
+        public string? Insight { get; set; }
 
         [Required]
         public string EmployeeId { get; set; }

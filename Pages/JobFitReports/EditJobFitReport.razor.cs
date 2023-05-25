@@ -37,7 +37,7 @@ namespace WebAdmin.Pages.JobFitReports
 
         protected override async Task OnInitializedAsync()
         {
-            jobFitReport = await adminPanelProjectService.GetJobFitReportById(id);
+            jobFitReport =  adminPanelProjectService.GetJobFitReportById(id);
         }
         protected bool errorVisible;
         protected WebAdmin.Models.adminPanelProject.JobFitReport jobFitReport;

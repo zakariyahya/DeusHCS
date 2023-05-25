@@ -87,7 +87,7 @@ namespace WebAdmin.Pages.JobFitReports
             //     item.UserId = jobFitReport.UserId;
 
             //     adminPanelProjectService.CreateJobFitReport(item);
-                
+
             //     // foreach (var dataItem in dataItems)
             //     // {
             //     //     dataItem.employeeID = item.EmployeeId;

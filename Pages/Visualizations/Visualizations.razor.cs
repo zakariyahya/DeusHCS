@@ -29,22 +29,50 @@ namespace WebAdmin.Pages.Visualizations
         public adminPanelProjectService adminPanelProjectService { get; set; }
 
         protected IEnumerable<WebAdmin.Models.adminPanelProject.Employee> employees;
+        protected IEnumerable<WebAdmin.Models.ApplicationUser> companies;
+
+        protected IEnumerable<WebAdmin.Models.adminPanelProject.Employee> employees2;
+
         protected WebAdmin.Models.adminPanelProject.Employee employee;
         protected WebAdmin.Models.adminPanelProject.JobFitReport report;
 
         protected IEnumerable<WebAdmin.Models.adminPanelProject.JobFitReport> reports;
-        protected List<WebAdmin.Models.adminPanelProject.DataItem> dataItem;
+        protected IEnumerable<WebAdmin.Models.adminPanelProject.TransposeData> transposeDatas;
+        protected WebAdmin.Models.adminPanelProject.Assessment assessment;
+        protected List<WebAdmin.Models.adminPanelProject.DataItem> data;
+
+
+        protected List<WebAdmin.Models.adminPanelProject.TransposeData> transposeDataByIdList;
+        protected WebAdmin.Models.adminPanelProject.TransposeData transposeDataById;
+
+
+
+        protected List<WebAdmin.Models.adminPanelProject.DataItem> dataItems;
+        protected WebAdmin.Models.adminPanelProject.DataItem dataItem;
+
+        protected WebAdmin.Models.adminPanelProject.MergedObject mergedObject;
+
 
 
         protected string employeeId;
+        protected string stringData;
+        protected string companyId;
+
+        protected string employeeIdForPosition;
+
+        protected string JobTitle;
+
+        protected string employeeIdDb;
+
+        protected string parameterValue;
         protected double jobFitValue;
         protected string search = "";
-        protected double minFRC;
+        protected decimal minFRC;
 
         protected override async Task OnInitializedAsync()
         {
-            employee = await adminPanelProjectService.GetPlayerById(employeeId);
-
+            employee = adminPanelProjectService.GetPlayerById(employeeId);
+            // assessment = adminPanelProjectService.GetAssessmentByID(employeeId);
             employees = await adminPanelProjectService.GetPlayers(
                 new Query
                 {
@@ -53,88 +81,70 @@ namespace WebAdmin.Pages.Visualizations
                     FilterParameters = new object[] { search }
                 }
             );
+            employees2 = await adminPanelProjectService.GetPlayers(
+                new Query
+                {
+                    Filter =
+                        $@"i => i.id.Contains(@0) || i.FullName.Contains(@0) || i.Email.Contains(@0) || i.Gender.Contains(@0) || i.createdBy.Contains(@0)",
+                    FilterParameters = new object[] { search }
+                }
+            );
+
+            companies = await adminPanelProjectService.GetUsers(
+                // new Query
+                // {
+                //     Filter =
+                //         $@"i => i.id.Contains(@0) || i.FullName.Contains(@0) || i.Email.Contains(@0) || i.Gender.Contains(@0) || i.createdBy.Contains(@0)",
+                //     FilterParameters = new object[] { search }
+                // }
+            );
             reports = await adminPanelProjectService.GetJobFitReports();
-            report = await adminPanelProjectService.GetJobFitReportById(employeeId);
- 
+            // report =  adminPanelProjectService.GetJobFitReportById(employeeId);
+
+            // transposeDatas = await adminPanelProjectService.GetTransposeDatas(
+            //      new Query
+            //      {
+            //          Filter =
+            //             $@"i => i.ColumnName.Contains(@0) || i.ColumnValue.Contains(@0)",
+            //          FilterParameters = new object[] { search }
+            //      }
+            // );
+   
+            // transposeDataByIdList = adminPanelProjectService.GetTransposeDataById(@"employeeId");
+
+            // mergedObject = new MergedObject
+            // {
+            //     ColumnName = transposeDataByIdList.Select(o => o.ColumnName).FirstOrDefault(),
+            //     ColumnValue = transposeDataByIdList.Select(o => o.ColumnValue).FirstOrDefault(),
+            // };
+
+
+            // foreach (var item in reports.Where(x=>x.EmployeeId == employeeId))
+            // {
+            //     data = new List<WebAdmin.Models.adminPanelProject.DataItem> {
+            //         new WebAdmin.Models.adminPanelProject.DataItem
+            //         {
+            //             employeeID =  item?.EmployeeId,
+            //             Quarter = "CEOGeneralDirector",
+            //             Revenue = item?.CEOGeneralDirector
+            //         },
+            //     };
+            // }
+        
+                        
+                
+                // };
+
+            
+            
+
         }
+
         bool showDataLabels = false;
         int value;
         void OnSeriesClick(SeriesClickEventArgs args)
         {
         }
-
-
-        List<WebAdmin.Models.adminPanelProject.DataItem> data = new List<WebAdmin.Models.adminPanelProject.DataItem> {
-            new WebAdmin.Models.adminPanelProject.DataItem
-            {
-                employeeID = "24Wa",
-                Quarter = "CEOGeneralDirector",
-                Revenue = 0.7*100
-            },
-                     new DataItem
-            {
-                employeeID = "24Wa",
-
-                Quarter = "AdministrativeStaff",
-                Revenue = 0.3*100
-            },
-                         new DataItem
-            {
-                employeeID = "24Wa",
-
-                Quarter = "CreativeDesignManager",
-                Revenue = 0.9*100
-            },             
-            // new DataItem
-            // {
-            //     Quarter = "FinanceStaff",
-            //     Revenue = 0.55162
-            // },             new DataItem
-            // {
-            //     Quarter = "FinanceManager",
-            //     Revenue = 0.55162*100
-            // },             new DataItem
-            // {
-            //     Quarter = "HRStaff",
-            //     Revenue = 0.55162*100
-            // },             new DataItem
-            // {
-            //     Quarter = "HRManager",
-            //     Revenue = 0.55162*100
-            // },             new DataItem
-            // {
-            //     Quarter = "ITStaff",
-            //     Revenue = 0.55162*100
-            // },             new DataItem
-            // {
-            //     Quarter = "ITManager",
-            //     Revenue = 0.55162*100
-            // },             new DataItem
-            // {
-            //     Quarter = "MarketingStaff",
-            //     Revenue = 0.55162*100
-            // },             new DataItem
-            // {
-            //     Quarter = "ProductStaff",
-            //     Revenue = 0.55162*100
-            // },             new DataItem
-            // {
-            //     Quarter = "ProductManager",
-            //     Revenue = 0.55162*100
-            // },             new DataItem
-            // {
-            //     Quarter = "SalesStaff",
-            //     Revenue = 0.55162*100
-            // },             new DataItem
-            // {
-            //     Quarter = "CustomerService",
-            //     Revenue = 0.55162*100
-            // },             new DataItem
-            // {
-            //     Quarter = "SalesManager",
-            //     Revenue = 0.55162*100
-            // },
-         };
 
     }
 }

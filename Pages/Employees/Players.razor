@@ -30,8 +30,8 @@
         <RadzenDropDown TValue="string" @bind-Value="userid" Placeholder="Select Company" AllowFiltering="true"
             Data="@usersForUserId" TextProperty="CompanyName"  ValueProperty="CompanyName" Style="width: 50%; max-width: 400px;" />
     </RadzenColumn>
-    <RadzenDataGrid @ref="grid0" ColumnWidth="200px" Render=Grid0Render AllowColumnResize="true" AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
-        Data="@employees.Where(h=>h.userid == userid)" TItem="WebAdmin.Models.adminPanelProject.Employee"  RowDoubleClick="@EditRow">
+    <RadzenDataGrid @ref="grid0" ColumnWidth="200px"  AllowColumnResize="true" AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+        Data="@employees.Where(h=>h.userid == userid)" TItem="WebAdmin.Models.adminPanelProject.Employee"  RowSelect="@EditRow">
         <Columns>
             <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Employee" Property="EmployeeId" Filterable="false" Title="ID" Frozen="true" Width="80px" TextAlign="TextAlign.Center" />
             <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Employee" Property="FullName" Filterable="false" Title="Full Name" Frozen="true" TextAlign="TextAlign.Center" />

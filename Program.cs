@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.OData;
 using Microsoft.OData.ModelBuilder;
 using Microsoft.AspNetCore.Components.Authorization;
 using AdminPanel.Data;
+using WebAdmin;
+using static WebAdmin.adminPanelProjectService;
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
@@ -48,11 +50,13 @@ builder.Services.AddControllers().AddOData(o =>
     o.AddRouteComponents("odata/Identity", oDataBuilder.GetEdmModel()).Count().Filter().OrderBy().Expand().Select().SetMaxTop(null).TimeZone = TimeZoneInfo.Utc;
 });
 builder.Services.AddScoped<AuthenticationStateProvider, WebAdmin.ApplicationAuthenticationStateProvider>();
+builder.Services.AddScoped<ContextHelper>();
 //  builder.Services.AddSingleton<LockState>();
 // builder.Services.AddDbContext<WebAdmin.Data.adminPanelProjectContext>(options =>
 // {
 //     options.UseNpgsql(builder.Configuration.GetConnectionString("adminPanelProjectConnection"));
 // });
+// builder.Services.AddScoped<ZipService>();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

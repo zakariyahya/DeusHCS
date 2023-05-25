@@ -38,6 +38,8 @@ namespace WebAdmin.Pages.Assessments
         protected RadzenDataGrid<WebAdmin.Models.adminPanelProject.Assessment> grid0;
 
         protected string search = "";
+        IEnumerable<string> selectedCompanyNames;
+        protected List<WebAdmin.Models.ApplicationUser> usersForUserId;
 
         protected async Task Search(ChangeEventArgs args)
         {
@@ -50,8 +52,19 @@ namespace WebAdmin.Pages.Assessments
         protected override async Task OnInitializedAsync()
         {
             assessments = await adminPanelProjectService.GetAssessments(new Query { Filter = $@"i => i.id.Contains(@0) || i.UserId.Contains(@0) ", FilterParameters = new object[] { search } });
+            usersForUserId = await adminPanelProjectService.GetAllUsers();
+            
+
         }
 
+
+        void OnSelectedCompanyNamesChange(object value)
+        {
+            if (selectedCompanyNames != null && !selectedCompanyNames.Any())
+            {
+                selectedCompanyNames = null;
+            }
+        }
         protected async Task AddButtonClick(MouseEventArgs args)
         {
             // await grid0.InsertRow(new WebAdmin.Models.adminPanelProject.Assessment());

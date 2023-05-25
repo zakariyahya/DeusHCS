@@ -18,24 +18,22 @@
     </RadzenColumn>
 </RadzenRow>
 <RadzenTextBox Placeholder="Search ..." style="display: block; width: 100%" @oninput="@Search" />
+ <RadzenDropDown @bind-Value=@selectedCompanyNames Style="width:100%;"
+                        Change=@OnSelectedCompanyNamesChange Data="@(usersForUserId)" AllowClear="true" Multiple="true" />
 <RadzenRow>
     <RadzenColumn SizeMD=12>
         <RadzenDataGrid @ref="grid0" ColumnWidth="200px"  AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowColumnResize="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
-            Data="@assessments"   RowUpdate=@GridRowUpdate RowCreate=@GridRowCreate TItem="WebAdmin.Models.adminPanelProject.Assessment" AllowVirtualization="true" >
+            Data="@assessments"   RowUpdate=@GridRowUpdate RowCreate=@GridRowCreate TItem="WebAdmin.Models.adminPanelProject.Assessment" AllowVirtualization="true">
             <Columns>
-                @* <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="id" Title="id">
-                  <EditTemplate Context="assessment">
-                      <RadzenTextBox style="display: block; width: 100%" @bind-Value="@assessment.id" Name="id" />
-                      <RadzenRequiredValidator Component="id" Text="id is required" style="position: absolute" />
-                  </EditTemplate>
-                </RadzenDataGridColumn> *@
                      <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="EmployeeId" Title="Employee Id" Frozen="true" Width="150px" TextAlign="TextAlign.Center">
                   <EditTemplate Context="assessment">
                       <RadzenTextBox style="display: block; width: 100%" @bind-Value="@assessment.EmployeeId" Name="EmployeeId" />
                       <RadzenRequiredValidator Component="EmployeeId" Text="EmployeeId is required" style="position: absolute" />
                   </EditTemplate>
+                  
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="UserId" Title="Company" Frozen="true" Width="150px" TextAlign="TextAlign.Center">
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="UserId"  Type="typeof(IEnumerable<string>)"  FilterValue="@selectedCompanyNames" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.Or" Title="Company" Frozen="true" Width="150px" TextAlign="TextAlign.Center">
+       
                   <EditTemplate Context="assessment">
                       <RadzenTextBox style="display: block; width: 100%" @bind-Value="@assessment.UserId" Name="UserId" />
                       <RadzenRequiredValidator Component="UserId" Text="UserId is required" style="position: absolute" />

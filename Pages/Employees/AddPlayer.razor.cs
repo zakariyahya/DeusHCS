@@ -50,6 +50,8 @@ namespace WebAdmin.Pages.Employees
 
         protected bool errorVisible;
         protected string error;
+        protected string companyId;
+
         protected bool isBusy;
 
         protected string info;
@@ -78,6 +80,7 @@ namespace WebAdmin.Pages.Employees
             foreach (var item in employees)
             {
                 item.userid = employee.userid;
+                item.CompanyId = employee.userid;
                 item.createdTime = DateTime.Now;
                 item.PhoneNumber = "0888";
                 item.createdBy = "System";

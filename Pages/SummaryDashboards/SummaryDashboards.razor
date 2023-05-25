@@ -1,0 +1,29 @@
+@page "/summary-dashboard"
+@attribute [Authorize(Roles="admin")]
+
+<PageTitle>Summary Dashboard</PageTitle>
+
+<RadzenRow AlignItems="AlignItems.Center">
+    <RadzenColumn Size="12" SizeMD="6">
+        <RadzenText Text="Summary Dashboard" TextStyle="TextStyle.H3" TagName="TagName.H1" style="margin: 0" />
+    </RadzenColumn>
+</RadzenRow>
+
+<h3>Upload ZIP File</h3>
+
+<InputFile OnChange="HandleFileSelected" />
+
+<h3>Read ZIP File</h3>
+
+<button @onclick="ReadZipFile">Read ZIP</button>
+
+@if (zipEntries is not null)
+{
+    <h4>ZIP Entries:</h4>
+    <ul>
+        @foreach (var entry in zipEntries)
+        {
+            <li>@entry</li>
+        }
+    </ul>
+}

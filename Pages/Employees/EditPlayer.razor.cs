@@ -37,57 +37,43 @@ namespace WebAdmin.Pages.Employees
 
         protected override async Task OnInitializedAsync()
         {
-            employee = await adminPanelProjectService.GetPlayerById(id);
-
-            usersForUserId = await adminPanelProjectService.GetUsers();
-
+            employee = await adminPanelProjectService.GetEmployeeById(id);
         }
         protected bool errorVisible;
         protected WebAdmin.Models.adminPanelProject.Employee employee;
-        protected IEnumerable<WebAdmin.Models.ApplicationUser> usersForUserId;
-
-        // protected IEnumerable<WebAdmin.Models.adminPanelProject.Company> companiesForCompanyid;
 
         protected async Task FormSubmit()
         {
             try
             {
-                await adminPanelProjectService.UpdatePlayer(id, employee);
-                DialogService.Close(employee);
+                await adminPanelProjectService.UpdateEmployee(id, employee);
+                NavigationManager.NavigateTo("employees");
             }
             catch (Exception ex)
             {
+                hasChanges = ex is Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException;
+                canEdit = !(ex is Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException);
                 errorVisible = true;
             }
         }
 
         protected async Task CancelButtonClick(MouseEventArgs args)
         {
-            DialogService.Close(null);
+            NavigationManager.NavigateTo("employees");
         }
 
 
+        protected bool hasChanges = false;
+        protected bool canEdit = true;
 
 
-
-        bool hasUseridValue;
-
-        [Parameter]
-        public string userid { get; set; }
-
-        [Inject]
-        protected SecurityService Security { get; set; }
-        public override async Task SetParametersAsync(ParameterView parameters)
+        protected async Task ReloadButtonClick(MouseEventArgs args)
         {
-            employee = new WebAdmin.Models.adminPanelProject.Employee();
+           adminPanelProjectService.Reset();
+            hasChanges = false;
+            canEdit = true;
 
-            hasUseridValue = parameters.TryGetValue<string>("userid", out var hasUseridResult);
-
-            if (hasUseridValue)
-            {
-                employee.userid = hasUseridResult;
-            }
-            await base.SetParametersAsync(parameters);
+            employee = await adminPanelProjectService.GetEmployeeById(id);
         }
     }
 }

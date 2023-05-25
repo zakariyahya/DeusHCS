@@ -1,4 +1,5 @@
 using System.Net.Http;
+using AdminPanel.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -16,10 +17,16 @@ namespace WebAdmin.Pages
 {
     public partial class Index
     {
+        ApplicationIdentityDbContext Context
+        {
+            get { return this.context; }
+        }
+        private readonly ApplicationIdentityDbContext context;
+
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
 
-  [Inject]
+        [Inject]
         protected adminPanelProjectService adminPanelProjectService { get; set; }
 
         [Inject]
@@ -40,10 +47,14 @@ namespace WebAdmin.Pages
         [Inject]
         protected SecurityService Security { get; set; }
         [Inject]
-        protected IJSRuntime js {get; set;}
+        protected IJSRuntime js { get; set; }
         [Inject]
-       UserManager<ApplicationUser> userManager {get; set;}
-        
+        UserManager<ApplicationUser> userManager { get; set; }
+
+
+        protected RadzenDataGrid<WebAdmin.Models.adminPanelProject.Assessment> grid0;
+
+
         protected WebAdmin.Models.ApplicationUser user;
         protected string userData;
 
@@ -51,6 +62,8 @@ namespace WebAdmin.Pages
 
         [CascadingParameter]
         private Task<AuthenticationState> authenticationState { get; set; }
+        protected IEnumerable<WebAdmin.Models.adminPanelProject.Assessment> assessmentDatas;
+
 
         protected override async Task OnInitializedAsync()
         {
@@ -61,7 +74,30 @@ namespace WebAdmin.Pages
             user = await Security.GetUserById(userId);
             userData = user.CompanyName;
 
+            // assessmentDatas =  Context.GetTableNames();
+
         }
+        protected WebAdmin.Models.adminPanelProject.Assessment assessmentData;
+
+        string lastFilter;
+
+        protected async void Grid0Render(
+    DataGridRenderEventArgs<WebAdmin.Models.adminPanelProject.Assessment> args
+)
+        {
+            if (grid0.Query.Filter != lastFilter)
+            {
+                assessmentData = grid0.View.FirstOrDefault();
+            }
+
+            if (grid0.Query.Filter != lastFilter)
+            {
+                await grid0.SelectRow(assessmentData);
+            }
+
+            lastFilter = grid0.Query.Filter;
+        }
+
         private async Task DisplayGreetingAlert()
         {
             // var authState = await authenticationState;

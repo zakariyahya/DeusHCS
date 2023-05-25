@@ -66,7 +66,7 @@ namespace WebAdmin.Pages.Employees
                     FilterParameters = new object[] { search }
                 }
             );
-            
+
             infoVisible = !string.IsNullOrEmpty(info);
             usersForUserId = await adminPanelProjectService.GetUsers();
         }
@@ -77,14 +77,9 @@ namespace WebAdmin.Pages.Employees
             await grid0.Reload();
         }
 
-        protected async Task EditRow(
-            DataGridRowMouseEventArgs<WebAdmin.Models.adminPanelProject.Employee> args
-        )
+        protected async Task EditRow(WebAdmin.Models.adminPanelProject.Employee args)
         {
-            await DialogService.OpenAsync<EditPlayer>(
-                "Edit Employees",
-                new Dictionary<string, object> { { "id", args.Data.id } }
-            );
+            NavigationManager.NavigateTo($"edit-employee/{args.id}");
         }
 
         protected async Task GridDeleteButtonClick(

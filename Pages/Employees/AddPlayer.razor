@@ -7,7 +7,7 @@
         <RadzenAlert Shade="Shade.Lighter" Variant="Variant.Flat" Size="AlertSize.Small" AlertStyle="AlertStyle.Info" Visible="@infoVisible">@info</RadzenAlert>
         <RadzenTemplateForm TItem="WebAdmin.Models.adminPanelProject.Employee" Data="@employee" Visible="@(employee != null)" Submit="@FormSubmit">
              <RadzenColumn SizeMD="6">
-                     <RadzenDropDownDataGrid Data="@usersForuserid" TextProperty="CompanyName" ValueProperty="CompanyName"
+                     <RadzenDropDownDataGrid Data="@usersForuserid" TextProperty="CompanyName" ValueProperty="CompanyId"
                         Disabled=@(hasuseridValue) Placeholder="Choose Company" style="display: block; width: 100%; margin-bottom: 5px" @bind-Value="@employee.userid" Name="userid"
                            />
                 </RadzenColumn>

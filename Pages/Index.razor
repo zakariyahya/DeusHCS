@@ -12,6 +12,13 @@
                 @{NavigationManager.NavigateTo("/login");}
             </NotAuthorized>
         </AuthorizeView>
+ @* <RadzenDataGrid @ref="grid0" ColumnWidth="200px" Render=Grid0Render AllowColumnResize="true" AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+        Data="@assessmentDatas" TItem="WebAdmin.Models.adminPanelProject.Assessment"  >
+        <Columns>
+            <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.Assessment" Property="assessmentName" Filterable="false" Title="ID" Frozen="true" Width="80px" TextAlign="TextAlign.Center" />
+        
+        </Columns>
+    </RadzenDataGrid> *@
         @* <RadzenText Text="Welcome to your new app" TextStyle="Radzen.Blazor.TextStyle.DisplayH2" TagName="Radzen.Blazor.TagName.Auto"></RadzenText> *@
         @* <RadzenText Text="Your Success Is Our Biggest Priority" TextStyle="Radzen.Blazor.TextStyle.H4" TagName="Radzen.Blazor.TagName.H2" class="mt-5"></RadzenText>
         <RadzenText Text="With Radzen Blazor Studio, application development is just one-click away." TextStyle="Radzen.Blazor.TextStyle.Body1" TagName="Radzen.Blazor.TagName.Auto" class="mt-4" Style="font-size: 20px; line-height: 24px"></RadzenText>

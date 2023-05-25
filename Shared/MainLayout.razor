@@ -39,8 +39,8 @@
     </RadzenBody>
     <RadzenSidebar Expanded="@sidebarExpanded" style="z-index: 2; background-color: #11232f">
         <RadzenStack AlignItems="Radzen.AlignItems.Center" class="rz-py-1 rz-py-lg-1" Style="padding: var(--rz-panel-menu-item-padding); border-bottom: var(--rz-panel-menu-item-border);">
-            <RadzenLabel Text="Super Admin" Style="margin-top: -5px; color: #fffcf2; margin-bottom: 1px" />
-            <RadzenImage Text="Super Admin" Path="images/DEUS_Logo2.jpg"  style="width: 30%; margin-top: -20px; margin-bottom: 1px"></RadzenImage>
+            <RadzenLabel Text="Super Admin" Style="margin-top: -5px; color: #fffcf2; margin-bottom: 2px" />
+            <RadzenImage Text="Super Admin" Path="images/DEUS_Logo2.jpg"  style="width: 30%; margin-top: -20px; margin-bottom: 2px"></RadzenImage>
             <RadzenLabel Text="Powered By Deus HCS" Style="margin: -20px; margin-bottom: 1px; width: 100%; float: none; text-align: center; text-transform: none; font-weight: normal; font-size: 5px; color: #fffcf2" />
         </RadzenStack>
         <RadzenPanelMenu Style="background-color: #11232f">
@@ -56,59 +56,19 @@
             </AuthorizeView>
 
             <AuthorizeView Roles="admin">
-                <RadzenPanelMenuItem Text="Individual Assessment Report" Path="assessments" Icon="attach_file"></RadzenPanelMenuItem>
-            </AuthorizeView>
-
-            <AuthorizeView Roles="admin">
-                <RadzenPanelMenuItem Text="Mass Report" Path="job-fit-reports" Icon="assignment"></RadzenPanelMenuItem>
-            </AuthorizeView>
-            @* <AuthorizeView> *@
-                <RadzenPanelMenuItem Text="Visualization" Path="reports-user" Icon="analytics"></RadzenPanelMenuItem>
-            @* </AuthorizeView> *@
-        </RadzenPanelMenu>
-            @* <RadzenPanelMenuItem Text="Companies" Path="companies" /> *@
-        @* <RadzenPanelMenuItem Text="Companies" Path="application-users" />
-            <RadzenPanelMenuItem Text="Players" Path="players" /> *@
-     @* <RadzenPanelMenuItem Text="Notification" Path="notification" Icon="announcement"></RadzenPanelMenuItem> *@
-            @* <RadzenPanelMenuItem Text="General" Icon="line_weight">
-                <RadzenPanelMenuItem Text="Companies" Path="application-users" Icon="account_circle"></RadzenPanelMenuItem>
-                <RadzenPanelMenuItem Text="Employees" Path="players" Icon="line_weight"></RadzenPanelMenuItem>
-                <RadzenPanelMenuItem Text="Assessment" Path="fileinput" Icon="attach_file"></RadzenPanelMenuItem>
-                <RadzenPanelMenuItem Text="Reports" Path="dialog" Icon="announcement"></RadzenPanelMenuItem>
-            </RadzenPanelMenuItem> *@
-        @* <RadzenPanelMenuItem Text="Inputs" Icon="payment">
-            <RadzenPanelMenuItem Text="CheckBox" Path="checkbox" Icon="check_circle"></RadzenPanelMenuItem>
-            <RadzenPanelMenuItem Text="TextBox" Path="textbox" Icon="input"></RadzenPanelMenuItem>
-            <RadzenPanelMenuItem Text="TextArea" Path="textarea" Icon="description"></RadzenPanelMenuItem>
-            <RadzenPanelMenuItem Text="Password" Path="password" Icon="payment"></RadzenPanelMenuItem>
-            <RadzenPanelMenuItem Text="Numeric" Path="numeric" Icon="aspect_ratio"></RadzenPanelMenuItem>
-            <RadzenPanelMenuItem Text="DatePicker" Path="datepicker" Icon="date_range"></RadzenPanelMenuItem>
-        </RadzenPanelMenuItem>
-        <RadzenPanelMenuItem Text="Data" Icon="save">
-            <RadzenPanelMenuItem Text="DataGrid" Path="datagrid" Icon="grid_on"></RadzenPanelMenuItem>
-            <RadzenPanelMenuItem Text="DataList" Path="datalist" Icon="list"></RadzenPanelMenuItem>
-            <RadzenPanelMenuItem Text="DropDown" Path="dropdown" Icon="dns"></RadzenPanelMenuItem>
-            <RadzenPanelMenuItem Text="DropDownDataGrid" Path="dropdown-datagrid" Icon="receipt"></RadzenPanelMenuItem>
-            <RadzenPanelMenuItem Text="ListBox" Path="listbox" Icon="view_list"></RadzenPanelMenuItem>
-            <RadzenPanelMenuItem Text="TemplateForm" Path="templateform" Icon="line_style"></RadzenPanelMenuItem>
-        </RadzenPanelMenuItem>
-        <RadzenPanelMenuItem Text="Containers" Icon="account_box">
-            <RadzenPanelMenuItem Text="Tabs" Path="tabs" Icon="tab"></RadzenPanelMenuItem>
-            <RadzenPanelMenuItem Text="Panel" Path="panel" Icon="content_paste"></RadzenPanelMenuItem>
-            <RadzenPanelMenuItem Text="Fieldset" Path="fieldset" Icon="account_balance_wallet"></RadzenPanelMenuItem>
-            <RadzenPanelMenuItem Text="Card" Path="card" Icon="line_style"></RadzenPanelMenuItem>
-        </RadzenPanelMenuItem>
-        <RadzenPanelMenuItem Text="More">
-            <RadzenPanelMenuItem Text="Item1"></RadzenPanelMenuItem>
-            <RadzenPanelMenuItem  Text="Item2"></RadzenPanelMenuItem>
-            <RadzenPanelMenuItem Text="More items">
-                <RadzenPanelMenuItem Text="More sub items">
-                    <RadzenPanelMenuItem  Text="Item3"></RadzenPanelMenuItem>
-                    <RadzenPanelMenuItem  Text="Item4"></RadzenPanelMenuItem>
-                </RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Assessment Summary Report" Icon="attach_file">
+                <RadzenPanelMenuItem Text="Summary dashboard" Path="summary-dashboard" Icon="check_circle"></RadzenPanelMenuItem>
+                <RadzenPanelMenuItem Text="Raw scores" Path="assessments" Icon="input"></RadzenPanelMenuItem>
             </RadzenPanelMenuItem>
-        </RadzenPanelMenuItem> *@
-        @* </RadzenPanelMenu> *@
+            </AuthorizeView>
+            <AuthorizeView Roles="admin">
+            <RadzenPanelMenuItem Text="Job Fit Mass Report" Icon="assignment">
+                <RadzenPanelMenuItem Text="Visualization" Path="reports-user" Icon="analytics"></RadzenPanelMenuItem>
+                <RadzenPanelMenuItem Text="Job Fit Raw Scores" Path="job-fit-reports" Icon="input"></RadzenPanelMenuItem>
+            </RadzenPanelMenuItem>
+            </AuthorizeView>
+        </RadzenPanelMenu>
+        
         <RadzenStack AlignItems="Radzen.AlignItems.Center" Gap="0" class="rz-py-4 rz-py-lg-6" Style="padding: var(--rz-panel-menu-item-padding);">
             <RadzenText Text="WebAdmin v1.0.0" TextStyle="Radzen.Blazor.TextStyle.Caption" style="color: var(--rz-text-disabled-color);" TagName="Radzen.Blazor.TagName.P" TextAlign="Radzen.TextAlign.Center" />
             <RadzenText Text="Copyright Ⓒ 2023" TextStyle="Radzen.Blazor.TextStyle.Caption" class="rz-mb-0" style="color: var(--rz-text-disabled-color);" TagName="Radzen.Blazor.TagName.P" TextAlign="Radzen.TextAlign.Center" />
