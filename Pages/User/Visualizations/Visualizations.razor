@@ -1,0 +1,378 @@
+@page "/report-user"
+@attribute [Authorize]
+
+<h1>@userData</h1>
+<div class="row" >
+  <RadzenCard Style="margin-bottom: 5px; width: 100%; height: 140px; background-color: #11232f">
+      <RadzenLabel Text="Label" Style="width: 15%; height: 66px">
+          <RadzenImage Style="width: 76px; height: 60px" Path="images\DEUS_Logo2.jpg"></RadzenImage>
+      </RadzenLabel>
+      <RadzenLabel Text="JOB FITTING" Style="width: 69%; height: 49px; text-align: center; text-transform: uppercase; color: #ffffff; margin-top: -10px" class="rz-text-display-h4">
+          
+          <RadzenLabel Text="JOB FITTING" Style="width: 100%; margin-top: -25px" />
+          @* <RadzenDropDown TValue="string" @bind-Value="companyId" Placeholder="Select Employee" AllowFiltering="true"
+            Data="@companies" TextProperty="CompanyName"  ValueProperty="CompanyId" Style="width: 30%; margin-top: -5px"  /> *@
+            @* @foreach (var item in companies.Where(x => x.CompanyId== companyId))
+            {
+                <RadzenLabel Text=@item?.CompanyName Style="width: 100%; margin-bottom: 5px; font-size: 20px; color: #0a0909; font-style: normal" class="fw-bold rz-text-display-h4" />
+            } *@
+            <RadzenLabel Text=@userData Style="width: 100%; margin-top: -5px" />
+   
+      </RadzenLabel>
+      <RadzenLabel Text="Label" Style="width: 15%" />
+  </RadzenCard>
+    <div class="col-sm-6" style="width: 25%; color: #5f4e4e; background-color: #ececec; background-repeat: repeat; margin-bottom: 7px">
+        <div class="rz-p-1" style="width: 100%; font-style: italic; text-align: center; margin-top: 5px">
+
+        <RadzenDropDown TValue="string" @bind-Value="employeeId" Placeholder="Select Employee" AllowFiltering="true"
+            Data="@employees" TextProperty="FullName"  ValueProperty="EmployeeId" Style="width: 100%; text-align: center; height: 40px"  />
+        </div>
+        <div class="rz-p-1" style="width: 100%; font-style: italic; text-align: center; margin-top: 5px">
+            @foreach (var item in employees.Where(x => x.EmployeeId == employeeId))
+            {
+                <RadzenLabel Text=@item?.FullName Style="width: 100%; margin-bottom: 5px; font-size: 20px; color: #0a0909; font-style: normal" class="fw-bold rz-text-display-h4" />
+            }
+        </div>
+    </div>
+        @* <div class="col-sm-12" style="width: 40%; float: none; visibility: visible; margin-bottom: 5px">
+        <RadzenLabel Text="50%" Style="width: 65px; height: 100%; font-size: 25px; padding-top: 5%" class="fw-bold" />
+        @foreach (var item in employees.Where(x => x.EmployeeId == employeeId))
+                {
+                            <RadzenLabel Text=@item.FullName Style="width: 25%; height: 100%; padding-top: 5%" class="fw-bold" />
+
+                }
+        <RadzenLabel Text="for Finance Staff" Style="width: 187px; height: 100%; padding-top: 5%; text-align: center" class="fw-bold" />
+        <RadzenLabel Text="Considering" Style="width: 144px; height: 100%; font-size: 25px; color: #424242; background-color: #fefb00; padding-bottom: 5%" />
+  
+    </div> *@
+    <div class="col-sm-12" style="width: 50%; float: none; visibility: visible; margin-bottom: 5px">
+        <RadzenCard Style="height: 200%; background-color: #eeeeee; border-radius: 0px; width: 100%">
+            <RadzenLabel Text="Label" Style="width: 59%">
+                <RadzenCard Style="height: 75px; width: 100%">
+                    <RadzenLabel Text="50%" Style="width: 35%; text-transform: uppercase; color: #f6c22f; font-size: 35px" class="fw-bold" />
+                         @foreach (var item in employees.Where(x => x.EmployeeId == employeeId))
+                            {
+                                <RadzenLabel Text=@item?.FullName Style="width: 59%; font-size: 16px; height: 100%" />
+                                @* <RadzenLabel Text="Applied for HR STAFF" Style="width: 59%; font-size: 16px; height: 100%" /> *@
+                            }
+                   
+                </RadzenCard>
+            </RadzenLabel>
+            <RadzenLabel Text="Label" Style="width: 40%">
+                <RadzenCard Style="height: 75px; background-color: #fff995">
+                    <RadzenText Text="Considering  " Style="height: 100%; font-size: 20px; width: 127px" class="fw-bold" />
+                </RadzenCard>
+            </RadzenLabel>
+        </RadzenCard>
+    </div>
+
+   <div class="col-sm-6" style="width: 25%; color: #5f4e4e; background-color: #ececec; background-repeat: repeat; margin-bottom: 7px">
+        <div class="rz-p-1" style="width: 100%; font-style: italic; text-align: center; margin-top: 5px">
+        <RadzenDropDown Data="@employees" TextProperty="JobTitle" ValueProperty="EmployeeId"
+           Placeholder="Choose Position" style="display: block; width: 100%; margin-bottom: 5px" @bind-Value="@employeeId2" 
+                />
+        @* <RadzenDropDown TValue="string" @bind-Value="employeeId" Placeholder="Select Employee" AllowFiltering="true"
+            Data="@employees" TextProperty="JobTitle"  ValueProperty="EmployeeId" Style="width: 100%; text-align: center; height: 40px"  /> *@
+        </div>
+        <div class="rz-p-1" style="width: 100%; font-style: italic; text-align: center; margin-top: 5px">
+            @foreach (var item in employees.Where(x => x.EmployeeId == employeeId2))
+            {
+                <RadzenLabel Text=@item?.JobTitle Style="width: 100%; margin-bottom: 5px; font-size: 20px; color: #0a0909; font-style: normal" class="fw-bold rz-text-display-h4" />
+            }
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6" style="width: 25%; color: #5f4e4e; background-color: #ececec; background-repeat: repeat">
+       
+        
+        <RadzenLabel  Style="margin-bottom: 10px; text-align: center; border-radius: 1px; border: 0px solid #30445f; margin-top: 5px; width: 100%; padding: 2px; display: inline-block" class="fw-bolder">
+            <RadzenLabel Text="Recommended role for" Style="width: 50%; text-align: left" />
+              @foreach (var item in employees.Where(x => x.EmployeeId == employeeId))
+            {
+                <RadzenLabel Text=@item?.FullName Style="width: 39%" />
+            }
+            
+        </RadzenLabel>
+        <div class="rz-p-1" style="width: 100%; font-style: italic; text-align: left; border: 1px solid #403b3b">
+            <RadzenLabel Text="Number of recommended Role" Style="width: 70%; margin-left: 5px" />
+            <RadzenNumeric Min="1" Max="10" @bind-Value=@value Style="width: 20%; background-color: #dbd7d7; height: 20%" />
+        </div>
+        <div class="rz-p-1" style="width: 100%; font-style: italic; text-align: left; border: 1px solid #403b3b; margin-top: 5px">
+            <RadzenLabel Text="Minimum fitness for role recommendation" Style="width: 70%; margin-left: 5px" />
+            <RadzenNumeric Min="1" Max="100" Step="5" @bind-Value=@minFRC Style="width: 20%; background-color: #dbd7d7; height: 20%" />
+        </div>
+@*      
+        @foreach (var item in data)
+        {
+            item.employeeID = employeeId;
+            item.Quarter = "AdministrativeStaff";
+            item.Revenue = 90; *@
+        @foreach (var item2 in reports.Where(x => x.EmployeeId == employeeId))
+        {
+           WebAdmin.Models.adminPanelProject.DataItem[] data = new WebAdmin.Models.adminPanelProject.DataItem[] {
+            new WebAdmin.Models.adminPanelProject.DataItem
+                {
+                    employeeID =  employeeId,
+                    Quarter = "CEOGeneralDirector",
+                    Revenue = item2?.CEOGeneralDirector
+                },
+                        new WebAdmin.Models.adminPanelProject.DataItem
+                    {
+                        employeeID = employeeId,
+                        Quarter = "AdministrativeStaff",
+                        Revenue = item2?.AdministrativeStaff
+                    },
+                        new WebAdmin.Models.adminPanelProject.DataItem
+                    {
+                        employeeID = employeeId,
+                        Quarter = "CreativeDesignManager",
+                        Revenue = item2?.AdministrativeStaff
+                    },
+                    new WebAdmin.Models.adminPanelProject.DataItem
+                    {
+                        employeeID = employeeId,
+                        Quarter = "FinanceStaff",
+                        Revenue = item2?.FinanceStaff
+                    },
+                    new WebAdmin.Models.adminPanelProject.DataItem
+                    {
+                        employeeID = employeeId,
+                        Quarter = "FinanceManager",
+                        Revenue = item2?.FinanceManager
+                    },
+                    new WebAdmin.Models.adminPanelProject.DataItem
+                    {
+                        employeeID = employeeId,
+                        Quarter = "HRStaff",
+                        Revenue = item2?.HRStaff
+                    },
+                    new WebAdmin.Models.adminPanelProject.DataItem
+                    {
+                        employeeID = employeeId,
+                        Quarter = "HRManager",
+                        Revenue = item2?.HRManager
+                    },
+                    new WebAdmin.Models.adminPanelProject.DataItem
+                    {
+                        employeeID = employeeId,
+                        Quarter = "ITStaff",
+                        Revenue = item2?.ITStaff
+                    },
+                    new WebAdmin.Models.adminPanelProject.DataItem
+                    {
+                        employeeID = employeeId,
+                        Quarter = "ITManager",
+                        Revenue = item2?.ITManager
+                    },
+                    new WebAdmin.Models.adminPanelProject.DataItem
+                    {
+                        employeeID = employeeId,
+                        Quarter = "MarketingStaff",
+                        Revenue = item2?.MarketingStaff
+                    },
+                    new WebAdmin.Models.adminPanelProject.DataItem
+                    {
+                        employeeID = employeeId,
+                        Quarter = "ProductStaff",
+                        Revenue = item2?.ProductStaff
+                    },
+                    new WebAdmin.Models.adminPanelProject.DataItem
+                    {
+                        employeeID = employeeId,
+                        Quarter = "ProductManager",
+                        Revenue = item2?.ProductManager
+                    },
+                    new WebAdmin.Models.adminPanelProject.DataItem
+                    {
+                        employeeID = employeeId,
+                        Quarter = "SalesStaff",
+                        Revenue = item2?.SalesStaff
+                    },
+                    new WebAdmin.Models.adminPanelProject.DataItem
+                    {
+                        employeeID = employeeId,
+                        Quarter = "CustomerService",
+                        Revenue = item2?.CustomerService
+                    },
+                    new WebAdmin.Models.adminPanelProject.DataItem
+                    {
+                        employeeID = employeeId,
+                        Quarter = "SalesManager",
+                        Revenue = item2?.SalesManager
+                    },
+            };
+            
+            @* Data="@data.Where(x => x.employeeID == item.employeeID && x.Revenue >= minFRC ).OrderByDescending(data => data.Revenue)" *@
+
+            
+            <RadzenChart SeriesClick=@OnSeriesClick Visible="@(employeeId != null)" style="height: 400px; margin-top: 5px; background-color: #fffcf2; border: 0px solid #eaf38f; margin-bottom: 5px; float: none" ColorScheme="Radzen.Blazor.ColorScheme.Palette">
+                <RadzenStackedBarSeries Data="@data.Distinct().Where(x=> x.Revenue >= minFRC).OrderByDescending(data => data.Revenue)" CategoryProperty="Quarter" Title="2019" ValueProperty="Revenue">
+                    <RadzenSeriesDataLabels  />
+                </RadzenStackedBarSeries>
+                <RadzenValueAxis Min="0" Max="100" Step="25">
+                    <RadzenGridLines Visible="true" />
+                    <RadzenAxisTitle Text="" />
+                </RadzenValueAxis>
+                <RadzenBarOptions  Height="15" />
+                <RadzenCategoryAxis>
+                    <RadzenGridLines LineType="Radzen.Blazor.LineType.Solid"></RadzenGridLines>
+                </RadzenCategoryAxis>
+            </RadzenChart>  
+        }
+
+    </div>
+    <div class="col-sm-12" style="width: 50%; float: none; visibility: visible; margin-bottom: 5PX; background-color: #11232f">
+        <RadzenCard Style="margin-top: 10px; background-color: #adaaaa; height: 60px; border-radius: 0px">
+            <RadzenLabel Text="Label" Style="width: 100%; height: 65px; margin-top: -10px">
+                  @foreach (var item in employees.Where(x => x.EmployeeId == employeeId2))
+                    {
+                        <RadzenLabel Text=@item?.FullName Style="width: 154px; color: #ffffff; font-family: Arial; text-transform: uppercase" class="fw-bolder" />
+                    }
+                <RadzenLabel Text="" Style="width: 473px" Visible="true" />
+                @* <RadzenLabel Text="Applying for Hr Staff" Style="color: #ffffff" /> *@
+            </RadzenLabel>
+        </RadzenCard>
+        @foreach (var item in employees.Where(x => x.EmployeeId == employeeId2))
+            {
+                <RadzenLabel Text=@item?.Age.ToString() Style="width: 415px; margin-top: 5px; font-style: italic; text-transform: capitalize; color: #ffffff; line-height: 20px" />
+                <RadzenLabel Text=@item?.createdTime.ToString() Style="width: 268px; margin-top: 5px; font-style: italic; color: #ffffff" />
+                <RadzenLabel Text="Islam" Style="width: 415px; color: #ffffff; font-style: italic" />
+                <RadzenLabel Text="Test date: 1 Oct 2022" Style="width: 271px; font-style: italic; color: #ffffff" />
+                <RadzenLabel Text="Single" Style="background-color: rgba(255, 255, 255, 0); color: #ffffff; font-style: italic; width: 683px; margin-bottom: 20px" />
+                
+               
+                <RadzenLabel Text="Text .................................." Style="width: 688px; height: 45px; color: #ffffff" />
+                <RadzenLabel Text="Text .................................." Style="width: 695px; color: #ffffff; margin-bottom: 50px" />
+            }
+            @foreach (var item in reports.Where(x=>x.EmployeeId == employeeId2))
+            {
+                 <RadzenLabel Text="Insight " Style="width: 690px; height: 39px; color: #000000; background-color: #adaaaa; margin-bottom: 5px; padding-top: 2px" />
+                <RadzenLabel Text=@item.Bio Style="width: 685px; height: 65px; color: #ffffff" />
+            }
+        <RadzenProgressBar Style="height: 37px"></RadzenProgressBar>
+    </div>
+    <div class="col-sm-6" style="width: 25%; background-color: #ececec">
+    <RadzenLabel Text="Recommended user for Sales Staff position" Style="margin-bottom: 10px; text-align: center; border-radius: 1px; border: 0px solid #30445f; margin-top: 5px; width: 100%; padding: 2px; display: inline-block" class="fw-bold" />
+        <div class="rz-p-1" style="width: 100%; font-style: italic; text-align: left; border: 1px solid #403b3b">
+            <RadzenLabel Text="Number of recommended User" Style="width: 70%; margin-left: 5px" />
+            <RadzenNumeric Min="1" Max="10" @bind-Value=@value Style="width: 20%; height: 20%; background-color: #dbd7d7" />
+        </div>f
+        <div class="rz-p-1" style="width: 100%; font-style: italic; text-align: left; border: 1px solid #403b3b; margin-top: 5px">
+            <RadzenLabel Text="Minimum fitness for user recommendation" Style="width: 70%; margin-left: 5px" />
+            <RadzenNumeric Min="1" Max="10" @bind-Value=@value Style="width: 20%; height: 20%; background-color: #dbd7d7" />
+        </div>
+        @foreach (var item3 in reports.Where(x => x.EmployeeId == employeeId2))
+        {
+            WebAdmin.Models.adminPanelProject.DataItem[] data2 = new WebAdmin.Models.adminPanelProject.DataItem[] {
+        
+                    new WebAdmin.Models.adminPanelProject.DataItem
+                {
+                    employeeID =  employeeId2,
+                    Quarter = employee?.FullName,
+                    Revenue = item3?.CEOGeneralDirector
+                },
+                    new WebAdmin.Models.adminPanelProject.DataItem
+                {
+                    employeeID = employeeId2,
+                    Quarter = employee?.FullName,
+                    Revenue = item3?.AdministrativeStaff
+                },
+                    new WebAdmin.Models.adminPanelProject.DataItem
+                {
+                    employeeID = employeeId2,
+                    Quarter = employee?.FullName,
+                    Revenue = item3?.AdministrativeStaff
+                },
+                new WebAdmin.Models.adminPanelProject.DataItem
+                {
+                    employeeID = employeeId2,
+                    Quarter = employee?.FullName,
+                    Revenue = item3?.FinanceStaff
+                },
+                new WebAdmin.Models.adminPanelProject.DataItem
+                {
+                    employeeID = employeeId2,
+                    Quarter = employee?.FullName,
+                    Revenue = item3?.FinanceManager
+                },
+                new WebAdmin.Models.adminPanelProject.DataItem
+                {
+                    employeeID = employeeId2,
+                    Quarter = employee?.FullName,
+                    Revenue = item3?.HRStaff
+                },
+                new WebAdmin.Models.adminPanelProject.DataItem
+                {
+                    employeeID = employeeId2,
+                    Quarter = employee?.FullName,
+                    Revenue = item3?.HRManager
+                },
+                new WebAdmin.Models.adminPanelProject.DataItem
+                {
+                    employeeID = employeeId2,
+                    Quarter = employee?.FullName,
+                    Revenue = item3?.ITStaff
+                },
+                new WebAdmin.Models.adminPanelProject.DataItem
+                {
+                    employeeID = employeeId2,
+                    Quarter = employee?.FullName,
+                    Revenue = item3?.ITManager
+                },
+                new WebAdmin.Models.adminPanelProject.DataItem
+                {
+                    employeeID = employeeId2,
+                    Quarter = employee?.FullName,
+                    Revenue = item3?.MarketingStaff
+                },
+                new WebAdmin.Models.adminPanelProject.DataItem
+                {
+                    employeeID = employeeId2,
+                    Quarter = employee?.FullName,
+                    Revenue = item3?.ProductStaff
+                },
+                new WebAdmin.Models.adminPanelProject.DataItem
+                {
+                    employeeID = employeeId2,
+                    Quarter = employee?.FullName,
+                    Revenue = item3?.ProductManager
+                },
+                new WebAdmin.Models.adminPanelProject.DataItem
+                {
+                    employeeID = employeeId2,
+                    Quarter = employee?.FullName,
+                    Revenue = item3?.SalesStaff
+                },
+                new WebAdmin.Models.adminPanelProject.DataItem
+                {
+                    employeeID = employeeId2,
+                    Quarter = employee?.FullName,
+                    Revenue = item3?.CustomerService
+                },
+                new WebAdmin.Models.adminPanelProject.DataItem
+                {
+                    employeeID = employeeId2,
+                    Quarter = employee?.FullName,
+                    Revenue = item3?.SalesManager
+                },
+            };
+            @* Data="@data.Where(x => x.employeeID == item.employeeID && x.Revenue >= minFRC ).OrderByDescending(data => data.Revenue)" *@
+
+            <RadzenChart SeriesClick=@OnSeriesClick Visible="@(employeeId != null)" style="height: 400px; margin-top: 5px; background-color: #fffcf2; border: 0px solid #eaf38f; margin-bottom: 5px; float: none" ColorScheme="Radzen.Blazor.ColorScheme.Palette">
+                <RadzenStackedBarSeries Data="@data.Distinct().Where(x=> x.Revenue >= minFRC).OrderByDescending(data => data.Revenue)" CategoryProperty="Quarter" Title="2019" ValueProperty="Revenue">
+                    <RadzenSeriesDataLabels  />
+                </RadzenStackedBarSeries>
+                <RadzenValueAxis Min="0" Max="100" Step="25">
+                    <RadzenGridLines Visible="true" />
+                    <RadzenAxisTitle Text="" />
+                </RadzenValueAxis>
+                <RadzenBarOptions  Height="15" />
+                <RadzenCategoryAxis>
+                    <RadzenGridLines LineType="Radzen.Blazor.LineType.Solid"></RadzenGridLines>
+                </RadzenCategoryAxis>
+            </RadzenChart>  
+        
+        }
+    </div>
+</div>

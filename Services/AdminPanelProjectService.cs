@@ -19,6 +19,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using System.IO.Compression;
 using System.Text;
 using Microsoft.AspNetCore.Components.Forms;
+using System.Security.AccessControl;
 
 namespace WebAdmin
 {
@@ -180,6 +181,8 @@ namespace WebAdmin
                     "wwwroot/Data/Reports",
                     file.Name
                 );
+            // var FilePath = $"{Directory.GetCurrentDirectory()}{@"\wwwroot\files"}" + "\\" + file.Name;
+
             System.IO.FileInfo existingFile = new System.IO.FileInfo(FilePath);
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             using (ExcelPackage package = new ExcelPackage(existingFile))
@@ -228,44 +231,113 @@ namespace WebAdmin
                             jbr.HRStaff =
                                 Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
                             ;
-                        else if (col == 9)
+                        else if (col == 11)
                             jbr.HRManager =
                                 Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
                             ;
-                        else if (col == 10)
+                        else if (col == 12)
                             jbr.ITStaff =
                                 Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
                             ;
-                        else if (col == 11)
+                        else if (col == 13)
                             jbr.ITManager =
                                 Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
                             ;
-                        else if (col == 12)
+                        else if (col == 14)
                             jbr.MarketingStaff =
                                 Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
                             ;
-                        else if (col == 13)
+                        else if (col == 15)
                             jbr.ProductStaff =
                                 Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
                             ;
-                        else if (col == 14)
+                        else if (col == 16)
                             jbr.ProductManager =
                                 Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
                             ;
-                        else if (col == 15)
+                        else if (col == 17)
                             jbr.SalesStaff =
                                 Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
                             ;
-                        else if (col == 16)
+                        else if (col == 18)
                             jbr.CustomerService =
                                 Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
                             ;
-                        else if (col == 17)
+                        else if (col == 19)
                             jbr.SalesManager =
                                 Convert.ToDecimal(worksheet.Cells[row, col].Value.ToString())
                             ;
+                        else if (col == 20)
+                            jbr.X1 =
+                                worksheet.Cells[row, col].Value.ToString()
+                            ;
+                        else if (col == 21)
+                            jbr.X2 =
+                                worksheet.Cells[row, col].Value.ToString()
+                            ;
+                        else if (col == 22)
+                            jbr.X3 =
+                                worksheet.Cells[row, col].Value.ToString()
+                            ;
+                        else if (col == 23)
+                            jbr.X4 =
+                                worksheet.Cells[row, col].Value.ToString()
+                            ;
+                        else if (col == 24)
+                            jbr.X5 =
+                                worksheet.Cells[row, col].Value.ToString()
+                            ;
+                        else if (col == 25)
+                            jbr.X6 =
+                                worksheet.Cells[row, col].Value.ToString()
+                            ;
+                        else if (col == 26)
+                            jbr.X7 =
+                                worksheet.Cells[row, col].Value.ToString()
+                            ;
+                        else if (col == 27)
+                            jbr.X8 =
+                                worksheet.Cells[row, col].Value.ToString()
+                            ;
+                        else if (col == 28)
+                            jbr.X9 =
+                                worksheet.Cells[row, col].Value.ToString()
+                            ;
+                        else if (col == 29)
+                            jbr.X10 =
+                                worksheet.Cells[row, col].Value.ToString()
+                            ;
+                        else if (col == 30)
+                            jbr.X11 =
+                                worksheet.Cells[row, col].Value.ToString()
+                            ;
+                        else if (col == 31)
+                            jbr.X12 =
+                                worksheet.Cells[row, col].Value.ToString()
+                            ;
+                        else if (col == 32)
+                            jbr.X13 =
+                                worksheet.Cells[row, col].Value.ToString()
+                            ;
+                        else if (col == 33)
+                            jbr.X14 =
+                                worksheet.Cells[row, col].Value.ToString()
+                            ;
+                        else if (col == 34)
+                            jbr.X15 =
+                                worksheet.Cells[row, col].Value.ToString()
+                            ;
+                        else if (col == 35)
+                            jbr.X16 =
+                                worksheet.Cells[row, col].Value.ToString()
+                            ;
+                        else if (col == 36)
+                            jbr.X17 =
+                                worksheet.Cells[row, col].Value.ToString()
+                            ;
                     }
                     jbrs.Add(jbr);
+                    // Context.SaveChanges();
                 }
             }
             return jbrs;
@@ -973,7 +1045,7 @@ namespace WebAdmin
             OnJobFitReportCreated(jobfitreport);
 
             var existingItem = Context.JobFitReports
-                .Where(i => i.id == jobfitreport.id)
+                .Where(i => i.EmployeeId == jobfitreport.EmployeeId)
                 .FirstOrDefault();
 
             if (existingItem != null)
@@ -1156,6 +1228,60 @@ namespace WebAdmin
             }
 
             OnAssessmentsRead(ref items);
+
+            return await Task.FromResult(items);
+        }
+
+        partial void OnReportsRead(
+            ref IQueryable<WebAdmin.Models.adminPanelProject.AssessmentReportEmployeeFile> items
+        );
+
+        public async Task<IQueryable<WebAdmin.Models.adminPanelProject.AssessmentReportEmployeeFile>> GetReports(
+            Query query = null
+        )
+        {
+            var items = Context.assessmentReportEmployeeFiles.AsQueryable();
+
+            if (query != null)
+            {
+                if (!string.IsNullOrEmpty(query.Expand))
+                {
+                    var propertiesToExpand = query.Expand.Split(',');
+                    foreach (var p in propertiesToExpand)
+                    {
+                        items = items.Include(p.Trim());
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(query.Filter))
+                {
+                    if (query.FilterParameters != null)
+                    {
+                        items = items.Where(query.Filter, query.FilterParameters);
+                    }
+                    else
+                    {
+                        items = items.Where(query.Filter);
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(query.OrderBy))
+                {
+                    items = items.OrderBy(query.OrderBy);
+                }
+
+                if (query.Skip.HasValue)
+                {
+                    items = items.Skip(query.Skip.Value);
+                }
+
+                if (query.Top.HasValue)
+                {
+                    items = items.Take(query.Top.Value);
+                }
+            }
+
+            OnReportsRead(ref items);
 
             return await Task.FromResult(items);
         }
@@ -1610,6 +1736,51 @@ namespace WebAdmin
             return await Task.FromResult(itemToReturn);
         }
 
+        // partial void OnEmployeeGet(WebAdmin.Models.adminPanelProject.Employee item);
+
+        public WebAdmin.Models.adminPanelProject.Employee GetEmployeeByName(string name)
+        {
+            var items = Context.Employees.AsNoTracking().Where(i => i.EmployeeId == name);
+
+            var itemToReturn = items.FirstOrDefault();
+
+            OnEmployeeGet(itemToReturn);
+
+            return itemToReturn;
+        }
+        partial void OnReportCreated(WebAdmin.Models.adminPanelProject.AssessmentReportEmployeeFile item);
+
+        partial void OnAfterReportCreated(WebAdmin.Models.adminPanelProject.AssessmentReportEmployeeFile item);
+
+        public WebAdmin.Models.adminPanelProject.AssessmentReportEmployeeFile CreateReport(
+            WebAdmin.Models.adminPanelProject.AssessmentReportEmployeeFile employee
+        )
+        {
+            OnReportCreated(employee);
+
+            var existingItem = Context.assessmentReportEmployeeFiles.Where(i => i.employeeID == employee.employeeID).FirstOrDefault();
+
+            if (existingItem != null)
+            {
+                throw new Exception("Item already available");
+            }
+
+            try
+            {
+                Context.assessmentReportEmployeeFiles.Add(employee);
+                Context.SaveChanges();
+            }
+            catch
+            {
+                Context.Entry(employee).State = EntityState.Detached;
+                throw;
+            }
+
+            OnAfterReportCreated(employee);
+
+            return employee;
+        }
+
         partial void OnEmployeeCreated(WebAdmin.Models.adminPanelProject.Employee item);
 
         partial void OnAfterEmployeeCreated(WebAdmin.Models.adminPanelProject.Employee item);
@@ -1759,6 +1930,19 @@ namespace WebAdmin
         public WebAdmin.Models.adminPanelProject.Employee GetPlayerById(string id)
         {
             var items = Context.Employees.AsNoTracking().Where(i => i.EmployeeId == id);
+
+            // items = items.Include(i => i.ApplicationUser);
+
+            var itemToReturn = items.FirstOrDefault();
+
+            OnPlayerGet(itemToReturn);
+
+            // return await Task.FromResult(itemToReturn);
+            return itemToReturn;
+        }
+        public WebAdmin.Models.adminPanelProject.Employee GetPlayerByEmail(string user)
+        {
+            var items = Context.Employees.AsNoTracking().Where(i => i.CompanyId == user);
 
             // items = items.Include(i => i.ApplicationUser);
 
@@ -1933,8 +2117,9 @@ namespace WebAdmin
 
 
 
-        public async Task<List<ZipEntry>> ExtractFiles(Stream fileData)
+        public async Task<List<ZipEntry>> ExtractFiles(Stream fileData, IBrowserFile file, string companyId)
         {
+
             await using var ms = new MemoryStream();
             await fileData.CopyToAsync(ms);
 
@@ -1951,9 +2136,79 @@ namespace WebAdmin
                 entries.Add(new ZipEntry { Name = entry.FullName, Content = content });
             }
 
+            var fileName = Path.GetFileName(file.Name);
+            string name = Path.GetFileNameWithoutExtension(fileName);
+            string extension = Path.GetExtension(fileName);
+
+            // Split name into words
+            string[] words = name.Split(' ');
+
+            // Modify the first word with the user ID
+            words[0] = companyId +" - "+ words[0];
+
+            // Reconstruct the fileName
+            fileName = string.Join(" ", words) + extension;
+            // var filePath = Path.Combine(SaveDirectory, companyId, fileName);
+            var filePath = Path.Combine(SaveDirectory, fileName);
+
+            string wwwrootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+            // string directoryPath = Path.Combine(wwwrootPath, companyId, fileName);
+
+            // var dir = Directory.CreateDirectory(directoryPath);
+            // DirectorySecurity security = dir.GetAccessControl();
+            // security.AddAccessRule(new FileSystemAccessRule(@"MYDOMAIN\JohnDoe",
+            //             FileSystemRights.Modify,
+            //             AccessControlType.Allow));
+            // dir.SetAccessControl(security);
+            // Directory.CreateDirectory(filePath);
+
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.OpenReadStream(431643600).CopyToAsync(fileStream);
+            }
+
+            // List<WebAdmin.Models.adminPanelProject.AssessmentReportEmployeeFile> assessmentReportFiles = new List<WebAdmin.Models.adminPanelProject.AssessmentReportEmployeeFile>();
+            // WebAdmin.Models.adminPanelProject.Employee employeeByName = new WebAdmin.Models.adminPanelProject.Employee();
+            // string name;
+            //     string input;
+
+            // foreach (var item in entries)
+            // {
+            //     string[] fileNameParts = item.Name.Split(new[] { ' ' }, 3);
+            //     if (fileNameParts[1].Equals("Assesment", StringComparison.OrdinalIgnoreCase))
+            //     {
+            //         fileNameParts = fileNameParts.Skip(1).ToArray();
+            //     }
+            //     name = string.Join(" ", fileNameParts);
+            //     foreach (var word in name)
+            //     {
+            //         input = name.Replace("Report, - EN.pdf", string.Empty);
+            //     }
+            //     employeeByName = GetEmployeeByName(name);
+            //     foreach (var reportFile in assessmentReportFiles)
+            //     {
+            //         reportFile.employeeID = "employeeByName.EmployeeId";
+            //         reportFile.employeeName = "name";
+            //         reportFile.FileName = "fileName";
+            //         reportFile.FilePath = "filePath";
+            //         CreateReport(reportFile);
+            //     }
+
+            // }
+
+
             return entries;
         }
 
+        // public static class StreamExtension
+        // {
+        //     public static async Task<byte[]> ReadFully(this Stream input)
+        //     {
+        //         await using var ms = new MemoryStream();
+        //         await input.CopyToAsync(ms);
+        //         return ms.ToArray();
+        //     }
+        // }
         private static readonly string SaveDirectory = "wwwroot/uploads"; // Change this path according to your requirements
 
 
@@ -1964,7 +2219,7 @@ namespace WebAdmin
 
             using (var fileStream = new FileStream(filePath, FileMode.Create))
             {
-                await file.OpenReadStream().CopyToAsync(fileStream);
+                await file.OpenReadStream(43164360).CopyToAsync(fileStream);
             }
 
             return filePath;
@@ -1977,7 +2232,7 @@ namespace WebAdmin
 
     }
 
-    public static class NewBaseType
+    public static class StreamExtension
     {
         public static async Task<byte[]> ReadFully(this Stream input)
         {

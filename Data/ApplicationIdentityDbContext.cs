@@ -27,6 +27,7 @@ namespace AdminPanel.Data
         // public DbSet<WebAdmin.Models.adminPanelProject.AssessmentData> AssessmentDatas { get; set; }
         public DbSet<WebAdmin.Models.adminPanelProject.TransposeData> TransposeDatas { get; set; }
         public DbSet<WebAdmin.Models.adminPanelProject.DataItem> dataItems { get; set; }
+        public DbSet<WebAdmin.Models.adminPanelProject.AssessmentReportEmployeeFile> assessmentReportEmployeeFiles { get; set; }
 
 
 

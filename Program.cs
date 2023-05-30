@@ -13,6 +13,9 @@ using Microsoft.AspNetCore.Components.Authorization;
 using AdminPanel.Data;
 using WebAdmin;
 using static WebAdmin.adminPanelProjectService;
+using System.Security.Principal;
+using System.Security.AccessControl;
+
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
@@ -51,6 +54,10 @@ builder.Services.AddControllers().AddOData(o =>
 });
 builder.Services.AddScoped<AuthenticationStateProvider, WebAdmin.ApplicationAuthenticationStateProvider>();
 builder.Services.AddScoped<ContextHelper>();
+builder.Services.AddScoped<adminPanelProjectService>();
+
+// builder.Services.AddScoped(
+//             sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 //  builder.Services.AddSingleton<LockState>();
 // builder.Services.AddDbContext<WebAdmin.Data.adminPanelProjectContext>(options =>
 // {

@@ -1,0 +1,49 @@
+@page "/summary-dashboards"
+
+@attribute [Authorize(Roles="admin")]
+
+<PageTitle>Summary Dashboard List</PageTitle>
+<h4>@cwdPath</h4>
+<h4>@FilePath</h4>
+<RadzenRow AlignItems="AlignItems.Center">
+    <RadzenColumn Size="12" SizeMD="6">
+        <RadzenText Text="Employee List" TextStyle="TextStyle.H3" TagName="TagName.H1" style="margin: 0" />
+        <br />
+    </RadzenColumn>
+    <RadzenColumn Size="12" SizeMD="6">
+        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+            @* <RadzenSplitButton Icon="get_app" Text="Export" Click="@ExportClick" Variant="Variant.Flat" Shade="Shade.Lighter">
+                <RadzenSplitButtonItem Text="Excel" Value="xlsx" />
+                <RadzenSplitButtonItem Text="CSV" Value="csv" />
+            </RadzenSplitButton> *@
+            <RadzenButton Icon="add_circle_outline" Text="Add" Click="@AddButtonClick" Variant="Variant.Flat" />
+        </RadzenStack>
+    </RadzenColumn>
+</RadzenRow>
+ @* <RadzenDropDown FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" FilterOperator="StringFilterOperator.StartsWith" AllowFiltering="true"
+                    Data=@players TextProperty="FullName" ValueProperty="id" AllowClear="true" @bind-Value="@player.id" Style="width: 100%; max-width: 400px;" /> *@
+<RadzenTextBox Placeholder="Search ..." style="display: block; width: 100%" @oninput="@Search" />
+<RadzenStack Class="rz-my-8">
+    <RadzenColumn SizeMD="3">
+
+        @* <RadzenDropDown @bind-Value=@values Data=@usersForUserId TextProperty="CompanyName" ValueProperty="CompanyName" 
+            Multiple=true AllowClear=true Placeholder="Select Company" Chips=true Style="width: 50%; max-width: 400px;" /> *@
+
+        @* <RadzenDropDown TValue="string" @bind-Value="userid" Placeholder="Select Company" AllowFiltering="true"
+            Data="@usersForUserId" TextProperty="CompanyName"  ValueProperty="CompanyName" Style="width: 50%; max-width: 400px;" /> *@
+    </RadzenColumn>
+    <RadzenDataGrid @ref="grid0" ColumnWidth="200px"  AllowColumnResize="true" AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+        Data="@reportFiles" TItem="WebAdmin.Models.adminPanelProject.AssessmentReportEmployeeFile"  >
+        <Columns>
+            <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.AssessmentReportEmployeeFile" Property="EmployeeId" Filterable="false" Title="ID" Frozen="true" Width="80px" TextAlign="TextAlign.Center" />
+            <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.AssessmentReportEmployeeFile" Property="FullName" Filterable="false" Title="Full Name" Frozen="true" TextAlign="TextAlign.Center" />
+          
+            @* <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.AssessmentReportEmployeeFile" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+                <Template Context="playerChild">
+                    <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Medium" Shade="Shade.Lighter" Variant="Variant.Flat"
+                        Click=@(args => GridDeleteButtonClick(args, employee)) @onclick:stopPropagation="true" />
+                </Template>
+            </RadzenDataGridColumn> *@
+        </Columns>
+    </RadzenDataGrid>
+</RadzenStack>  

@@ -1,0 +1,37 @@
+@page "/add-summary-dashboard"
+@attribute [Authorize(Roles="admin")]
+
+<PageTitle>Summary Dashboard</PageTitle>
+<h5>@company.CompanyId</h5>
+<RadzenDropDownDataGrid Data="@usersForuserid" TextProperty="CompanyName" ValueProperty="CompanyId"
+            Disabled=@(hasuseridValue) Placeholder="Choose Company" style="display: block; width: 100%; margin-bottom: 5px" @bind-Value="@company.CompanyId" Name="userid"
+                />
+@if (company.CompanyId != null)
+{
+    <div class="drag-drop-zone">
+    <InputFile OnChange="OnInputFileChange" accept=".zip" />
+    @_status
+    </div>
+}
+        <AuthorizeView>
+
+<h1>ini user: @userData</h1>
+        </AuthorizeView>
+<RadzenRow>
+    <RadzenColumn SizeMD=12>
+        <RadzenDataGrid ColumnWidth="200px"  AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+            Data="@_entries" Visible="@(company.CompanyId != null)" TItem="WebAdmin.Models.adminPanelProject.ZipEntry" >
+            <Columns>
+ 
+                <RadzenDataGridColumn TItem="WebAdmin.Models.adminPanelProject.ZipEntry" Property="Name" Title="Name" Frozen="true" Width="150px" TextAlign="TextAlign.Center">
+         
+                </RadzenDataGridColumn>
+            </Columns>
+        </RadzenDataGrid>
+    </RadzenColumn>
+</RadzenRow>
+      <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+            <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Create All"  Variant="Variant.Flat" />
+            @* <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Close" Click="@CancelClick" Variant="Variant.Flat" /> *@
+        </RadzenStack>
+
